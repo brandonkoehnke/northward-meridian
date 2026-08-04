@@ -1,10 +1,8 @@
-import Navigation from "../components/Navigation";
+
 
 export default function AboutPage() {
   return (
-    <>
-      <Navigation />
-
+    
       <main className="min-h-screen bg-white text-zinc-900">
         <section className="mx-auto max-w-4xl px-6 py-24">
           <p className="text-sm font-semibold uppercase tracking-[0.25em] text-zinc-500">
@@ -53,6 +51,6 @@ export default function AboutPage() {
           </section>
         </section>
       </main>
-    </>
+    
   );
 }
