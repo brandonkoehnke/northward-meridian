@@ -16,7 +16,7 @@ export default function OptionsAndTradeoffs({
     <section className="mx-auto max-w-4xl px-6 py-16">
       <div className="border-t border-[var(--border)] pt-12">
         <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[var(--accent)]">
-          Options & Tradeoffs
+          Options &amp; Tradeoffs
         </p>
 
         <div className="mt-10 space-y-10">
@@ -25,7 +25,7 @@ export default function OptionsAndTradeoffs({
               key={option.title}
               className="rounded-2xl border border-[var(--border)] bg-white p-8"
             >
-              <h3 className="text-2xl font-semibold">
+              <h3 className="text-2xl font-semibold tracking-tight">
                 {option.title}
               </h3>
 
@@ -33,32 +33,44 @@ export default function OptionsAndTradeoffs({
                 {option.summary}
               </p>
 
-              <div className="mt-8 grid gap-8 md:grid-cols-2">
+              <div className="mt-8 grid gap-8 border-t border-[var(--border)] pt-8 md:grid-cols-2">
                 <div>
-                  <p className="font-semibold text-green-700">
-                    Advantages
+                  <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--accent)]">
+                    Benefits
                   </p>
 
-                  <ul className="mt-4 space-y-2">
+                  <ul className="mt-5 space-y-3">
                     {option.pros.map((pro) => (
-                      <li key={pro} className="flex gap-3">
-                        <span className="text-green-600">+</span>
-                        <span>{pro}</span>
+                      <li key={pro} className="flex items-start gap-3">
+                        <span
+                          aria-hidden="true"
+                          className="mt-2 h-2 w-2 shrink-0 rounded-full bg-[var(--accent)]"
+                        />
+
+                        <span className="leading-7 text-[var(--foreground)]">
+                          {pro}
+                        </span>
                       </li>
                     ))}
                   </ul>
                 </div>
 
                 <div>
-                  <p className="font-semibold text-red-700">
-                    Tradeoffs
+                  <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--muted)]">
+                    Things to Consider
                   </p>
 
-                  <ul className="mt-4 space-y-2">
+                  <ul className="mt-5 space-y-3">
                     {option.cons.map((con) => (
-                      <li key={con} className="flex gap-3">
-                        <span className="text-red-600">−</span>
-                        <span>{con}</span>
+                      <li key={con} className="flex items-start gap-3">
+                        <span
+                          aria-hidden="true"
+                          className="mt-2 h-2 w-2 shrink-0 rounded-full bg-[var(--muted)]"
+                        />
+
+                        <span className="leading-7 text-[var(--foreground)]">
+                          {con}
+                        </span>
                       </li>
                     ))}
                   </ul>

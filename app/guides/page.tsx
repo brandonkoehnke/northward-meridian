@@ -1,30 +1,10 @@
 import Link from "next/link";
 
-const guides = [
-  {
-    title: "How to Evaluate Whether a Premium Credit Card Is Worth the Annual Fee",
-    description:
-      "A practical framework for deciding whether to keep, downgrade, or cancel a premium credit card.",
-    category: "Personal Finance",
-    href: "/guides/premium-credit-card-annual-fee",
-  },
-  {
-    title: "How to Assess an AI Business Idea Before Building It",
-    description:
-      "A decision framework for evaluating demand, differentiation, and monetization before investing heavily.",
-    category: "Business",
-    href: "/guides/evaluate-ai-business-idea",
-  },
-  {
-    title: "How to Start a Small Content Website Without Overbuilding",
-    description:
-      "The essential decisions, tools, and launch steps for a lean publishing business.",
-    category: "Technology",
-    href: "/guides/start-small-content-website",
-  },
-];
+import { guides } from "@/lib/guides";
 
 export default function GuidesPage() {
+  const publishedGuides = guides.filter((guide) => guide.published);
+
   return (
     <main className="min-h-screen bg-[var(--background)] text-[var(--foreground)]">
       <section className="mx-auto max-w-6xl px-6 py-24">
@@ -42,7 +22,7 @@ export default function GuidesPage() {
         </p>
 
         <div className="mt-16 grid gap-8">
-          {guides.map((guide) => (
+          {publishedGuides.map((guide) => (
             <article
               key={guide.href}
               className="rounded-2xl border border-[var(--border)] bg-white p-10"
@@ -68,6 +48,14 @@ export default function GuidesPage() {
             </article>
           ))}
         </div>
+
+        {publishedGuides.length === 0 && (
+          <div className="mt-16 rounded-2xl border border-[var(--border)] bg-white p-10">
+            <p className="text-lg text-[var(--muted)]">
+              No guides are published yet.
+            </p>
+          </div>
+        )}
       </section>
     </main>
   );

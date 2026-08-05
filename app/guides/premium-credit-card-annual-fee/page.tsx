@@ -1,11 +1,13 @@
 import ArticleHero from "@/app/components/article/ArticleHero";
 import ContinueExploring from "@/app/components/article/ContinueExploring";
+import DecisionFramework from "@/app/components/article/DecisionFramework";
 import DecisionSnapshot from "@/app/components/article/DecisionSnapshot";
 import KeyTakeaways from "@/app/components/article/KeyTakeaways";
 import LearningObjectives from "@/app/components/article/LearningObjectives";
 import OptionsAndTradeoffs from "@/app/components/article/OptionsAndTradeoffs";
-import WhyThisMatters from "@/app/components/article/WhyThisMatters";
 import Recommendation from "@/app/components/article/Recommendation";
+import Sources from "@/app/components/article/Sources";
+import WhyThisMatters from "@/app/components/article/WhyThisMatters";
 import type { Guide } from "@/lib/guide";
 
 const guide: Guide = {
@@ -66,27 +68,6 @@ export default function PremiumCreditCardAnnualFeeGuide() {
         </p>
       </WhyThisMatters>
 
-      <Recommendation
-        summary="Choose the option that best reflects the value you actually use, not the value the card advertises."
-        items={[
-          {
-            heading: "Keep the card if you naturally use the benefits",
-            description:
-              "Keep the card when the credits, rewards, and travel benefits you would use anyway reliably exceed the annual fee.",
-          },
-          {
-            heading: "Downgrade if the account still has strategic value",
-            description:
-              "Downgrading is often the best middle ground when you want to preserve account age and available credit without continuing to pay a premium annual fee.",
-          },
-          {
-            heading: "Cancel if the card no longer serves a purpose",
-            description:
-              "Consider cancelling when the card delivers little realized value, no useful downgrade path exists, and closing it will not materially harm your broader credit profile.",
-          },
-        ]}
-      />
-
       <OptionsAndTradeoffs
         options={[
           {
@@ -132,12 +113,79 @@ export default function PremiumCreditCardAnnualFeeGuide() {
         ]}
       />
 
+      <DecisionFramework
+        introduction="Use this four-step process to evaluate the card based on the value you actually receive rather than the value advertised by the issuer."
+        steps={[
+          {
+            title: "Calculate the value you actually use",
+            description:
+              "List the credits, rewards, and benefits you would naturally use during a normal year. Do not count benefits that require extra spending you would not otherwise make.",
+          },
+          {
+            title: "Subtract the annual fee",
+            description:
+              "Compare your realistic annual value against the card's total annual fee. The card should produce a meaningful surplus, not merely break even on paper.",
+          },
+          {
+            title: "Compare the available alternatives",
+            description:
+              "Consider whether a lower-fee card, a downgrade option, or a simpler rewards card would deliver similar value with less effort.",
+          },
+          {
+            title: "Choose the option that fits your current habits",
+            description:
+              "Keep, downgrade, or cancel based on your actual spending and travel patterns. Reevaluate the decision whenever the fee, benefits, or your habits change.",
+          },
+        ]}
+      />
+
+      <Recommendation
+        summary="Choose the option that best reflects the value you actually use, not the value the card advertises."
+        items={[
+          {
+            heading: "Keep the card if you naturally use the benefits",
+            description:
+              "Keep the card when the credits, rewards, and travel benefits you would use anyway reliably exceed the annual fee.",
+          },
+          {
+            heading: "Downgrade if the account still has strategic value",
+            description:
+              "Downgrading is often the best middle ground when you want to preserve account age and available credit without continuing to pay a premium annual fee.",
+          },
+          {
+            heading: "Cancel if the card no longer serves a purpose",
+            description:
+              "Consider cancelling when the card delivers little realized value, no useful downgrade path exists, and closing it will not materially harm your broader credit profile.",
+          },
+        ]}
+      />
+
       <KeyTakeaways
         items={[
           "A premium card is only worthwhile when the value you actually use exceeds the annual fee.",
           "Statement credits should be valued based on natural spending, not their advertised maximum.",
           "Downgrading is often better than cancelling because it can preserve account history.",
           "Reevaluate the card annually because benefits, fees, and spending habits change.",
+        ]}
+      />
+
+      <Sources
+        sources={[
+          {
+            title: "Credit Card Annual Fees and Account Terms",
+            publisher: "Consumer Financial Protection Bureau",
+            href: "https://www.consumerfinance.gov/",
+          },
+          {
+            title: "Understanding Credit Card Accounts and Credit History",
+            publisher: "Federal Trade Commission",
+            href: "https://consumer.ftc.gov/",
+          },
+          {
+            title: "Official Card Benefits and Fee Schedule",
+            publisher: "Card Issuer",
+            href: "https://www.example.com/",
+          },
         ]}
       />
 
