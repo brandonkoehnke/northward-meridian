@@ -8,7 +8,9 @@
   --accent-hover: #8b4513;
 
   --muted: #6b7280;
-  --border: #e5e7eb;
+  --border: #e8e3db;
+
+  --transition: 200ms ease;
 }
 
 @theme inline {

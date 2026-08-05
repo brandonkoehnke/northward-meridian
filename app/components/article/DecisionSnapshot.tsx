@@ -7,18 +7,26 @@ type DecisionSnapshotProps = {
 
 export default function DecisionSnapshot({
   recommendedFor,
- readingTime,
+  readingTime,
   updated,
   bottomLine,
 }: DecisionSnapshotProps) {
   return (
     <section className="mx-auto max-w-4xl px-6">
       <div className="rounded-2xl border border-[var(--border)] bg-white p-8 shadow-sm">
-        <h2 className="mb-8 text-2xl font-semibold tracking-tight">
+        <h2 className="text-2xl font-semibold tracking-tight">
           Decision Snapshot
         </h2>
 
-        <div className="grid gap-8 md:grid-cols-3">
+        <div className="mt-10 border-l-4 border-[var(--accent)] pl-6">
+          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[var(--accent)]">
+            Bottom Line
+          </p>
+
+          <p className="mt-3 text-lg leading-8">{bottomLine}</p>
+        </div>
+
+        <div className="mt-10 grid gap-8 border-t border-[var(--border)] pt-8 md:grid-cols-3">
           <SnapshotItem
             label="Recommended For"
             value={recommendedFor}
@@ -34,16 +42,6 @@ export default function DecisionSnapshot({
             value={updated}
           />
         </div>
-
-        <div className="mt-10 rounded-xl bg-[var(--background)] p-6">
-          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[var(--accent)]">
-            Bottom Line
-          </p>
-
-          <p className="mt-4 text-lg leading-8">
-            {bottomLine}
-          </p>
-        </div>
       </div>
     </section>
   );
@@ -58,13 +56,11 @@ function SnapshotItem({
 }) {
   return (
     <div>
-      <p className="text-sm uppercase tracking-[0.2em] text-[var(--muted)]">
+      <p className="text-sm uppercase tracking-[0.2em] text-[var(--muted)] opacity-75">
         {label}
       </p>
 
-      <p className="mt-3 text-lg font-medium">
-        {value}
-      </p>
+      <p className="mt-3 text-lg font-medium">{value}</p>
     </div>
   );
 }
