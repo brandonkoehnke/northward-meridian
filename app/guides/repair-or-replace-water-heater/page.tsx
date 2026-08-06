@@ -53,19 +53,63 @@ const guide: Guide = {
 
 
 const guideSections = [
-    { id: "safety", label: "Safety first" },
-    { id: "why-it-matters", label: "Why this decision matters" },
-    { id: "diagnosis", label: "Diagnose the failure" },
-    { id: "options", label: "Options and tradeoffs" },
-    { id: "scorecard", label: "Repair-or-replace scorecard" },
-    { id: "framework", label: "Decision framework" },
-    { id: "cost-comparison", label: "Compare total cost" },
-    { id: "worked-examples", label: "Worked examples" },
-    { id: "replacement-options", label: "Replacement options" },
-    { id: "recommendation", label: "Recommendation" },
-    { id: "checklist", label: "Decision checklist" },
-    { id: "questions", label: "Questions to ask" },
-    { id: "takeaways", label: "Key takeaways" },
+    {
+        id: "safety",
+        label: "Secure the situation",
+        stage: "Secure",
+    },
+    {
+        id: "why-it-matters",
+        label: "Why this decision matters",
+    },
+    {
+        id: "diagnosis",
+        label: "Diagnose the problem",
+        stage: "Diagnose",
+    },
+    {
+        id: "options",
+        label: "Evaluate your options",
+        stage: "Evaluate",
+    },
+    {
+        id: "scorecard",
+        label: "Score the decision",
+        stage: "Decide",
+    },
+    {
+        id: "framework",
+        label: "Decision framework",
+    },
+    {
+        id: "cost-comparison",
+        label: "Compare total cost",
+    },
+    {
+        id: "worked-examples",
+        label: "Worked examples",
+    },
+    {
+        id: "replacement-options",
+        label: "Replacement options",
+    },
+    {
+        id: "recommendation",
+        label: "Recommendation",
+    },
+    {
+        id: "checklist",
+        label: "Take action",
+        stage: "Act",
+    },
+    {
+        id: "questions",
+        label: "Questions to ask",
+    },
+    {
+        id: "takeaways",
+        label: "Key takeaways",
+    },
 ] as const;
 
 const meridianFrameworkSteps = [
@@ -168,12 +212,11 @@ export default function RepairOrReplaceWaterHeaterGuide() {
             structuredData={articleJsonLd}
             sections={guideSections}
         >
+            <MeridianFramework steps={meridianFrameworkSteps} />
 
             <SafetyCallout />
 
             <LearningObjectives items={guide.learningObjectives} />
-
-            <MeridianFramework steps={meridianFrameworkSteps} />
 
             <WhyThisMatters id="why-it-matters">
                 <p>

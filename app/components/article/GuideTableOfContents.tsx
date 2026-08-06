@@ -5,6 +5,7 @@ import { useEffect, useMemo, useState } from "react";
 export type GuideNavigationItem = {
   id: string;
   label: string;
+  stage?: "Secure" | "Diagnose" | "Evaluate" | "Decide" | "Act";
 };
 
 type GuideTableOfContentsProps = {
@@ -16,12 +17,12 @@ export default function GuideTableOfContents({
   items,
   variant = "desktop",
 }: GuideTableOfContentsProps) {
-  const [activeId, setActiveId] = useState(items[0]?.id ?? "");
-
   const validItems = useMemo(
     () => items.filter((item) => item.id.trim() && item.label.trim()),
     [items],
   );
+
+  const [activeId, setActiveId] = useState(validItems[0]?.id ?? "");
 
   useEffect(() => {
     const sections = validItems
@@ -46,7 +47,10 @@ export default function GuideTableOfContents({
     };
 
     updateActiveSection();
-    window.addEventListener("scroll", updateActiveSection, { passive: true });
+
+    window.addEventListener("scroll", updateActiveSection, {
+      passive: true,
+    });
     window.addEventListener("resize", updateActiveSection);
 
     return () => {
@@ -59,15 +63,21 @@ export default function GuideTableOfContents({
     0,
     validItems.findIndex((item) => item.id === activeId),
   );
+
   const progress = validItems.length
     ? ((activeIndex + 1) / validItems.length) * 100
     : 0;
 
   const navigateTo = (id: string) => {
     const section = document.getElementById(id);
+
     if (!section) return;
 
-    section.scrollIntoView({ behavior: "smooth", block: "start" });
+    section.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+
     window.history.replaceState(null, "", `#${id}`);
   };
 
@@ -82,6 +92,7 @@ export default function GuideTableOfContents({
         >
           On this page
         </label>
+
         <select
           id="guide-section-select"
           value={activeId}
@@ -108,6 +119,7 @@ export default function GuideTableOfContents({
           <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--accent)]">
             On this page
           </p>
+
           <span className="text-xs tabular-nums text-[var(--muted)]">
             {activeIndex + 1}/{validItems.length}
           </span>
@@ -133,12 +145,33 @@ export default function GuideTableOfContents({
                   type="button"
                   onClick={() => navigateTo(item.id)}
                   aria-current={isActive ? "location" : undefined}
-                  className={`w-full rounded-lg border-l-2 px-3 py-2 text-left text-sm leading-5 transition-colors ${isActive
-                      ? "border-[var(--accent)] bg-[var(--background)] font-semibold text-[var(--foreground)]"
-                      : "border-transparent text-[var(--muted)] hover:bg-[var(--background)] hover:text-[var(--foreground)]"
-                    }`}
+                  className={`flex w-full items-center justify-between gap-3 rounded-lg border-l-2 px-3 py-2 text-left transition-colors ${
+                    isActive
+                      ? "border-[var(--accent)] bg-[var(--background)]"
+                      : "border-transparent hover:bg-[var(--background)]"
+                  }`}
                 >
-                  {item.label}
+                  <span
+                    className={`text-sm leading-5 ${
+                      isActive
+                        ? "font-semibold text-[var(--foreground)]"
+                        : "font-medium text-[var(--muted)]"
+                    }`}
+                  >
+                    {item.label}
+                  </span>
+
+                  {item.stage ? (
+                    <span
+                      className={`shrink-0 text-[0.58rem] font-semibold uppercase tracking-[0.12em] ${
+                        isActive
+                          ? "text-[var(--accent)]"
+                          : "text-[var(--muted)]"
+                      }`}
+                    >
+                      {item.stage}
+                    </span>
+                  ) : null}
                 </button>
               </li>
             );
