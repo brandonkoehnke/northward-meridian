@@ -22,7 +22,7 @@ export default function AboutPage() {
             </h2>
 
             <p className="mt-4">
-              Most people don't need more information—they need better
+              Most people don’t need more information—they need better
               frameworks for making decisions. Meridian is built around that
               idea.
             </p>
@@ -55,7 +55,7 @@ export default function AboutPage() {
 
           <div>
             <h2 className="text-2xl font-semibold tracking-tight">
-              What you'll find here
+              What you’ll find here
             </h2>
 
             <ul className="mt-6 space-y-3">

@@ -7,7 +7,7 @@ export default function ContactPage() {
         </p>
 
         <h1 className="mt-6 text-5xl font-bold tracking-tight">
-          We'd love to hear from you.
+          We’d love to hear from you.
         </h1>
 
         <p className="mt-8 text-xl leading-9 text-[var(--muted)]">
@@ -25,7 +25,7 @@ export default function ContactPage() {
 
           <p className="mt-8 leading-8 text-[var(--muted)]">
             If you notice an error in one of our guides or have a suggestion
-            for a future topic, we'd appreciate hearing from you.
+            for a future topic, we’d appreciate hearing from you.
           </p>
         </div>
       </section>
