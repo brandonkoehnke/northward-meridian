@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import ContinueExploring from "@/app/components/article/ContinueExploring";
+import RelatedDecisions from "@/app/components/article/RelatedDecisions";
 import GuideLayout from "@/app/components/article/GuideLayout";
 import {
     ExampleCard,
@@ -13,6 +13,7 @@ import DecisionChecklist from "@/app/components/article/DecisionChecklist";
 import DecisionFramework from "@/app/components/article/DecisionFramework";
 import KeyTakeaways from "@/app/components/article/KeyTakeaways";
 import LearningObjectives from "@/app/components/article/LearningObjectives";
+import MeridianFramework from "@/app/components/article/MeridianFramework";
 import OptionsAndTradeoffs from "@/app/components/article/OptionsAndTradeoffs";
 import QuestionsToAsk from "@/app/components/article/QuestionsToAsk";
 import Recommendation from "@/app/components/article/Recommendation";
@@ -65,6 +66,39 @@ const guideSections = [
     { id: "checklist", label: "Decision checklist" },
     { id: "questions", label: "Questions to ask" },
     { id: "takeaways", label: "Key takeaways" },
+] as const;
+
+const meridianFrameworkSteps = [
+    {
+        label: "Secure",
+        description:
+            "Identify immediate safety risks and stabilize the situation before comparing costs.",
+        href: "#safety",
+    },
+    {
+        label: "Diagnose",
+        description:
+            "Confirm what failed and distinguish a serviceable component from tank failure.",
+        href: "#diagnosis",
+    },
+    {
+        label: "Evaluate",
+        description:
+            "Compare repair, replacement, cost, reliability, efficiency, and household needs.",
+        href: "#options",
+    },
+    {
+        label: "Decide",
+        description:
+            "Use the evidence and scorecard to choose the most defensible path forward.",
+        href: "#scorecard",
+    },
+    {
+        label: "Act",
+        description:
+            "Verify the quote, ask the right questions, and execute the decision confidently.",
+        href: "#checklist",
+    },
 ] as const;
 
 export const metadata: Metadata = {
@@ -138,6 +172,8 @@ export default function RepairOrReplaceWaterHeaterGuide() {
             <SafetyCallout />
 
             <LearningObjectives items={guide.learningObjectives} />
+
+            <MeridianFramework steps={meridianFrameworkSteps} />
 
             <WhyThisMatters id="why-it-matters">
                 <p>
@@ -544,17 +580,7 @@ export default function RepairOrReplaceWaterHeaterGuide() {
                 ]}
             />
 
-            <ContinueExploring
-                guides={[
-                    {
-                        title: "Browse All Meridian Guides",
-                        description:
-                            "Explore decision-focused guides for home, business, technology, finance, and everyday choices.",
-                        href: "/guides",
-                        category: "Meridian",
-                    },
-                ]}
-            />
+            <RelatedDecisions currentSlug="repair-or-replace-water-heater" />
         </GuideLayout>
     );
 }
