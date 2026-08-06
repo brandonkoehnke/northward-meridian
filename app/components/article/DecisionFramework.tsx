@@ -4,16 +4,18 @@ type FrameworkStep = {
 };
 
 type DecisionFrameworkProps = {
+  id?: string;
   introduction?: string;
   steps: FrameworkStep[];
 };
 
 export default function DecisionFramework({
+  id,
   introduction,
   steps,
 }: DecisionFrameworkProps) {
   return (
-    <section className="mx-auto max-w-4xl px-6 py-16">
+    <section id={id} className="scroll-mt-24 mx-auto max-w-4xl px-6 py-16">
       <div className="border-t border-[var(--border)] pt-12">
         <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[var(--accent)]">
           Decision Framework

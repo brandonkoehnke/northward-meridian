@@ -28,7 +28,11 @@ type Recommendation =
   | "replace"
   | "diagnose";
 
-export default function WaterHeaterScorecard() {
+type WaterHeaterScorecardProps = {
+  id?: string;
+};
+
+export default function WaterHeaterScorecard({ id }: WaterHeaterScorecardProps) {
   const [heaterType, setHeaterType] = useState<HeaterType>("gas-storage");
   const [ageRange, setAgeRange] = useState<AgeRange>("unknown");
   const [failureType, setFailureType] =
@@ -141,7 +145,7 @@ export default function WaterHeaterScorecard() {
   };
 
   return (
-    <section className="mx-auto max-w-4xl px-6 py-16">
+    <section id={id} className="scroll-mt-24 mx-auto max-w-4xl px-6 py-16">
       <div className="border-t border-[var(--border)] pt-12">
         <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[var(--accent)]">
           Repair-or-Replace Scorecard

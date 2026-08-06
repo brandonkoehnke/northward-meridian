@@ -1,12 +1,14 @@
 type KeyTakeawaysProps = {
+  id?: string;
   items: string[];
 };
 
 export default function KeyTakeaways({
+  id,
   items,
 }: KeyTakeawaysProps) {
   return (
-    <section className="mx-auto max-w-4xl px-6 py-16">
+    <section id={id} className="scroll-mt-24 mx-auto max-w-4xl px-6 py-16">
       <div className="rounded-2xl border border-[var(--border)] bg-white p-8">
         <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[var(--accent)]">
           Key Takeaways

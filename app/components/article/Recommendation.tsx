@@ -4,16 +4,18 @@ type RecommendationItem = {
 };
 
 type RecommendationProps = {
+  id?: string;
   summary: string;
   items: RecommendationItem[];
 };
 
 export default function Recommendation({
+  id,
   summary,
   items,
 }: RecommendationProps) {
   return (
-    <section className="mx-auto max-w-4xl px-6 py-16">
+    <section id={id} className="scroll-mt-24 mx-auto max-w-4xl px-6 py-16">
       <div className="border-t border-[var(--border)] pt-12">
         <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[var(--accent)]">
           Recommendation
