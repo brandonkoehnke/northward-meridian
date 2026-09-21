@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import RelatedDecisions from "@/app/components/article/RelatedDecisions";
 import GuideLayout from "@/app/components/article/GuideLayout";
+import GuidedEntry from "@/app/components/article/GuidedEntry";
 import {
     ExampleCard,
     FormulaCard,
@@ -12,8 +13,6 @@ import SafetyCallout from "@/app/components/article/SafetyCallout";
 import DecisionChecklist from "@/app/components/article/DecisionChecklist";
 import DecisionFramework from "@/app/components/article/DecisionFramework";
 import KeyTakeaways from "@/app/components/article/KeyTakeaways";
-import LearningObjectives from "@/app/components/article/LearningObjectives";
-import MeridianFramework from "@/app/components/article/MeridianFramework";
 import OptionsAndTradeoffs from "@/app/components/article/OptionsAndTradeoffs";
 import QuestionsToAsk from "@/app/components/article/QuestionsToAsk";
 import Recommendation from "@/app/components/article/Recommendation";
@@ -112,36 +111,56 @@ const guideSections = [
     },
 ] as const;
 
-const meridianFrameworkSteps = [
+const guidedEntryScenarios = [
     {
-        label: "Secure",
-        description:
-            "Identify immediate safety risks and stabilize the situation before comparing costs.",
-        href: "#safety",
+        id: "leaking",
+        title: "My water heater is leaking",
+        summary:
+            "Find out whether the leak points toward an external repair or probable tank failure.",
+        guidance:
+            "Start by identifying exactly where the water is coming from. A leak through the tank body usually points toward replacement, while a fitting, valve, or nearby source may still be repairable.",
+        destinationId: "diagnosis",
+        destinationLabel: "Diagnosis",
     },
     {
-        label: "Diagnose",
-        description:
-            "Confirm what failed and distinguish a serviceable component from tank failure.",
-        href: "#diagnosis",
+        id: "no-hot-water",
+        title: "I do not have hot water",
+        summary:
+            "Determine whether the problem may be a replaceable component or a broader system failure.",
+        guidance:
+            "Loss of hot water does not automatically mean the tank needs replacement. Start with the diagnosis section and identify what has actually failed.",
+        destinationId: "diagnosis",
+        destinationLabel: "Diagnosis",
     },
     {
-        label: "Evaluate",
-        description:
-            "Compare repair, replacement, cost, reliability, efficiency, and household needs.",
-        href: "#options",
+        id: "replacement-recommended",
+        title: "A plumber recommended replacement",
+        summary:
+            "Evaluate whether the recommendation is supported by the actual condition of the system.",
+        guidance:
+            "A replacement recommendation should be evaluated against the failure source, tank condition, age, warranty, repair history, and complete installed cost.",
+        destinationId: "scorecard",
+        destinationLabel: "Decision Scorecard",
     },
     {
-        label: "Decide",
-        description:
-            "Use the evidence and scorecard to choose the most defensible path forward.",
-        href: "#scorecard",
+        id: "comparing-costs",
+        title: "I am comparing repair and replacement costs",
+        summary:
+            "Compare complete installed costs rather than a repair quote against appliance price alone.",
+        guidance:
+            "The useful comparison includes repair labor and parts on one side and equipment, labor, permits, removal, disposal, and required modifications on the other.",
+        destinationId: "cost-comparison",
+        destinationLabel: "Cost Comparison",
     },
     {
-        label: "Act",
-        description:
-            "Verify the quote, ask the right questions, and execute the decision confidently.",
-        href: "#checklist",
+        id: "planning-ahead",
+        title: "I am planning ahead",
+        summary:
+            "Explore replacement options before you're dealing with an emergency.",
+        guidance:
+            "Planning ahead gives you time to compare capacity, fuel type, efficiency, installation requirements, and different water-heating technologies.",
+        destinationId: "replacement-options",
+        destinationLabel: "Replacement Options",
     },
 ] as const;
 
@@ -211,12 +230,10 @@ export default function RepairOrReplaceWaterHeaterGuide() {
             bottomLine={guide.bottomLine}
             structuredData={articleJsonLd}
             sections={guideSections}
+            guidedEntry={<GuidedEntry scenarios={guidedEntryScenarios} />}
         >
-            <MeridianFramework steps={meridianFrameworkSteps} />
 
             <SafetyCallout />
-
-            <LearningObjectives items={guide.learningObjectives} />
 
             <WhyThisMatters id="why-it-matters">
                 <p>

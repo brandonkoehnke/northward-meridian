@@ -1,6 +1,8 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
+
+import { trackEvent } from "@/lib/analytics";
 
 type HeaterType =
   | "gas-storage"
@@ -45,6 +47,19 @@ export default function WaterHeaterScorecard({ id }: WaterHeaterScorecardProps) 
   const [visibleCorrosion, setVisibleCorrosion] = useState(false);
   const [meetsDemand, setMeetsDemand] = useState(true);
   const [safetyConcern, setSafetyConcern] = useState(false);
+
+  const hasStarted = useRef(false);
+  const previousRecommendation = useRef<Recommendation | null>(null);
+
+  const markStarted = () => {
+    if (hasStarted.current) return;
+
+    hasStarted.current = true;
+
+    trackEvent("scorecard_started", {
+      tool: "water_heater_repair_or_replace",
+    });
+  };
 
   const result = useMemo(() => {
     if (safetyConcern) {
@@ -136,6 +151,25 @@ export default function WaterHeaterScorecard({ id }: WaterHeaterScorecardProps) 
     visibleCorrosion,
   ]);
 
+  useEffect(() => {
+    if (!hasStarted.current) {
+      previousRecommendation.current = result.recommendation;
+      return;
+    }
+
+    if (previousRecommendation.current === result.recommendation) {
+      return;
+    }
+
+    trackEvent("scorecard_result_changed", {
+      tool: "water_heater_repair_or_replace",
+      recommendation: result.recommendation,
+      result_heading: result.heading,
+    });
+
+    previousRecommendation.current = result.recommendation;
+  }, [result]);
+
   const resultClasses: Record<Recommendation, string> = {
     safety: "border-red-300 bg-red-50",
     repair: "border-[var(--accent)] bg-white",
@@ -164,7 +198,10 @@ export default function WaterHeaterScorecard({ id }: WaterHeaterScorecardProps) 
           <SelectField
             label="Water-heater type"
             value={heaterType}
-            onChange={(value) => setHeaterType(value as HeaterType)}
+            onChange={(value) => {
+              markStarted();
+              setHeaterType(value as HeaterType);
+            }}
             options={[
               ["gas-storage", "Gas storage tank"],
               ["electric-storage", "Electric storage tank"],
@@ -177,7 +214,10 @@ export default function WaterHeaterScorecard({ id }: WaterHeaterScorecardProps) 
           <SelectField
             label="Approximate age"
             value={ageRange}
-            onChange={(value) => setAgeRange(value as AgeRange)}
+            onChange={(value) => {
+              markStarted();
+              setAgeRange(value as AgeRange);
+            }}
             options={[
               ["unknown", "Unknown"],
               ["under-5", "Under 5 years"],
@@ -190,7 +230,10 @@ export default function WaterHeaterScorecard({ id }: WaterHeaterScorecardProps) 
           <SelectField
             label="Primary problem"
             value={failureType}
-            onChange={(value) => setFailureType(value as FailureType)}
+            onChange={(value) => {
+              markStarted();
+              setFailureType(value as FailureType);
+            }}
             options={[
               [
                 "replaceable-component",
@@ -210,9 +253,10 @@ export default function WaterHeaterScorecard({ id }: WaterHeaterScorecardProps) 
           <SelectField
             label="Repair quote as a share of installed replacement cost"
             value={repairCostShare}
-            onChange={(value) =>
-              setRepairCostShare(value as RepairCostShare)
-            }
+            onChange={(value) => {
+              markStarted();
+              setRepairCostShare(value as RepairCostShare);
+            }}
             options={[
               ["unknown", "Unknown—quotes not yet available"],
               ["under-20", "Under 20%"],

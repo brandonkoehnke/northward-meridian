@@ -16,6 +16,7 @@ type GuideLayoutProps = {
   bottomLine: string;
   sections?: readonly GuideNavigationItem[];
   structuredData?: Record<string, unknown>;
+  guidedEntry?: ReactNode;
   children: ReactNode;
 };
 
@@ -29,6 +30,7 @@ export default function GuideLayout({
   bottomLine,
   sections = [],
   structuredData,
+  guidedEntry,
   children,
 }: GuideLayoutProps) {
   return (
@@ -54,6 +56,8 @@ export default function GuideLayout({
         updated={updated}
         bottomLine={bottomLine}
       />
+
+      {guidedEntry ? guidedEntry : null}
 
       {sections.length ? (
         <GuideTableOfContents items={sections} variant="mobile" />
