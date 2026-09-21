@@ -20,7 +20,7 @@ export default function ContactPage() {
           </h2>
 
           <p className="mt-4 text-lg">
-            hello@northwardmeridian.com
+            20koehnkeb@gmail.com
           </p>
 
           <p className="mt-8 leading-8 text-[var(--muted)]">

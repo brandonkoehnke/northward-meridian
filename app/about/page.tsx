@@ -3,7 +3,7 @@ export default function AboutPage() {
     <main className="min-h-screen bg-[var(--background)] text-[var(--foreground)]">
       <section className="mx-auto max-w-4xl px-6 py-24">
         <p className="text-sm font-semibold uppercase tracking-[0.25em] text-[var(--accent)]">
-          About Meridian
+          About Northward Meridian
         </p>
 
         <h1 className="mt-6 text-5xl font-bold tracking-tight md:text-6xl">
@@ -11,7 +11,7 @@ export default function AboutPage() {
         </h1>
 
         <p className="mt-8 text-xl leading-9 text-[var(--muted)]">
-          Meridian exists to help people navigate complex decisions with
+          Northward Meridian exists to help people navigate complex decisions with
           practical guidance, thoughtful research, and useful tools.
         </p>
 
@@ -23,7 +23,7 @@ export default function AboutPage() {
 
             <p className="mt-4">
               Most people don’t need more information—they need better
-              frameworks for making decisions. Meridian is built around that
+              frameworks for making decisions. Northward Meridian is built around that
               idea.
             </p>
 
@@ -40,7 +40,7 @@ export default function AboutPage() {
             </h2>
 
             <p className="mt-4">
-              Meridian combines careful research, structured analysis, and
+              Northward Meridian combines careful research, structured analysis, and
               practical decision frameworks to produce guides that are clear,
               balanced, and actionable.
             </p>
@@ -72,7 +72,7 @@ export default function AboutPage() {
             </h2>
 
             <p className="mt-4">
-              Meridian is committed to publishing guides that respect your
+              Northward Meridian is committed to publishing guides that respect your
               time. We aim to provide recommendations early, explain the
               reasoning clearly, acknowledge uncertainty when it exists, and
               help you move forward with confidence.

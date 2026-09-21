@@ -11,7 +11,7 @@ export default function PrivacyPage() {
         </h1>
 
         <p className="mt-8 text-xl leading-9 text-[var(--muted)]">
-          Meridian is committed to respecting your privacy and being transparent
+          Northward Meridian is committed to respecting your privacy and being transparent
           about the information we collect.
         </p>
 
@@ -21,7 +21,7 @@ export default function PrivacyPage() {
             <h2 className="text-2xl font-semibold">Information We Collect</h2>
 
             <p className="mt-4 leading-8 text-[var(--muted)]">
-              Meridian may collect anonymous usage information such as page
+              Northward Meridian may collect anonymous usage information such as page
               views, browser type, device information, and general geographic
               region through analytics tools. This information helps improve the
               website and understand which guides are most useful.
@@ -32,7 +32,7 @@ export default function PrivacyPage() {
             <h2 className="text-2xl font-semibold">Cookies</h2>
 
             <p className="mt-4 leading-8 text-[var(--muted)]">
-              Meridian may use cookies and similar technologies to improve site
+              Northward Meridian may use cookies and similar technologies to improve site
               functionality, measure traffic, and enhance the user experience.
             </p>
           </section>
@@ -41,7 +41,7 @@ export default function PrivacyPage() {
             <h2 className="text-2xl font-semibold">Advertising</h2>
 
             <p className="mt-4 leading-8 text-[var(--muted)]">
-              Meridian may display advertising in the future. Advertising
+              Northward Meridian may display advertising in the future. Advertising
               partners may use cookies or similar technologies to deliver and
               measure advertisements in accordance with their own privacy
               policies.
@@ -52,7 +52,7 @@ export default function PrivacyPage() {
             <h2 className="text-2xl font-semibold">Email</h2>
 
             <p className="mt-4 leading-8 text-[var(--muted)]">
-              If you contact Meridian by email, your message and contact
+              If you contact Northward Meridian by email, your message and contact
               information will only be used to respond to your inquiry.
             </p>
           </section>
@@ -61,7 +61,7 @@ export default function PrivacyPage() {
             <h2 className="text-2xl font-semibold">Third-Party Services</h2>
 
             <p className="mt-4 leading-8 text-[var(--muted)]">
-              Meridian may use third-party services such as analytics,
+              Northward Meridian may use third-party services such as analytics,
               advertising, hosting, or email providers. These services may
               process information according to their own privacy policies.
             </p>

@@ -11,7 +11,7 @@ export default function TermsPage() {
                 </h1>
 
                 <p className="mt-8 text-xl leading-9 text-[var(--muted)]">
-                    By using Meridian, you agree to the following terms.
+                    By using Northward Meridian, you agree to the following terms.
                 </p>
 
                 <div className="mt-16 space-y-12">
@@ -22,7 +22,7 @@ export default function TermsPage() {
                         </h2>
 
                         <p className="mt-4 leading-8 text-[var(--muted)]">
-                            Meridian publishes educational information intended to help
+                            Northward Meridian publishes educational information intended to help
                             readers better understand topics and evaluate decisions.
                         </p>
                     </section>
@@ -33,7 +33,7 @@ export default function TermsPage() {
                         </h2>
 
                         <p className="mt-4 leading-8 text-[var(--muted)]">
-                            Information published on Meridian should not be considered
+                            Information published on Northward Meridian should not be considered
                             individualized financial, legal, tax, accounting, investment, or
                             professional advice. Decisions should be made based on your own
                             circumstances and, when appropriate, in consultation with a
@@ -47,7 +47,7 @@ export default function TermsPage() {
                         </h2>
 
                         <p className="mt-4 leading-8 text-[var(--muted)]">
-                            Meridian strives to provide accurate and current information.
+                            Northward Meridian strives to provide accurate and current information.
                             However, regulations, pricing, products, benefits, and policies
                             change over time. No guarantee is made regarding completeness,
                             accuracy, or timeliness.
@@ -60,8 +60,8 @@ export default function TermsPage() {
                         </h2>
 
                         <p className="mt-4 leading-8 text-[var(--muted)]">
-                            Meridian may link to third-party websites for reference or
-                            convenience. Meridian is not responsible for the content,
+                            Northward Meridian may link to third-party websites for reference or
+                            convenience. Northward Meridian is not responsible for the content,
                             policies, or practices of external websites.
                         </p>
                     </section>
@@ -73,7 +73,7 @@ export default function TermsPage() {
 
                         <p className="mt-4 leading-8 text-[var(--muted)]">
                             Unless otherwise noted, all original content published by
-                            Northward Meridian is protected by copyright. Permission is
+                            Northward Northward Meridian is protected by copyright. Permission is
                             required before reproducing or republishing substantial portions
                             of the content.
                         </p>
@@ -88,7 +88,7 @@ export default function TermsPage() {
                         </div>
 
                         <p className="mt-8 text-lg leading-8 text-[var(--foreground)]">
-                            Meridian provides educational information designed to help readers
+                            Northward Meridian provides educational information designed to help readers
                             understand options, evaluate tradeoffs, and make informed decisions.
                         </p>
 

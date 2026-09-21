@@ -19,10 +19,10 @@ export default function Home() {
         </p>
 
         <Link
-          href="/articles"
+          href="/guides"
           className="mt-12 rounded-full bg-[var(--accent)] px-8 py-4 text-white transition hover:bg-[var(--accent-hover)]"
         >
-          Explore Articles
+          Explore Guides
         </Link>
       </section>
 

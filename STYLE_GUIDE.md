@@ -1,8 +1,8 @@
-# Meridian Editorial Style Guide
+# Northward Meridian Editorial Style Guide
 
 ## Purpose
 
-Meridian helps people navigate consequential decisions through clear explanations, balanced analysis, and practical recommendations.
+Northward Meridian helps people navigate consequential decisions through clear explanations, balanced analysis, and practical recommendations.
 
 Every guide should leave the reader more capable of making a decision than they were before arriving.
 
@@ -20,7 +20,7 @@ Examples:
 
 Avoid articles that only define a topic without helping the reader act.
 
-## Meridian Guide Structure
+## Northward Meridian Guide Structure
 
 Every guide should follow this sequence:
 
@@ -77,7 +77,7 @@ AI may assist with research, outlining, drafting, and editing. A human must revi
 
 ## Voice
 
-Meridian should sound:
+Northward Meridian should sound:
 
 - Calm
 - Practical
@@ -86,7 +86,7 @@ Meridian should sound:
 - Thoughtful
 - Nonjudgmental
 
-Meridian should not sound:
+Northward Meridian should not sound:
 
 - Sensational
 - Promotional
@@ -205,7 +205,7 @@ Avoid guarantees about approval, returns, savings, credit scores, or financial o
 
 ## Firsthand Experience
 
-Do not imply that Meridian personally tested, purchased, visited, or used something unless that occurred.
+Do not imply that Northward Meridian personally tested, purchased, visited, or used something unless that occurred.
 
 Use honest phrasing:
 
@@ -260,7 +260,6 @@ Before publishing, confirm:
 
 Use:
 
-- Meridian — public-facing publication
 - Northward Meridian — company or publisher
 - Guides — published decision-focused resources
 - Decision Snapshot — the summary near the beginning
