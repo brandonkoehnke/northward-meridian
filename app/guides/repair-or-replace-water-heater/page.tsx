@@ -187,15 +187,6 @@ export const metadata: Metadata = {
         title: guide.title,
         description: guide.description,
     },
-
-    /*
-     * Leave this in place while reviewing the draft.
-     * Delete the robots block before public launch.
-     */
-    robots: {
-        index: false,
-        follow: false,
-    },
 };
 
 const articleJsonLd = {
