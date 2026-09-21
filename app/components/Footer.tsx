@@ -13,7 +13,9 @@ export default function Footer() {
       <div className="mx-auto max-w-6xl px-6">
         <div className="grid gap-10 md:grid-cols-[1fr_auto] md:items-start">
           <div>
-            <h2 className="text-xl font-semibold tracking-tight">Meridian</h2>
+            <h2 className="text-xl font-semibold tracking-tight">
+              Northward Meridian
+            </h2>
 
             <p className="mt-4 max-w-xl leading-8 text-[var(--muted)]">
               Helping people navigate complex decisions through practical

@@ -18,24 +18,10 @@ export default function Navigation() {
 
         <div className="flex gap-8 text-sm font-medium">
           <Link
-            href="/articles"
+            href="/guides"
             className="text-[var(--muted)] transition-colors hover:text-[var(--accent)]"
           >
-            Articles
-          </Link>
-
-          <Link
-            href="/topics"
-            className="text-[var(--muted)] transition-colors hover:text-[var(--accent)]"
-          >
-            Topics
-          </Link>
-
-          <Link
-            href="/tools"
-            className="text-[var(--muted)] transition-colors hover:text-[var(--accent)]"
-          >
-            Tools
+            Guides
           </Link>
 
           <Link
