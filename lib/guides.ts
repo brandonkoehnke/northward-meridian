@@ -23,28 +23,7 @@ export const guides: GuideSummary[] = [
     published: true,
     relatedSlugs: [],
   },
-  {
-    slug: "evaluate-ai-business-idea",
-    title: "How to Assess an AI Business Idea Before Building It",
-    description:
-      "A decision framework for evaluating demand, differentiation, and monetization before investing heavily.",
-    category: "Business",
-    href: "/guides/evaluate-ai-business-idea",
-    tags: ["AI", "business", "validation"],
-    published: false,
-    relatedSlugs: ["start-small-content-website"],
-  },
-  {
-    slug: "start-small-content-website",
-    title: "How to Start a Small Content Website Without Overbuilding",
-    description:
-      "The essential decisions, tools, and launch steps for a lean publishing business.",
-    category: "Technology",
-    href: "/guides/start-small-content-website",
-    tags: ["publishing", "websites", "content"],
-    published: false,
-    relatedSlugs: ["evaluate-ai-business-idea"],
-  },
+
   {
     slug: "repair-or-replace-water-heater",
     title: "Should You Repair or Replace Your Water Heater?",
@@ -60,12 +39,28 @@ export const guides: GuideSummary[] = [
       "repair or replace",
     ],
     published: true,
-    relatedSlugs: [
-      "tank-vs-tankless-water-heater",
-      "heat-pump-water-heater",
-      "home-warranty-worth-it",
-    ],
+    relatedSlugs: ["is-service-line-coverage-worth-it"],
   },
+
+  {
+    slug: "is-service-line-coverage-worth-it",
+    title: "Is Service Line Coverage Worth It?",
+    description:
+      "A practical guide to deciding whether coverage for buried water, sewer, gas, and utility lines is worth the cost.",
+    category: "Home",
+    href: "/guides/is-service-line-coverage-worth-it",
+    tags: [
+      "service line coverage",
+      "sewer line coverage",
+      "homeowners insurance",
+      "homeownership",
+      "insurance",
+    ],
+    published: true,
+    relatedSlugs: ["repair-or-replace-water-heater"],
+  },
+
+  // Future guides
   {
     slug: "tank-vs-tankless-water-heater",
     title: "Should You Choose a Tank or Tankless Water Heater?",
@@ -75,11 +70,9 @@ export const guides: GuideSummary[] = [
     href: "/guides/tank-vs-tankless-water-heater",
     tags: ["water heaters", "tankless", "home improvement"],
     published: false,
-    relatedSlugs: [
-      "repair-or-replace-water-heater",
-      "heat-pump-water-heater",
-    ],
+    relatedSlugs: ["repair-or-replace-water-heater"],
   },
+
   {
     slug: "heat-pump-water-heater",
     title: "Is a Heat-Pump Water Heater Worth It?",
@@ -89,11 +82,9 @@ export const guides: GuideSummary[] = [
     href: "/guides/heat-pump-water-heater",
     tags: ["water heaters", "heat pumps", "energy efficiency"],
     published: false,
-    relatedSlugs: [
-      "repair-or-replace-water-heater",
-      "tank-vs-tankless-water-heater",
-    ],
+    relatedSlugs: ["repair-or-replace-water-heater"],
   },
+
   {
     slug: "home-warranty-worth-it",
     title: "Is a Home Warranty Worth the Cost?",
@@ -104,6 +95,30 @@ export const guides: GuideSummary[] = [
     tags: ["home warranty", "home repair", "insurance"],
     published: false,
     relatedSlugs: ["repair-or-replace-water-heater"],
+  },
+
+  {
+    slug: "evaluate-ai-business-idea",
+    title: "How to Assess an AI Business Idea Before Building It",
+    description:
+      "A decision framework for evaluating demand, differentiation, and monetization before investing heavily.",
+    category: "Business",
+    href: "/guides/evaluate-ai-business-idea",
+    tags: ["AI", "business", "validation"],
+    published: false,
+    relatedSlugs: ["start-small-content-website"],
+  },
+
+  {
+    slug: "start-small-content-website",
+    title: "How to Start a Small Content Website Without Overbuilding",
+    description:
+      "The essential decisions, tools, and launch steps for a lean publishing business.",
+    category: "Technology",
+    href: "/guides/start-small-content-website",
+    tags: ["publishing", "websites", "content"],
+    published: false,
+    relatedSlugs: ["evaluate-ai-business-idea"],
   },
 ];
 
@@ -119,7 +134,7 @@ export function getRelatedGuides(slug: string, limit = 3) {
   }
 
   return currentGuide.relatedSlugs
-    .map(getGuideBySlug)
+    .map((relatedSlug) => getGuideBySlug(relatedSlug))
     .filter(
       (guide): guide is GuideSummary =>
         Boolean(guide && guide.published && guide.slug !== slug),
