@@ -3,7 +3,7 @@ import LogoMark from "./LogoMark";
 
 export default function Navigation() {
   return (
-    <nav className="border-b border-[var(--border)] bg-[var(--background)]">
+    <nav className="sticky top-0 z-50 border-b border-[var(--border)] bg-[var(--background)]/95 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-5">
         <Link
           href="/"
