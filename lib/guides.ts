@@ -138,6 +138,23 @@ export const guides: GuideSummary[] = [
     published: false,
     relatedSlugs: ["evaluate-ai-business-idea"],
   },
+  {
+    slug: "replace-roof-before-selling-house",
+    title: "Should I Replace My Roof Before Selling My House?",
+    description:
+      "A practical framework for deciding whether to replace, repair, credit, or sell a house with an aging or damaged roof.",
+    category: "Home",
+    href: "/guides/replace-roof-before-selling-house",
+    tags: [
+      "roof replacement",
+      "selling a house",
+      "home improvement",
+      "home selling",
+      "roof repair",
+    ],
+    published: true,
+    relatedSlugs: [],
+  },
 ];
 
 export function getGuideBySlug(slug: string) {
