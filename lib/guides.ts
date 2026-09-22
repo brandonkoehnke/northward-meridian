@@ -156,6 +156,7 @@ export const guides: GuideSummary[] = [
     relatedSlugs: [
       "septic-inspection-before-selling-house",
       "replace-galvanized-plumbing-before-selling-house",
+      "remove-underground-oil-tank-before-selling-house",
     ],
   },
   {
@@ -176,6 +177,7 @@ export const guides: GuideSummary[] = [
     relatedSlugs: [
       "replace-roof-before-selling-house",
       "replace-galvanized-plumbing-before-selling-house",
+      "remove-underground-oil-tank-before-selling-house",
     ],
   },
   {
@@ -196,6 +198,28 @@ export const guides: GuideSummary[] = [
     relatedSlugs: [
       "replace-roof-before-selling-house",
       "septic-inspection-before-selling-house",
+      "remove-underground-oil-tank-before-selling-house",
+    ],
+  },
+  {
+    slug: "remove-underground-oil-tank-before-selling-house",
+    title: "Should I Remove an Underground Oil Tank Before Selling My House?",
+    description:
+      "A practical framework for deciding whether to investigate, remove, document, or otherwise address an underground heating-oil tank before selling a house.",
+    category: "Home",
+    href: "/guides/remove-underground-oil-tank-before-selling-house",
+    tags: [
+      "underground oil tank",
+      "selling a house",
+      "heating oil",
+      "home selling",
+      "oil tank removal",
+    ],
+    published: true,
+    relatedSlugs: [
+      "replace-roof-before-selling-house",
+      "septic-inspection-before-selling-house",
+      "replace-galvanized-plumbing-before-selling-house",
     ],
   },
 ];

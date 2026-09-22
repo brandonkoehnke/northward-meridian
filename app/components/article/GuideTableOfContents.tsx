@@ -32,6 +32,11 @@ export default function GuideTableOfContents({
     if (!sections.length) return;
 
     const updateActiveSection = () => {
+      if (window.scrollY < 300) {
+        setActiveId(validItems[0]?.id ?? "");
+        return;
+      }
+
       const activationLine = 150;
       let current = sections[0];
 
@@ -72,6 +77,8 @@ export default function GuideTableOfContents({
     const section = document.getElementById(id);
 
     if (!section) return;
+
+    setActiveId(id);
 
     section.scrollIntoView({
       behavior: "smooth",
@@ -145,29 +152,26 @@ export default function GuideTableOfContents({
                   type="button"
                   onClick={() => navigateTo(item.id)}
                   aria-current={isActive ? "location" : undefined}
-                  className={`flex w-full items-center justify-between gap-3 rounded-lg border-l-2 px-3 py-2 text-left transition-colors ${
-                    isActive
-                      ? "border-[var(--accent)] bg-[var(--background)]"
-                      : "border-transparent hover:bg-[var(--background)]"
-                  }`}
+                  className={`flex w-full items-center justify-between gap-3 rounded-lg border-l-2 px-3 py-2 text-left transition-colors ${isActive
+                    ? "border-[var(--accent)] bg-[var(--background)]"
+                    : "border-transparent hover:bg-[var(--background)]"
+                    }`}
                 >
                   <span
-                    className={`text-sm leading-5 ${
-                      isActive
-                        ? "font-semibold text-[var(--foreground)]"
-                        : "font-medium text-[var(--muted)]"
-                    }`}
+                    className={`text-sm leading-5 ${isActive
+                      ? "font-semibold text-[var(--foreground)]"
+                      : "font-medium text-[var(--muted)]"
+                      }`}
                   >
                     {item.label}
                   </span>
 
                   {item.stage ? (
                     <span
-                      className={`shrink-0 text-[0.58rem] font-semibold uppercase tracking-[0.12em] ${
-                        isActive
-                          ? "text-[var(--accent)]"
-                          : "text-[var(--muted)]"
-                      }`}
+                      className={`shrink-0 text-[0.58rem] font-semibold uppercase tracking-[0.12em] ${isActive
+                        ? "text-[var(--accent)]"
+                        : "text-[var(--muted)]"
+                        }`}
                     >
                       {item.stage}
                     </span>
