@@ -240,6 +240,7 @@ export const guides: GuideSummary[] = [
     relatedSlugs: [
       "roof-rack-gas-mileage-cost",
       "engine-braking-automatic-transmission",
+      "tonneau-cover-gas-savings-payback",
     ],
   },
   {
@@ -260,6 +261,7 @@ export const guides: GuideSummary[] = [
     relatedSlugs: [
       "idle-or-turn-car-off-fuel-efficiency",
       "engine-braking-automatic-transmission",
+      "tonneau-cover-gas-savings-payback",
     ],
   },
   {
@@ -280,6 +282,28 @@ export const guides: GuideSummary[] = [
     relatedSlugs: [
       "idle-or-turn-car-off-fuel-efficiency",
       "roof-rack-gas-mileage-cost",
+      "tonneau-cover-gas-savings-payback",
+    ],
+  },
+  {
+    slug: "tonneau-cover-gas-savings-payback",
+    title: "Does a Tonneau Cover Save Enough Gas to Pay for Itself?",
+    description:
+      "Calculate whether potential fuel savings from a tonneau cover are large enough to recover the purchase price, and understand what aerodynamic testing does and does not prove.",
+    category: "Automotive",
+    href: "/guides/tonneau-cover-gas-savings-payback",
+    tags: [
+      "tonneau cover",
+      "truck bed cover",
+      "gas mileage",
+      "fuel economy",
+      "pickup trucks",
+    ],
+    published: true,
+    relatedSlugs: [
+      "roof-rack-gas-mileage-cost",
+      "idle-or-turn-car-off-fuel-efficiency",
+      "engine-braking-automatic-transmission",
     ],
   },
 ];
