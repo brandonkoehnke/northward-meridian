@@ -153,7 +153,24 @@ export const guides: GuideSummary[] = [
       "roof repair",
     ],
     published: true,
-    relatedSlugs: [],
+    relatedSlugs: ["septic-inspection-before-selling-house"],
+  },
+  {
+    slug: "septic-inspection-before-selling-house",
+    title: "Should I Get a Septic Inspection Before Selling My House?",
+    description:
+      "A practical framework for deciding whether to inspect your septic system before listing, based on system history, warning signs, documentation, transaction requirements, and repair risk.",
+    category: "Home",
+    href: "/guides/septic-inspection-before-selling-house",
+    tags: [
+      "septic inspection",
+      "selling a house",
+      "septic system",
+      "home selling",
+      "home inspection",
+    ],
+    published: true,
+    relatedSlugs: ["replace-roof-before-selling-house"],
   },
 ];
 
