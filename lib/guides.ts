@@ -222,6 +222,23 @@ export const guides: GuideSummary[] = [
       "replace-galvanized-plumbing-before-selling-house",
     ],
   },
+  {
+    slug: "idle-or-turn-car-off-fuel-efficiency",
+    title: "Is It More Fuel Efficient to Idle or Turn Your Car Off?",
+    description:
+      "A practical explanation of how much fuel idling uses, when shutting off can save fuel, and why automatic start-stop systems are different from manually cycling a conventional vehicle.",
+    category: "Automotive",
+    href: "/guides/idle-or-turn-car-off-fuel-efficiency",
+    tags: [
+      "idling",
+      "fuel economy",
+      "gas mileage",
+      "start stop",
+      "fuel efficiency",
+    ],
+    published: true,
+    relatedSlugs: [],
+  },
 ];
 
 export function getGuideBySlug(slug: string) {

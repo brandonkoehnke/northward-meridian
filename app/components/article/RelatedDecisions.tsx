@@ -70,7 +70,7 @@ export default function RelatedDecisions({
             className="group mt-8 block rounded-2xl border border-[var(--border)] bg-white p-8 transition hover:border-[var(--accent)]"
           >
             <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--accent)]">
-              Meridian
+              Northward Meridian
             </p>
 
             <h3 className="mt-3 text-xl font-semibold">
