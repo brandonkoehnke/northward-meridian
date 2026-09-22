@@ -29,7 +29,9 @@ export default function GuideTableOfContents({
       .map((item) => document.getElementById(item.id))
       .filter((section): section is HTMLElement => section !== null);
 
-    if (!sections.length) return;
+    if (!sections.length) {
+      return;
+    }
 
     const updateActiveSection = () => {
       if (window.scrollY < 300) {
@@ -51,11 +53,10 @@ export default function GuideTableOfContents({
       setActiveId(current.id);
     };
 
-    updateActiveSection();
-
     window.addEventListener("scroll", updateActiveSection, {
       passive: true,
     });
+
     window.addEventListener("resize", updateActiveSection);
 
     return () => {
@@ -76,7 +77,9 @@ export default function GuideTableOfContents({
   const navigateTo = (id: string) => {
     const section = document.getElementById(id);
 
-    if (!section) return;
+    if (!section) {
+      return;
+    }
 
     setActiveId(id);
 
@@ -88,7 +91,9 @@ export default function GuideTableOfContents({
     window.history.replaceState(null, "", `#${id}`);
   };
 
-  if (!validItems.length) return null;
+  if (!validItems.length) {
+    return null;
+  }
 
   if (variant === "mobile") {
     return (
@@ -153,14 +158,14 @@ export default function GuideTableOfContents({
                   onClick={() => navigateTo(item.id)}
                   aria-current={isActive ? "location" : undefined}
                   className={`flex w-full items-center justify-between gap-3 rounded-lg border-l-2 px-3 py-2 text-left transition-colors ${isActive
-                    ? "border-[var(--accent)] bg-[var(--background)]"
-                    : "border-transparent hover:bg-[var(--background)]"
+                      ? "border-[var(--accent)] bg-[var(--background)]"
+                      : "border-transparent hover:bg-[var(--background)]"
                     }`}
                 >
                   <span
                     className={`text-sm leading-5 ${isActive
-                      ? "font-semibold text-[var(--foreground)]"
-                      : "font-medium text-[var(--muted)]"
+                        ? "font-semibold text-[var(--foreground)]"
+                        : "font-medium text-[var(--muted)]"
                       }`}
                   >
                     {item.label}
@@ -169,8 +174,8 @@ export default function GuideTableOfContents({
                   {item.stage ? (
                     <span
                       className={`shrink-0 text-[0.58rem] font-semibold uppercase tracking-[0.12em] ${isActive
-                        ? "text-[var(--accent)]"
-                        : "text-[var(--muted)]"
+                          ? "text-[var(--accent)]"
+                          : "text-[var(--muted)]"
                         }`}
                     >
                       {item.stage}
