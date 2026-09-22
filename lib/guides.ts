@@ -237,7 +237,24 @@ export const guides: GuideSummary[] = [
       "fuel efficiency",
     ],
     published: true,
-    relatedSlugs: [],
+    relatedSlugs: ["roof-rack-gas-mileage-cost"],
+  },
+  {
+    slug: "roof-rack-gas-mileage-cost",
+    title: "Does a Roof Rack Use Enough Extra Gas That You Should Remove It?",
+    description:
+      "Calculate how much an empty roof rack may cost in fuel and understand why the MPG penalty depends on speed, vehicle shape, and rack design.",
+    category: "Automotive",
+    href: "/guides/roof-rack-gas-mileage-cost",
+    tags: [
+      "roof rack",
+      "gas mileage",
+      "fuel economy",
+      "crossbars",
+      "aerodynamic drag",
+    ],
+    published: true,
+    relatedSlugs: ["idle-or-turn-car-off-fuel-efficiency"],
   },
 ];
 
