@@ -153,7 +153,10 @@ export const guides: GuideSummary[] = [
       "roof repair",
     ],
     published: true,
-    relatedSlugs: ["septic-inspection-before-selling-house"],
+    relatedSlugs: [
+      "septic-inspection-before-selling-house",
+      "replace-galvanized-plumbing-before-selling-house",
+    ],
   },
   {
     slug: "septic-inspection-before-selling-house",
@@ -170,7 +173,30 @@ export const guides: GuideSummary[] = [
       "home inspection",
     ],
     published: true,
-    relatedSlugs: ["replace-roof-before-selling-house"],
+    relatedSlugs: [
+      "replace-roof-before-selling-house",
+      "replace-galvanized-plumbing-before-selling-house",
+    ],
+  },
+  {
+    slug: "replace-galvanized-plumbing-before-selling-house",
+    title: "Should I Replace Galvanized Plumbing Before Selling My House?",
+    description:
+      "A practical framework for deciding whether to repipe, repair, offer a credit, or sell a house with galvanized plumbing as-is.",
+    category: "Home",
+    href: "/guides/replace-galvanized-plumbing-before-selling-house",
+    tags: [
+      "galvanized plumbing",
+      "selling a house",
+      "repiping",
+      "home selling",
+      "plumbing",
+    ],
+    published: true,
+    relatedSlugs: [
+      "replace-roof-before-selling-house",
+      "septic-inspection-before-selling-house",
+    ],
   },
 ];
 

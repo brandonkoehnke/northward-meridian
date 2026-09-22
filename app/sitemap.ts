@@ -64,5 +64,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
             changeFrequency: "monthly",
             priority: 0.8,
         },
+        {
+            url: `${baseUrl}/guides/replace-galvanized-plumbing-before-selling-house`,
+            lastModified: new Date("2026-09-22"),
+            changeFrequency: "monthly",
+            priority: 0.8,
+        },
     ];
 }
