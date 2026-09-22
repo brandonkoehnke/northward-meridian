@@ -46,5 +46,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
             changeFrequency: "yearly",
             priority: 0.3,
         },
+        {
+            url: `${baseUrl}/guides/should-i-buy-a-timeshare-resale`,
+            lastModified: new Date("2026-09-22"),
+            changeFrequency: "monthly",
+            priority: 0.8,
+        },
     ];
 }

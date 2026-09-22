@@ -60,6 +60,24 @@ export const guides: GuideSummary[] = [
     relatedSlugs: ["repair-or-replace-water-heater"],
   },
 
+  {
+    slug: "should-i-buy-a-timeshare-resale",
+    title: "Should I Buy a Timeshare Resale?",
+    description:
+      "Compare buying a timeshare from a developer with buying resale, including total ownership cost, transferable benefits, booking rules, and contract risks.",
+    category: "Travel",
+    href: "/guides/should-i-buy-a-timeshare-resale",
+    tags: [
+      "timeshares",
+      "timeshare resale",
+      "vacation ownership",
+      "travel",
+      "developer vs resale",
+    ],
+    published: true,
+    relatedSlugs: [],
+  },
+
   // Future guides
   {
     slug: "tank-vs-tankless-water-heater",
