@@ -228,7 +228,7 @@ export function getGuideBySlug(slug: string) {
   return guides.find((guide) => guide.slug === slug);
 }
 
-export function getRelatedGuides(slug: string, limit = 3) {
+export function getRelatedGuides(slug: string, limit = 6) {
   const currentGuide = getGuideBySlug(slug);
 
   if (!currentGuide) {

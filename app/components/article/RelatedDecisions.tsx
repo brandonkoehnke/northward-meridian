@@ -18,41 +18,51 @@ export default function RelatedDecisions({
           Related Decisions
         </p>
 
-        <h2 className="mt-5 text-3xl font-semibold tracking-tight">
-          You may also be deciding...
-        </h2>
+        <div className="mt-5 flex items-end justify-between gap-6">
+          <h2 className="text-3xl font-semibold tracking-tight">
+            You may also be deciding...
+          </h2>
+
+          {relatedGuides.length >= 3 ? (
+            <p className="hidden shrink-0 text-sm text-[var(--muted)] sm:block">
+              Scroll to explore →
+            </p>
+          ) : null}
+        </div>
 
         {relatedGuides.length > 0 ? (
-          <div className="mt-8 grid gap-5 md:grid-cols-2">
-            {relatedGuides.map((guide) => (
-              <Link
-                key={guide.slug}
-                href={guide.href}
-                className="group rounded-2xl border border-[var(--border)] bg-white p-7 transition hover:-translate-y-0.5 hover:border-[var(--accent)] hover:shadow-sm"
-              >
-                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--accent)]">
-                  {guide.category}
-                </p>
+          <div className="-mx-6 mt-8 overflow-x-auto px-6 pb-4">
+            <div className="flex snap-x snap-mandatory gap-5">
+              {relatedGuides.map((guide) => (
+                <Link
+                  key={guide.slug}
+                  href={guide.href}
+                  className="group w-[85%] shrink-0 snap-start rounded-2xl border border-[var(--border)] bg-white p-7 transition hover:-translate-y-0.5 hover:border-[var(--accent)] hover:shadow-sm sm:w-[60%] lg:w-[calc((100%-1.25rem)/2)]"
+                >
+                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--accent)]">
+                    {guide.category}
+                  </p>
 
-                <h3 className="mt-3 text-xl font-semibold leading-7 tracking-tight">
-                  {guide.title}
-                </h3>
+                  <h3 className="mt-3 text-xl font-semibold leading-7 tracking-tight">
+                    {guide.title}
+                  </h3>
 
-                <p className="mt-3 leading-7 text-[var(--muted)]">
-                  {guide.description}
-                </p>
+                  <p className="mt-3 leading-7 text-[var(--muted)]">
+                    {guide.description}
+                  </p>
 
-                <span className="mt-5 inline-flex items-center gap-2 font-semibold text-[var(--accent)]">
-                  Read decision guide
-                  <span
-                    aria-hidden="true"
-                    className="transition-transform group-hover:translate-x-1"
-                  >
-                    →
+                  <span className="mt-5 inline-flex items-center gap-2 font-semibold text-[var(--accent)]">
+                    Read decision guide
+                    <span
+                      aria-hidden="true"
+                      className="transition-transform group-hover:translate-x-1"
+                    >
+                      →
+                    </span>
                   </span>
-                </span>
-              </Link>
-            ))}
+                </Link>
+              ))}
+            </div>
           </div>
         ) : (
           <Link
