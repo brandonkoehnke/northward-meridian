@@ -237,7 +237,10 @@ export const guides: GuideSummary[] = [
       "fuel efficiency",
     ],
     published: true,
-    relatedSlugs: ["roof-rack-gas-mileage-cost"],
+    relatedSlugs: [
+      "roof-rack-gas-mileage-cost",
+      "engine-braking-automatic-transmission",
+    ],
   },
   {
     slug: "roof-rack-gas-mileage-cost",
@@ -254,7 +257,30 @@ export const guides: GuideSummary[] = [
       "aerodynamic drag",
     ],
     published: true,
-    relatedSlugs: ["idle-or-turn-car-off-fuel-efficiency"],
+    relatedSlugs: [
+      "idle-or-turn-car-off-fuel-efficiency",
+      "engine-braking-automatic-transmission",
+    ],
+  },
+  {
+    slug: "engine-braking-automatic-transmission",
+    title: "Is Engine Braking Bad for an Automatic Transmission?",
+    description:
+      "Understand how engine braking works in an automatic transmission, when manufacturers expect you to use it, and which situations can create real transmission or traction concerns.",
+    category: "Automotive",
+    href: "/guides/engine-braking-automatic-transmission",
+    tags: [
+      "engine braking",
+      "automatic transmission",
+      "downshifting",
+      "transmission wear",
+      "driving",
+    ],
+    published: true,
+    relatedSlugs: [
+      "idle-or-turn-car-off-fuel-efficiency",
+      "roof-rack-gas-mileage-cost",
+    ],
   },
 ];
 
