@@ -29,7 +29,9 @@ export const guides: GuideSummary[] = [
       "credit card value",
     ],
     published: true,
-    relatedSlugs: [],
+    relatedSlugs: [
+      "zero-percent-financing-vs-cash",
+    ],
     updated: "September 2026",
     readingTime: "11 min",
     recommendedFor:
@@ -446,6 +448,31 @@ export const guides: GuideSummary[] = [
       "Households deciding whether hand-washing dishes or using a dishwasher is cheaper and more water efficient.",
     bottomLine:
       "For a reasonably full load, a modern efficient dishwasher can use substantially less water than hand-washing with a continuously running faucet. Whether it also costs less depends on the dishwasher, faucet flow, hand-washing technique, utility rates, detergent, and hot-water use. Efficient basin-style hand washing can narrow the gap considerably, which is why your actual faucet-running time matters more than a universal dishwasher-versus-hand-washing rule.",
+  },
+  {
+    slug: "zero-percent-financing-vs-cash",
+    title: "Should I Use 0% Financing or Pay Cash?",
+    description:
+      "Compare the economic cost of paying cash with using a 0% financing offer, including cash discounts, financing fees, and the value of keeping your money available.",
+    category: "Personal Finance",
+    href: "/guides/zero-percent-financing-vs-cash",
+    tags: [
+      "0% APR",
+      "financing",
+      "pay cash",
+      "personal finance",
+      "opportunity cost",
+    ],
+    published: true,
+    relatedSlugs: [
+      "premium-credit-card-annual-fee",
+    ],
+    updated: "September 2026",
+    readingTime: "10 min",
+    recommendedFor:
+      "People deciding whether to pay cash for a purchase or use a genuine 0% financing offer.",
+    bottomLine:
+      "A 0% financing offer can be economically useful when it does not cost more than paying cash and you can reliably make the required payments while keeping the retained cash safe and available. The comparison changes when financing comes with fees, a higher purchase price, lost cash discounts, deferred-interest terms, or a risk of carrying a balance beyond the promotional period.",
   },
 ];
 
