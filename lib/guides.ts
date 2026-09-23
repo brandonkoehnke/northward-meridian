@@ -348,7 +348,28 @@ export const guides: GuideSummary[] = [
     ],
     published: true,
     relatedSlugs: [
-      "repair-or-replace-water-heater"
+      "repair-or-replace-water-heater",
+      "can-chest-freezer-save-money",
+    ],
+  },
+  {
+    slug: "can-chest-freezer-save-money",
+    title: "Can a Chest Freezer Actually Save You Money?",
+    description:
+      "Calculate whether bulk-buying savings can outweigh the purchase price, electricity, and food waste of owning a chest freezer.",
+    category: "Home",
+    href: "/guides/can-chest-freezer-save-money",
+    tags: [
+      "chest freezer",
+      "grocery savings",
+      "bulk buying",
+      "freezer electricity",
+      "payback",
+    ],
+    published: true,
+    relatedSlugs: [
+      "repair-or-replace-water-heater",
+      "closing-vents-unused-rooms-save-energy",
     ],
   },
 ];
