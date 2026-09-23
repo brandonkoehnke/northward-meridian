@@ -106,5 +106,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
             changeFrequency: "monthly",
             priority: 0.8,
         },
+        {
+            url: `${baseUrl}/guides/closing-vents-unused-rooms-save-energy`,
+            lastModified: new Date("2026-09-23"),
+            changeFrequency: "monthly",
+            priority: 0.8,
+        },
     ];
 }

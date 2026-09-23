@@ -332,6 +332,25 @@ export const guides: GuideSummary[] = [
       "tonneau-cover-gas-savings-payback",
     ],
   },
+  {
+    slug: "closing-vents-unused-rooms-save-energy",
+    title: "Does Closing Vents in Unused Rooms Actually Save Energy?",
+    description:
+      "Understand what happens when you close HVAC vents, why central forced-air systems do not simply use proportionally less energy, and what to do instead.",
+    category: "Home",
+    href: "/guides/closing-vents-unused-rooms-save-energy",
+    tags: [
+      "HVAC",
+      "closing vents",
+      "energy savings",
+      "heating and cooling",
+      "home energy",
+    ],
+    published: true,
+    relatedSlugs: [
+      "repair-or-replace-water-heater"
+    ],
+  },
 ];
 
 export function getGuideBySlug(slug: string) {
