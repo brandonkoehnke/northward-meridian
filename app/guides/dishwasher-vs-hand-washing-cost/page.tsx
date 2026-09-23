@@ -407,9 +407,9 @@ export default function DishwasherVsHandWashingCostGuide() {
                 </div>
 
                 <p>
-                    If your water heater uses natural gas, propane, a heat pump, or another technology, 
-                    the calculator's electricity-based hot-water estimate will not directly represent 
-                    your actual water-heating cost. Treat it as an approximation unless you adjust the 
+                    If your water heater uses natural gas, propane, a heat pump, or another technology,
+                    the calculator&apos;s electricity-based hot-water estimate will not directly represent
+                    your actual water-heating cost. Treat it as an approximation unless you adjust the
                     input to reflect your effective cost.
                 </p>
             </GuideSection>
