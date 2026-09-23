@@ -14,36 +14,24 @@ import QuestionsToAsk from "@/app/components/article/QuestionsToAsk";
 import RelatedDecisions from "@/app/components/article/RelatedDecisions";
 import Sources from "@/app/components/article/Sources";
 import WhyThisMatters from "@/app/components/article/WhyThisMatters";
-import type { Guide } from "@/lib/guide";
+import { getGuideBySlug } from "@/lib/guides";
 
-const canonicalUrl =
-    "https://northwardmeridian.com/guides/replace-galvanized-plumbing-before-selling-house";
+const guide = (() => {
+    const found = getGuideBySlug(
+        "replace-galvanized-plumbing-before-selling-house",
+    );
 
-const guide: Guide = {
-    title: "Should I Replace Galvanized Plumbing Before Selling My House?",
-    category: "Home",
-    description:
-        "A practical framework for deciding whether to repipe, repair, offer a credit, or sell a house with galvanized plumbing as-is.",
-    updated: "September 2026",
-    readingTime: "10 min",
-    recommendedFor:
-        "Homeowners preparing to sell an older house that still has some or all of its galvanized water-supply plumbing.",
-    bottomLine:
-        "Galvanized plumbing does not automatically need to be replaced simply because you are selling. A full repipe becomes more compelling when there are widespread condition problems such as poor flow, repeated leaks, visible corrosion, or other documented deficiencies. When the plumbing remains functional, repair, documentation, a buyer credit, or selling with the condition appropriately addressed may be more practical. Identify what piping remains and get its condition assessed before deciding.",
-    learningObjectives: [
-        "Distinguish galvanized plumbing age from actual plumbing condition",
-        "Compare repiping, localized repair, buyer credit, and selling without a pre-sale repipe",
-        "Separate interior galvanized plumbing from the water service line",
-        "Understand why drinking-water concerns should be evaluated separately from the home-sale decision",
-    ],
-    tags: [
-        "galvanized plumbing",
-        "selling a house",
-        "repiping",
-        "home selling",
-        "plumbing",
-    ],
-};
+    if (!found) {
+        throw new Error(
+            "Guide not found: replace-galvanized-plumbing-before-selling-house",
+        );
+    }
+
+    return found;
+})();
+
+const siteUrl = "https://northwardmeridian.com";
+const canonicalUrl = `${siteUrl}${guide.href}`;
 
 const guideSections = [
     {

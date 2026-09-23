@@ -24,7 +24,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         },
         {
             url: `${baseUrl}/guides/premium-credit-card-annual-fee`,
-            lastModified: new Date("2026-08-06"),
+            lastModified: new Date("2026-09-23"),
             changeFrequency: "monthly",
             priority: 0.8,
         },

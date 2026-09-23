@@ -14,36 +14,24 @@ import QuestionsToAsk from "@/app/components/article/QuestionsToAsk";
 import RelatedDecisions from "@/app/components/article/RelatedDecisions";
 import Sources from "@/app/components/article/Sources";
 import WhyThisMatters from "@/app/components/article/WhyThisMatters";
-import type { Guide } from "@/lib/guide";
+import { getGuideBySlug } from "@/lib/guides";
 
-const canonicalUrl =
-    "https://northwardmeridian.com/guides/engine-braking-automatic-transmission";
+const guide = (() => {
+    const found = getGuideBySlug(
+        "engine-braking-automatic-transmission",
+    );
 
-const guide: Guide = {
-    title: "Is Engine Braking Bad for an Automatic Transmission?",
-    category: "Automotive",
-    description:
-        "Understand how engine braking works in an automatic transmission, when manufacturers expect you to use it, and which situations can create real transmission or traction concerns.",
-    updated: "September 2026",
-    readingTime: "9 min",
-    recommendedFor:
-        "Drivers wondering whether using a lower gear or transmission range for engine braking can damage an automatic transmission.",
-    bottomLine:
-        "Engine braking is a normal operating function of many automatic transmissions, and manufacturers explicitly describe using lower ranges or manual modes for downhill speed control. The important questions are whether the selected range is appropriate for the vehicle, whether engine speed remains within the manufacturer's limits, and whether road conditions make additional engine braking unsafe. Engine braking should complement the friction brakes rather than replace them.",
-    learningObjectives: [
-        "Understand what engine braking actually does",
-        "See why using a lower range can be normal transmission operation",
-        "Recognize situations where engine braking is especially useful",
-        "Identify when RPM, traction, or unusual transmission behavior is a bigger concern",
-    ],
-    tags: [
-        "engine braking",
-        "automatic transmission",
-        "downshifting",
-        "transmission wear",
-        "driving",
-    ],
-};
+    if (!found) {
+        throw new Error(
+            "Guide not found: engine-braking-automatic-transmission",
+        );
+    }
+
+    return found;
+})();
+
+const siteUrl = "https://northwardmeridian.com";
+const canonicalUrl = `${siteUrl}${guide.href}`;
 
 const guideSections = [
     {

@@ -14,36 +14,24 @@ import RelatedDecisions from "@/app/components/article/RelatedDecisions";
 import RoofSaleDecisionCheck from "@/app/components/article/RoofSaleDecisionCheck";
 import Sources from "@/app/components/article/Sources";
 import WhyThisMatters from "@/app/components/article/WhyThisMatters";
-import type { Guide } from "@/lib/guide";
+import { getGuideBySlug } from "@/lib/guides";
 
-const canonicalUrl =
-    "https://northwardmeridian.com/guides/replace-roof-before-selling-house";
+const guide = (() => {
+    const found = getGuideBySlug(
+        "replace-roof-before-selling-house",
+    );
 
-const guide: Guide = {
-    title: "Should I Replace My Roof Before Selling My House?",
-    category: "Home",
-    description:
-        "A practical framework for deciding whether to replace, repair, credit, or sell a house with an aging or damaged roof.",
-    updated: "September 2026",
-    readingTime: "9 min",
-    recommendedFor:
-        "Homeowners preparing to sell a house with an aging, damaged, or recently inspected roof.",
-    bottomLine:
-        "Replacing a roof before selling can make sense when the roof has significant problems, buyers are likely to require concessions, or the replacement materially improves the home's marketability. Repairing and documenting a serviceable roof may make more sense when the problem is localized. In other cases, a seller may be better served by pricing for the condition or offering a credit. Get the roof condition and likely costs documented before deciding.",
-    learningObjectives: [
-        "Distinguish roof age from actual roof condition",
-        "Compare replacement, repair, buyer credit, and selling as-is",
-        "Estimate how roof costs affect the economics of a sale",
-        "Understand why inspections, disclosures, insurance, and financing can affect the decision",
-    ],
-    tags: [
-        "roof replacement",
-        "selling a house",
-        "home improvement",
-        "home selling",
-        "roof repair",
-    ],
-};
+    if (!found) {
+        throw new Error(
+            "Guide not found: replace-roof-before-selling-house",
+        );
+    }
+
+    return found;
+})();
+
+const siteUrl = "https://northwardmeridian.com";
+const canonicalUrl = `${siteUrl}${guide.href}`;
 
 const guideSections = [
     {

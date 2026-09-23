@@ -14,36 +14,24 @@ import KeyTakeaways from "@/app/components/article/KeyTakeaways";
 import QuestionsToAsk from "@/app/components/article/QuestionsToAsk";
 import Sources from "@/app/components/article/Sources";
 import WhyThisMatters from "@/app/components/article/WhyThisMatters";
-import type { Guide } from "@/lib/guide";
+import { getGuideBySlug } from "@/lib/guides";
 
-const canonicalUrl =
-  "https://northwardmeridian.com/guides/is-service-line-coverage-worth-it";
+const guide = (() => {
+  const found = getGuideBySlug(
+    "is-service-line-coverage-worth-it",
+  );
 
-const guide: Guide = {
-  title: "Is Service Line Coverage Worth It?",
-  category: "Home",
-  description:
-    "A practical guide to deciding whether coverage for buried water, sewer, gas, and utility lines is worth the cost.",
-  updated: "September 2026",
-  readingTime: "8 min",
-  recommendedFor:
-    "Homeowners deciding whether to add service-line coverage to a homeowners insurance policy or purchase a separate utility-line protection plan.",
-  bottomLine:
-    "Service-line coverage can make sense when an older or exposed utility line could create a meaningful financial burden and the policy provides useful protection at a reasonable cost. It is less compelling when your lines are newer, your exposure is limited, you already have equivalent coverage, or you could comfortably absorb the loss yourself. Read the actual coverage terms before buying.",
-  learningObjectives: [
-    "Understand what service-line coverage protects and what it does not",
-    "Distinguish service-line coverage from water-backup coverage",
-    "Identify property characteristics that can increase the value of coverage",
-    "Compare the premium, deductible, coverage limit, exclusions, and repair exposure",
-  ],
-  tags: [
-    "service line coverage",
-    "sewer line coverage",
-    "homeowners insurance",
-    "homeownership",
-    "insurance",
-  ],
-};
+  if (!found) {
+    throw new Error(
+      "Guide not found: is-service-line-coverage-worth-it",
+    );
+  }
+
+  return found;
+})();
+
+const siteUrl = "https://northwardmeridian.com";
+const canonicalUrl = `${siteUrl}${guide.href}`;
 
 const guideSections = [
   {

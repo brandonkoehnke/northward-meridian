@@ -14,36 +14,24 @@ import RelatedDecisions from "@/app/components/article/RelatedDecisions";
 import RoofRackFuelCalculator from "@/app/components/article/RoofRackFuelCalculator";
 import Sources from "@/app/components/article/Sources";
 import WhyThisMatters from "@/app/components/article/WhyThisMatters";
-import type { Guide } from "@/lib/guide";
+import { getGuideBySlug } from "@/lib/guides";
 
-const canonicalUrl =
-    "https://northwardmeridian.com/guides/roof-rack-gas-mileage-cost";
+const guide = (() => {
+    const found = getGuideBySlug(
+        "roof-rack-gas-mileage-cost",
+    );
 
-const guide: Guide = {
-    title: "Does a Roof Rack Use Enough Extra Gas That You Should Remove It?",
-    category: "Automotive",
-    description:
-        "Calculate how much an empty roof rack may cost in fuel and understand why the MPG penalty depends on speed, vehicle shape, and rack design.",
-    updated: "September 2026",
-    readingTime: "9 min",
-    recommendedFor:
-        "Drivers deciding whether the fuel savings from removing an unused roof rack or crossbars are large enough to matter.",
-    bottomLine:
-        "Roof racks and crossbars can reduce fuel economy because they increase aerodynamic drag, but the effect varies substantially with the vehicle, rack design, speed, and cargo. The useful question is not simply whether a rack hurts MPG, but whether the additional fuel cost is large enough to justify removing it when you are not using it. Published testing has found effects ranging from relatively small losses to much larger highway penalties.",
-    learningObjectives: [
-        "Understand why roof racks can reduce highway fuel economy",
-        "See why the MPG penalty varies between vehicles and rack configurations",
-        "Estimate the annual and multi-year fuel cost of leaving a rack installed",
-        "Compare empty crossbars, loaded racks, roof boxes, and other cargo-carrying configurations",
-    ],
-    tags: [
-        "roof rack",
-        "gas mileage",
-        "fuel economy",
-        "crossbars",
-        "aerodynamic drag",
-    ],
-};
+    if (!found) {
+        throw new Error(
+            "Guide not found: roof-rack-gas-mileage-cost",
+        );
+    }
+
+    return found;
+})();
+
+const siteUrl = "https://northwardmeridian.com";
+const canonicalUrl = `${siteUrl}${guide.href}`;
 
 const guideSections = [
     {

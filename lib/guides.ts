@@ -1,27 +1,41 @@
-import type { Guide } from "./guide";
-
-export type GuideSummary = Pick<
-  Guide,
-  "title" | "category" | "description" | "tags"
-> & {
+export type GuideSummary = {
   slug: string;
+  title: string;
+  description: string;
+  category: string;
   href: string;
+  tags: string[];
   published: boolean;
   relatedSlugs: string[];
+  updated: string;
+  readingTime: string;
+  recommendedFor: string;
+  bottomLine: string;
 };
 
 export const guides: GuideSummary[] = [
   {
     slug: "premium-credit-card-annual-fee",
-    title:
-      "How to Evaluate Whether a Premium Credit Card Is Worth the Annual Fee",
+    title: "Is a Premium Credit Card Annual Fee Worth It?",
     description:
-      "A practical framework for deciding whether to keep, downgrade, or cancel a premium credit card.",
+      "Calculate the realistic value of a premium credit card by comparing usable credits, incremental rewards, benefits, and the cost of alternatives.",
     category: "Personal Finance",
     href: "/guides/premium-credit-card-annual-fee",
-    tags: ["credit cards", "annual fees", "travel rewards"],
+    tags: [
+      "credit cards",
+      "annual fees",
+      "travel rewards",
+      "premium cards",
+      "credit card value",
+    ],
     published: true,
     relatedSlugs: [],
+    updated: "September 2026",
+    readingTime: "11 min",
+    recommendedFor:
+      "People deciding whether a premium credit card's annual fee is justified by the value they realistically receive.",
+    bottomLine:
+      "A premium credit card is worth its annual fee only when the value you would realistically receive from usable credits, incremental rewards, and benefits exceeds the additional annual cost compared with your alternative. Advertised benefit values are not the same as realized value, and rewards should be compared against what you could earn with another card.",
   },
 
   {
@@ -40,6 +54,12 @@ export const guides: GuideSummary[] = [
     ],
     published: true,
     relatedSlugs: ["is-service-line-coverage-worth-it"],
+    updated: "August 2026",
+    readingTime: "15 min",
+    recommendedFor:
+      "Homeowners deciding whether to authorize a water-heater repair or obtain replacement quotes.",
+    bottomLine:
+      "Repair generally makes sense when the tank is sound, the failure is isolated and serviceable, the unit remains reliable, and the repair cost is modest compared with complete installed replacement. Replacement becomes more compelling when the tank itself has failed, safety is uncertain, repairs are recurring, the unit no longer meets household needs, or a major repair would preserve an aging and inefficient system.",
   },
 
   {
@@ -58,6 +78,12 @@ export const guides: GuideSummary[] = [
     ],
     published: true,
     relatedSlugs: ["repair-or-replace-water-heater"],
+    updated: "September 2026",
+    readingTime: "8 min",
+    recommendedFor:
+      "Homeowners deciding whether to add service-line coverage to a homeowners insurance policy or purchase a separate utility-line protection plan.",
+    bottomLine:
+      "Service-line coverage can make sense when an older or exposed utility line could create a meaningful financial burden and the policy provides useful protection at a reasonable cost. It is less compelling when your lines are newer, your exposure is limited, you already have equivalent coverage, or you could comfortably absorb the loss yourself. Read the actual coverage terms before buying.",
   },
 
   {
@@ -76,68 +102,14 @@ export const guides: GuideSummary[] = [
     ],
     published: true,
     relatedSlugs: [],
+    updated: "September 2026",
+    readingTime: "8 min",
+    recommendedFor:
+      "Travelers comparing a developer timeshare offer with a resale opportunity.",
+    bottomLine:
+      "A resale timeshare can have a much lower acquisition cost than a developer purchase, but the two should not be treated as equivalent until you verify the ownership rights, booking rules, transferable benefits, recurring fees, and all transfer requirements for the specific program. Compare the complete cost of ownership rather than the sales price alone.",
   },
 
-  // Future guides
-  {
-    slug: "tank-vs-tankless-water-heater",
-    title: "Should You Choose a Tank or Tankless Water Heater?",
-    description:
-      "Compare installed cost, hot-water demand, maintenance, efficiency, space requirements, and expected ownership period.",
-    category: "Home",
-    href: "/guides/tank-vs-tankless-water-heater",
-    tags: ["water heaters", "tankless", "home improvement"],
-    published: false,
-    relatedSlugs: ["repair-or-replace-water-heater"],
-  },
-
-  {
-    slug: "heat-pump-water-heater",
-    title: "Is a Heat-Pump Water Heater Worth It?",
-    description:
-      "Evaluate energy savings, installation requirements, climate, available space, noise, recovery performance, and incentives.",
-    category: "Home",
-    href: "/guides/heat-pump-water-heater",
-    tags: ["water heaters", "heat pumps", "energy efficiency"],
-    published: false,
-    relatedSlugs: ["repair-or-replace-water-heater"],
-  },
-
-  {
-    slug: "home-warranty-worth-it",
-    title: "Is a Home Warranty Worth the Cost?",
-    description:
-      "Compare premiums, service fees, exclusions, claim limits, equipment age, and your ability to absorb major repair costs.",
-    category: "Home",
-    href: "/guides/home-warranty-worth-it",
-    tags: ["home warranty", "home repair", "insurance"],
-    published: false,
-    relatedSlugs: ["repair-or-replace-water-heater"],
-  },
-
-  {
-    slug: "evaluate-ai-business-idea",
-    title: "How to Assess an AI Business Idea Before Building It",
-    description:
-      "A decision framework for evaluating demand, differentiation, and monetization before investing heavily.",
-    category: "Business",
-    href: "/guides/evaluate-ai-business-idea",
-    tags: ["AI", "business", "validation"],
-    published: false,
-    relatedSlugs: ["start-small-content-website"],
-  },
-
-  {
-    slug: "start-small-content-website",
-    title: "How to Start a Small Content Website Without Overbuilding",
-    description:
-      "The essential decisions, tools, and launch steps for a lean publishing business.",
-    category: "Technology",
-    href: "/guides/start-small-content-website",
-    tags: ["publishing", "websites", "content"],
-    published: false,
-    relatedSlugs: ["evaluate-ai-business-idea"],
-  },
   {
     slug: "replace-roof-before-selling-house",
     title: "Should I Replace My Roof Before Selling My House?",
@@ -158,7 +130,14 @@ export const guides: GuideSummary[] = [
       "replace-galvanized-plumbing-before-selling-house",
       "remove-underground-oil-tank-before-selling-house",
     ],
+    updated: "September 2026",
+    readingTime: "9 min",
+    recommendedFor:
+      "Homeowners preparing to sell a house with an aging, damaged, or recently inspected roof.",
+    bottomLine:
+      "Replacing a roof before selling can make sense when the roof has significant problems, buyers are likely to require concessions, or the replacement materially improves the home's marketability. Repairing and documenting a serviceable roof may make more sense when the problem is localized. In other cases, a seller may be better served by pricing for the condition or offering a credit. Get the roof condition and likely costs documented before deciding.",
   },
+
   {
     slug: "septic-inspection-before-selling-house",
     title: "Should I Get a Septic Inspection Before Selling My House?",
@@ -179,7 +158,14 @@ export const guides: GuideSummary[] = [
       "replace-galvanized-plumbing-before-selling-house",
       "remove-underground-oil-tank-before-selling-house",
     ],
+    updated: "September 2026",
+    readingTime: "9 min",
+    recommendedFor:
+      "Homeowners preparing to sell a property served by an individual septic system.",
+    bottomLine:
+      "A pre-sale septic inspection can be valuable when the system's condition is uncertain, maintenance records are incomplete, warning signs exist, or you want to identify a potentially expensive issue before a buyer does. A recent documented inspection and good maintenance history may reduce the value of repeating the work. Before scheduling anything, check whether your state, county, municipality, buyer's lender, or transaction already requires a particular inspection or certification.",
   },
+
   {
     slug: "replace-galvanized-plumbing-before-selling-house",
     title: "Should I Replace Galvanized Plumbing Before Selling My House?",
@@ -200,7 +186,14 @@ export const guides: GuideSummary[] = [
       "septic-inspection-before-selling-house",
       "remove-underground-oil-tank-before-selling-house",
     ],
+    updated: "September 2026",
+    readingTime: "10 min",
+    recommendedFor:
+      "Homeowners preparing to sell an older house that still has some or all of its galvanized water-supply plumbing.",
+    bottomLine:
+      "Galvanized plumbing does not automatically need to be replaced simply because you are selling. A full repipe becomes more compelling when there are widespread condition problems such as poor flow, repeated leaks, visible corrosion, or other documented deficiencies. When the plumbing remains functional, repair, documentation, a buyer credit, or selling with the condition appropriately addressed may be more practical. Identify what piping remains and get its condition assessed before deciding.",
   },
+
   {
     slug: "remove-underground-oil-tank-before-selling-house",
     title: "Should I Remove an Underground Oil Tank Before Selling My House?",
@@ -221,7 +214,14 @@ export const guides: GuideSummary[] = [
       "septic-inspection-before-selling-house",
       "replace-galvanized-plumbing-before-selling-house",
     ],
+    updated: "September 2026",
+    readingTime: "10 min",
+    recommendedFor:
+      "Homeowners preparing to sell an older property that may have an underground heating-oil tank.",
+    bottomLine:
+      "Do not excavate simply because someone suspects an old tank may be present. First establish whether a tank exists, whether it is active or abandoned, what documentation exists, and what state or local requirements apply. A known abandoned tank may warrant removal or another approved closure process, while evidence of leakage or contamination changes the problem into an environmental matter that should be evaluated separately.",
   },
+
   {
     slug: "idle-or-turn-car-off-fuel-efficiency",
     title: "Is It More Fuel Efficient to Idle or Turn Your Car Off?",
@@ -243,7 +243,14 @@ export const guides: GuideSummary[] = [
       "tonneau-cover-gas-savings-payback",
       "dirty-engine-air-filter-gas-mileage",
     ],
+    updated: "September 2026",
+    readingTime: "9 min",
+    recommendedFor:
+      "Drivers wondering whether leaving a gasoline vehicle idling during short waits saves fuel compared with shutting the engine off and restarting it.",
+    bottomLine:
+      "For a warmed-up modern passenger vehicle that is safely parked and does not need to remain running for traffic, visibility, HVAC, or another operational reason, unnecessary idling generally uses more fuel than shutting the engine off and restarting it. DOE-supported testing found a fuel-use break-even point of roughly 10 seconds under the conditions tested. That is not a universal command to manually switch off your engine at every brief stop: traffic conditions, vehicle design, temperature, HVAC needs, battery and starter condition, and manufacturer guidance still matter.",
   },
+
   {
     slug: "roof-rack-gas-mileage-cost",
     title: "Does a Roof Rack Use Enough Extra Gas That You Should Remove It?",
@@ -265,7 +272,14 @@ export const guides: GuideSummary[] = [
       "tonneau-cover-gas-savings-payback",
       "dirty-engine-air-filter-gas-mileage",
     ],
+    updated: "September 2026",
+    readingTime: "9 min",
+    recommendedFor:
+      "Drivers deciding whether the fuel savings from removing an unused roof rack or crossbars are large enough to matter.",
+    bottomLine:
+      "Roof racks and crossbars can reduce fuel economy because they increase aerodynamic drag, but the effect varies substantially with the vehicle, rack design, speed, and cargo. The useful question is not simply whether a rack hurts MPG, but whether the additional fuel cost is large enough to justify removing it when you are not using it. Published testing has found effects ranging from relatively small losses to much larger highway penalties.",
   },
+
   {
     slug: "engine-braking-automatic-transmission",
     title: "Is Engine Braking Bad for an Automatic Transmission?",
@@ -287,7 +301,14 @@ export const guides: GuideSummary[] = [
       "tonneau-cover-gas-savings-payback",
       "dirty-engine-air-filter-gas-mileage",
     ],
+    updated: "September 2026",
+    readingTime: "9 min",
+    recommendedFor:
+      "Drivers wondering whether using a lower gear or transmission range for engine braking can damage an automatic transmission.",
+    bottomLine:
+      "Engine braking is a normal operating function of many automatic transmissions, and manufacturers explicitly describe using lower ranges or manual modes for downhill speed control. The important questions are whether the selected range is appropriate for the vehicle, whether engine speed remains within the manufacturer's limits, and whether road conditions make additional engine braking unsafe. Engine braking should complement the friction brakes rather than replace them.",
   },
+
   {
     slug: "tonneau-cover-gas-savings-payback",
     title: "Does a Tonneau Cover Save Enough Gas to Pay for Itself?",
@@ -309,7 +330,14 @@ export const guides: GuideSummary[] = [
       "engine-braking-automatic-transmission",
       "dirty-engine-air-filter-gas-mileage",
     ],
+    updated: "September 2026",
+    readingTime: "9 min",
+    recommendedFor:
+      "Pickup owners deciding whether improved fuel economy is a meaningful reason to buy a tonneau cover.",
+    bottomLine:
+      "A tonneau cover can change airflow around a pickup bed and may reduce aerodynamic drag, but that does not mean every cover produces the same MPG improvement. Under modest fuel-economy assumptions, fuel-only payback can take many years. If you already want a cover for cargo security, weather protection, appearance, or bed usability, potential fuel savings can be a secondary benefit. Buying an expensive cover solely to save gasoline deserves a payback calculation first.",
   },
+
   {
     slug: "dirty-engine-air-filter-gas-mileage",
     title: "Does a Dirty Engine Air Filter Really Hurt Gas Mileage?",
@@ -331,7 +359,14 @@ export const guides: GuideSummary[] = [
       "engine-braking-automatic-transmission",
       "tonneau-cover-gas-savings-payback",
     ],
+    updated: "September 2026",
+    readingTime: "9 min",
+    recommendedFor:
+      "Drivers wondering whether replacing a dirty engine air filter will improve gas mileage, acceleration, or both.",
+    bottomLine:
+      "On the modern fuel-injected gasoline vehicles evaluated in U.S. Department of Energy-supported testing, severely restricted engine air filters did not produce a significant fuel-economy change, although acceleration performance could suffer. The same testing found a fuel-economy effect on an older carbureted vehicle. A dirty or damaged filter can still need replacement; the point is that improved MPG should not automatically be expected on a modern electronically controlled engine.",
   },
+
   {
     slug: "closing-vents-unused-rooms-save-energy",
     title: "Does Closing Vents in Unused Rooms Actually Save Energy?",
@@ -351,7 +386,14 @@ export const guides: GuideSummary[] = [
       "dishwasher-vs-hand-washing-cost",
       "can-chest-freezer-save-money",
     ],
+    updated: "September 2026",
+    readingTime: "9 min",
+    recommendedFor:
+      "Homeowners wondering whether closing supply vents in unused rooms can lower heating and cooling costs.",
+    bottomLine:
+      "For a central forced-air system, closing supply vents in unused rooms is not a reliable way to save energy. DOE guidance says this practice can reduce airflow through the air handler, create pressure imbalances, stress duct connections, and affect air quality when the air handler provides ventilation. Proper zoning uses system-level controls rather than simply closing room registers. Other HVAC systems, such as boilers and ductless heat pumps, work differently.",
   },
+
   {
     slug: "can-chest-freezer-save-money",
     title: "Can a Chest Freezer Actually Save You Money?",
@@ -371,7 +413,14 @@ export const guides: GuideSummary[] = [
       "dishwasher-vs-hand-washing-cost",
       "closing-vents-unused-rooms-save-energy",
     ],
+    updated: "September 2026",
+    readingTime: "9 min",
+    recommendedFor:
+      "Households considering a chest freezer primarily to save money on groceries through sale buying and stockpiling.",
+    bottomLine:
+      "A chest freezer can save money, but the freezer itself does not create the savings. The economics depend on how much freezer-friendly food you already buy, how consistently you can buy it at a lower price, how much electricity the freezer uses, and whether extra food goes to waste. A low-cost freezer used to stock up on meaningful discounts can pay for itself; a freezer that mostly encourages you to buy more food may not.",
   },
+
   {
     slug: "dishwasher-vs-hand-washing-cost",
     title: "Is It Cheaper to Hand-Wash Dishes or Use a Dishwasher?",
@@ -391,6 +440,12 @@ export const guides: GuideSummary[] = [
       "can-chest-freezer-save-money",
       "closing-vents-unused-rooms-save-energy",
     ],
+    updated: "September 2026",
+    readingTime: "10 min",
+    recommendedFor:
+      "Households deciding whether hand-washing dishes or using a dishwasher is cheaper and more water efficient.",
+    bottomLine:
+      "For a reasonably full load, a modern efficient dishwasher can use substantially less water than hand-washing with a continuously running faucet. Whether it also costs less depends on the dishwasher, faucet flow, hand-washing technique, utility rates, detergent, and hot-water use. Efficient basin-style hand washing can narrow the gap considerably, which is why your actual faucet-running time matters more than a universal dishwasher-versus-hand-washing rule.",
   },
 ];
 
@@ -398,7 +453,10 @@ export function getGuideBySlug(slug: string) {
   return guides.find((guide) => guide.slug === slug);
 }
 
-export function getRelatedGuides(slug: string, limit = 6) {
+export function getRelatedGuides(
+  slug: string,
+  limit = 6,
+) {
   const currentGuide = getGuideBySlug(slug);
 
   if (!currentGuide) {
@@ -409,7 +467,11 @@ export function getRelatedGuides(slug: string, limit = 6) {
     .map((relatedSlug) => getGuideBySlug(relatedSlug))
     .filter(
       (guide): guide is GuideSummary =>
-        Boolean(guide && guide.published && guide.slug !== slug),
+        Boolean(
+          guide &&
+          guide.published &&
+          guide.slug !== slug,
+        ),
     )
     .slice(0, limit);
 }

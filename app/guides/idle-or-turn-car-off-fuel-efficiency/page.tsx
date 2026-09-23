@@ -14,36 +14,24 @@ import QuestionsToAsk from "@/app/components/article/QuestionsToAsk";
 import RelatedDecisions from "@/app/components/article/RelatedDecisions";
 import Sources from "@/app/components/article/Sources";
 import WhyThisMatters from "@/app/components/article/WhyThisMatters";
-import type { Guide } from "@/lib/guide";
+import { getGuideBySlug } from "@/lib/guides";
 
-const canonicalUrl =
-    "https://northwardmeridian.com/guides/idle-or-turn-car-off-fuel-efficiency";
+const guide = (() => {
+    const found = getGuideBySlug(
+        "idle-or-turn-car-off-fuel-efficiency",
+    );
 
-const guide: Guide = {
-    title: "Is It More Fuel Efficient to Idle or Turn Your Car Off?",
-    category: "Automotive",
-    description:
-        "A practical explanation of how much fuel idling uses, when shutting off can save fuel, and why automatic start-stop systems are different from manually cycling a conventional vehicle.",
-    updated: "September 2026",
-    readingTime: "9 min",
-    recommendedFor:
-        "Drivers wondering whether leaving a gasoline vehicle idling during short waits saves fuel compared with shutting the engine off and restarting it.",
-    bottomLine:
-        "For a warmed-up modern passenger vehicle that is safely parked and does not need to remain running for traffic, visibility, HVAC, or another operational reason, unnecessary idling generally uses more fuel than shutting the engine off and restarting it. DOE-supported testing found a fuel-use break-even point of roughly 10 seconds under the conditions tested. That is not a universal command to manually switch off your engine at every brief stop: traffic conditions, vehicle design, temperature, HVAC needs, battery and starter condition, and manufacturer guidance still matter.",
-    learningObjectives: [
-        "Understand why a warm engine does not need minutes of idling before normal driving",
-        "See how much fuel a vehicle can consume while idling",
-        "Understand what the often-cited 10-second break-even point does and does not mean",
-        "Distinguish parked idling from traffic stops and factory automatic start-stop systems",
-    ],
-    tags: [
-        "idling",
-        "fuel economy",
-        "gas mileage",
-        "start stop",
-        "fuel efficiency",
-    ],
-};
+    if (!found) {
+        throw new Error(
+            "Guide not found: idle-or-turn-car-off-fuel-efficiency",
+        );
+    }
+
+    return found;
+})();
+
+const siteUrl = "https://northwardmeridian.com";
+const canonicalUrl = `${siteUrl}${guide.href}`;
 
 const guideSections = [
     {

@@ -14,36 +14,24 @@ import RelatedDecisions from "@/app/components/article/RelatedDecisions";
 import Sources from "@/app/components/article/Sources";
 import TonneauPaybackCalculator from "@/app/components/article/TonneauPaybackCalculator";
 import WhyThisMatters from "@/app/components/article/WhyThisMatters";
-import type { Guide } from "@/lib/guide";
+import { getGuideBySlug } from "@/lib/guides";
 
-const canonicalUrl =
-    "https://northwardmeridian.com/guides/tonneau-cover-gas-savings-payback";
+const guide = (() => {
+    const found = getGuideBySlug(
+        "tonneau-cover-gas-savings-payback",
+    );
 
-const guide: Guide = {
-    title: "Does a Tonneau Cover Save Enough Gas to Pay for Itself?",
-    category: "Automotive",
-    description:
-        "Calculate whether potential fuel savings from a tonneau cover are large enough to recover the purchase price, and understand what aerodynamic testing does and does not prove.",
-    updated: "September 2026",
-    readingTime: "9 min",
-    recommendedFor:
-        "Pickup owners deciding whether improved fuel economy is a meaningful reason to buy a tonneau cover.",
-    bottomLine:
-        "A tonneau cover can change airflow around a pickup bed and may reduce aerodynamic drag, but that does not mean every cover produces the same MPG improvement. Under modest fuel-economy assumptions, fuel-only payback can take many years. If you already want a cover for cargo security, weather protection, appearance, or bed usability, potential fuel savings can be a secondary benefit. Buying an expensive cover solely to save gasoline deserves a payback calculation first.",
-    learningObjectives: [
-        "Understand why covering a pickup bed can change aerodynamic drag",
-        "Separate drag reduction from claims about a specific MPG improvement",
-        "Calculate a fuel-only payback period using your own truck and driving",
-        "Decide how fuel savings should be weighed against the other benefits of a tonneau cover",
-    ],
-    tags: [
-        "tonneau cover",
-        "truck bed cover",
-        "gas mileage",
-        "fuel economy",
-        "pickup trucks",
-    ],
-};
+    if (!found) {
+        throw new Error(
+            "Guide not found: tonneau-cover-gas-savings-payback",
+        );
+    }
+
+    return found;
+})();
+
+const siteUrl = "https://northwardmeridian.com";
+const canonicalUrl = `${siteUrl}${guide.href}`;
 
 const guideSections = [
     {

@@ -14,36 +14,24 @@ import RelatedDecisions from "@/app/components/article/RelatedDecisions";
 import Sources from "@/app/components/article/Sources";
 import UndergroundOilTankSaleCheck from "@/app/components/article/UndergroundOilTankSaleCheck";
 import WhyThisMatters from "@/app/components/article/WhyThisMatters";
-import type { Guide } from "@/lib/guide";
+import { getGuideBySlug } from "@/lib/guides";
 
-const canonicalUrl =
-    "https://northwardmeridian.com/guides/remove-underground-oil-tank-before-selling-house";
+const guide = (() => {
+    const found = getGuideBySlug(
+        "remove-underground-oil-tank-before-selling-house",
+    );
 
-const guide: Guide = {
-    title: "Should I Remove an Underground Oil Tank Before Selling My House?",
-    category: "Home",
-    description:
-        "A practical framework for deciding whether to investigate, remove, document, or otherwise address an underground heating-oil tank before selling a house.",
-    updated: "September 2026",
-    readingTime: "10 min",
-    recommendedFor:
-        "Homeowners preparing to sell an older property that may have an underground heating-oil tank.",
-    bottomLine:
-        "Do not excavate simply because someone suspects an old tank may be present. First establish whether a tank exists, whether it is active or abandoned, what documentation exists, and what state or local requirements apply. A known abandoned tank may warrant removal or another approved closure process, while evidence of leakage or contamination changes the problem into an environmental matter that should be evaluated separately.",
-    learningObjectives: [
-        "Distinguish a suspected tank from a confirmed abandoned tank",
-        "Understand when investigation, removal, documentation, or environmental evaluation may be appropriate",
-        "Recognize why state and local requirements can change the answer",
-        "Know which records and warning signs matter before listing the property",
-    ],
-    tags: [
-        "underground oil tank",
-        "selling a house",
-        "heating oil",
-        "home selling",
-        "oil tank removal",
-    ],
-};
+    if (!found) {
+        throw new Error(
+            "Guide not found: remove-underground-oil-tank-before-selling-house",
+        );
+    }
+
+    return found;
+})();
+
+const siteUrl = "https://northwardmeridian.com";
+const canonicalUrl = `${siteUrl}${guide.href}`;
 
 const guideSections = [
     {

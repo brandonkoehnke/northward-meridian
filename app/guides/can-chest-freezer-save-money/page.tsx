@@ -14,36 +14,24 @@ import QuestionsToAsk from "@/app/components/article/QuestionsToAsk";
 import RelatedDecisions from "@/app/components/article/RelatedDecisions";
 import Sources from "@/app/components/article/Sources";
 import WhyThisMatters from "@/app/components/article/WhyThisMatters";
-import type { Guide } from "@/lib/guide";
+import { getGuideBySlug } from "@/lib/guides";
 
-const canonicalUrl =
-    "https://northwardmeridian.com/guides/can-chest-freezer-save-money";
+const guide = (() => {
+    const found = getGuideBySlug(
+        "can-chest-freezer-save-money",
+    );
 
-const guide: Guide = {
-    title: "Can a Chest Freezer Actually Save You Money?",
-    category: "Home",
-    description:
-        "Calculate whether bulk-buying savings can outweigh the purchase price, electricity, and food waste of owning a chest freezer.",
-    updated: "September 2026",
-    readingTime: "9 min",
-    recommendedFor:
-        "Households considering a chest freezer primarily to save money on groceries through sale buying and stockpiling.",
-    bottomLine:
-        "A chest freezer can save money, but the freezer itself does not create the savings. The economics depend on how much freezer-friendly food you already buy, how consistently you can buy it at a lower price, how much electricity the freezer uses, and whether extra food goes to waste. A low-cost freezer used to stock up on meaningful discounts can pay for itself; a freezer that mostly encourages you to buy more food may not.",
-    learningObjectives: [
-        "Understand where the financial benefit of a chest freezer actually comes from",
-        "Calculate grocery savings after electricity and additional food waste",
-        "Estimate how long a freezer would take to recover its purchase price",
-        "Determine what discount and buying habits are required for the freezer to make financial sense",
-    ],
-    tags: [
-        "chest freezer",
-        "grocery savings",
-        "bulk buying",
-        "freezer electricity",
-        "payback",
-    ],
-};
+    if (!found) {
+        throw new Error(
+            "Guide not found: can-chest-freezer-save-money",
+        );
+    }
+
+    return found;
+})();
+
+const siteUrl = "https://northwardmeridian.com";
+const canonicalUrl = `${siteUrl}${guide.href}`;
 
 const guideSections = [
     {

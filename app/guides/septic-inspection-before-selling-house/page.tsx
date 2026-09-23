@@ -14,36 +14,24 @@ import RelatedDecisions from "@/app/components/article/RelatedDecisions";
 import SepticSaleDecisionCheck from "@/app/components/article/SepticSaleDecisionCheck";
 import Sources from "@/app/components/article/Sources";
 import WhyThisMatters from "@/app/components/article/WhyThisMatters";
-import type { Guide } from "@/lib/guide";
+import { getGuideBySlug } from "@/lib/guides";
 
-const canonicalUrl =
-    "https://northwardmeridian.com/guides/septic-inspection-before-selling-house";
+const guide = (() => {
+    const found = getGuideBySlug(
+        "septic-inspection-before-selling-house",
+    );
 
-const guide: Guide = {
-    title: "Should I Get a Septic Inspection Before Selling My House?",
-    category: "Home",
-    description:
-        "A practical framework for deciding whether to inspect your septic system before listing, based on system history, warning signs, documentation, transaction requirements, and repair risk.",
-    updated: "September 2026",
-    readingTime: "9 min",
-    recommendedFor:
-        "Homeowners preparing to sell a property served by an individual septic system.",
-    bottomLine:
-        "A pre-sale septic inspection can be valuable when the system's condition is uncertain, maintenance records are incomplete, warning signs exist, or you want to identify a potentially expensive issue before a buyer does. A recent documented inspection and good maintenance history may reduce the value of repeating the work. Before scheduling anything, check whether your state, county, municipality, buyer's lender, or transaction already requires a particular inspection or certification.",
-    learningObjectives: [
-        "Determine when a pre-sale septic inspection provides useful information",
-        "Recognize warning signs that deserve professional evaluation",
-        "Understand why local inspection and transfer requirements matter",
-        "Know which septic records and maintenance documents to gather before listing",
-    ],
-    tags: [
-        "septic inspection",
-        "selling a house",
-        "septic system",
-        "home selling",
-        "home inspection",
-    ],
-};
+    if (!found) {
+        throw new Error(
+            "Guide not found: septic-inspection-before-selling-house",
+        );
+    }
+
+    return found;
+})();
+
+const siteUrl = "https://northwardmeridian.com";
+const canonicalUrl = `${siteUrl}${guide.href}`;
 
 const guideSections = [
     {

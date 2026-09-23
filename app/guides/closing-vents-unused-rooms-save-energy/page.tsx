@@ -14,36 +14,24 @@ import RelatedDecisions from "@/app/components/article/RelatedDecisions";
 import Sources from "@/app/components/article/Sources";
 import VentClosingRealityCheck from "@/app/components/article/VentClosingRealityCheck";
 import WhyThisMatters from "@/app/components/article/WhyThisMatters";
-import type { Guide } from "@/lib/guide";
+import { getGuideBySlug } from "@/lib/guides";
 
-const canonicalUrl =
-    "https://northwardmeridian.com/guides/closing-vents-unused-rooms-save-energy";
+const guide = (() => {
+    const found = getGuideBySlug(
+        "closing-vents-unused-rooms-save-energy",
+    );
 
-const guide: Guide = {
-    title: "Does Closing Vents in Unused Rooms Actually Save Energy?",
-    category: "Home",
-    description:
-        "Understand what happens when you close HVAC vents, why central forced-air systems do not simply use proportionally less energy, and what to do instead.",
-    updated: "September 2026",
-    readingTime: "9 min",
-    recommendedFor:
-        "Homeowners wondering whether closing supply vents in unused rooms can lower heating and cooling costs.",
-    bottomLine:
-        "For a central forced-air system, closing supply vents in unused rooms is not a reliable way to save energy. DOE guidance says this practice can reduce airflow through the air handler, create pressure imbalances, stress duct connections, and affect air quality when the air handler provides ventilation. Proper zoning uses system-level controls rather than simply closing room registers. Other HVAC systems, such as boilers and ductless heat pumps, work differently.",
-    learningObjectives: [
-        "Understand why closing a register does not simply make the HVAC system condition less space",
-        "See how supply-air restrictions can change pressure and airflow",
-        "Distinguish manual register closing from properly designed HVAC zoning",
-        "Identify better approaches for unused rooms and uneven temperatures",
-    ],
-    tags: [
-        "HVAC",
-        "closing vents",
-        "energy savings",
-        "heating and cooling",
-        "home energy",
-    ],
-};
+    if (!found) {
+        throw new Error(
+            "Guide not found: closing-vents-unused-rooms-save-energy",
+        );
+    }
+
+    return found;
+})();
+
+const siteUrl = "https://northwardmeridian.com";
+const canonicalUrl = `${siteUrl}${guide.href}`;
 
 const guideSections = [
     {

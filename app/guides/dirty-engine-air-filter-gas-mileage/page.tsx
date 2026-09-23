@@ -14,36 +14,24 @@ import QuestionsToAsk from "@/app/components/article/QuestionsToAsk";
 import RelatedDecisions from "@/app/components/article/RelatedDecisions";
 import Sources from "@/app/components/article/Sources";
 import WhyThisMatters from "@/app/components/article/WhyThisMatters";
-import type { Guide } from "@/lib/guide";
+import { getGuideBySlug } from "@/lib/guides";
 
-const canonicalUrl =
-    "https://northwardmeridian.com/guides/dirty-engine-air-filter-gas-mileage";
+const guide = (() => {
+    const found = getGuideBySlug(
+        "dirty-engine-air-filter-gas-mileage",
+    );
 
-const guide: Guide = {
-    title: "Does a Dirty Engine Air Filter Really Hurt Gas Mileage?",
-    category: "Automotive",
-    description:
-        "See what research found about clogged engine air filters, fuel economy, and acceleration in modern fuel-injected vehicles versus older carbureted cars.",
-    updated: "September 2026",
-    readingTime: "9 min",
-    recommendedFor:
-        "Drivers wondering whether replacing a dirty engine air filter will improve gas mileage, acceleration, or both.",
-    bottomLine:
-        "On the modern fuel-injected gasoline vehicles evaluated in U.S. Department of Energy-supported testing, severely restricted engine air filters did not produce a significant fuel-economy change, although acceleration performance could suffer. The same testing found a fuel-economy effect on an older carbureted vehicle. A dirty or damaged filter can still need replacement; the point is that improved MPG should not automatically be expected on a modern electronically controlled engine.",
-    learningObjectives: [
-        "Understand why old advice about dirty air filters and MPG does not transfer cleanly to modern vehicles",
-        "See how electronic fuel injection compensates for restricted airflow",
-        "Separate fuel-economy effects from acceleration and performance effects",
-        "Know when an air filter should still be inspected or replaced",
-    ],
-    tags: [
-        "engine air filter",
-        "gas mileage",
-        "fuel economy",
-        "car maintenance",
-        "engine performance",
-    ],
-};
+    if (!found) {
+        throw new Error(
+            "Guide not found: dirty-engine-air-filter-gas-mileage",
+        );
+    }
+
+    return found;
+})();
+
+const siteUrl = "https://northwardmeridian.com";
+const canonicalUrl = `${siteUrl}${guide.href}`;
 
 const guideSections = [
     {

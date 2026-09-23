@@ -19,37 +19,24 @@ import Recommendation from "@/app/components/article/Recommendation";
 import Sources from "@/app/components/article/Sources";
 import WaterHeaterScorecard from "@/app/components/article/WaterHeaterScorecard";
 import WhyThisMatters from "@/app/components/article/WhyThisMatters";
-import type { Guide } from "@/lib/guide";
+import { getGuideBySlug } from "@/lib/guides";
 
-const canonicalUrl =
-    "https://northwardmeridian.com/guides/repair-or-replace-water-heater";
+const guide = (() => {
+    const found = getGuideBySlug(
+        "repair-or-replace-water-heater",
+    );
 
-const guide: Guide = {
-    title: "Should You Repair or Replace Your Water Heater?",
-    category: "Home",
-    description:
-        "A practical framework based on safety, failure type, age, warranty, repair history, installed cost, household needs, and potential efficiency improvements.",
-    updated: "August 2026",
-    readingTime: "15 min",
-    recommendedFor:
-        "Homeowners deciding whether to authorize a water-heater repair or obtain replacement quotes.",
-    bottomLine:
-        "Repair generally makes sense when the tank is sound, the failure is isolated and serviceable, the unit remains reliable, and the repair cost is modest compared with complete installed replacement. Replacement becomes more compelling when the tank itself has failed, safety is uncertain, repairs are recurring, the unit no longer meets household needs, or a major repair would preserve an aging and inefficient system.",
-    learningObjectives: [
-        "Which safety conditions should stop an ordinary repair-versus-replacement comparison",
-        "How to distinguish a serviceable component problem from probable tank failure",
-        "How to compare repair cost with complete installed replacement cost",
-        "When age, warranty, recurring repairs, capacity, and efficiency should affect the decision",
-    ],
-    tags: [
-        "water heaters",
-        "home repair",
-        "homeownership",
-        "energy efficiency",
-        "repair or replace",
-    ],
-};
+    if (!found) {
+        throw new Error(
+            "Guide not found: repair-or-replace-water-heater",
+        );
+    }
 
+    return found;
+})();
+
+const siteUrl = "https://northwardmeridian.com";
+const canonicalUrl = `${siteUrl}${guide.href}`;
 
 const guideSections = [
     {
@@ -165,7 +152,7 @@ const guidedEntryScenarios = [
 ] as const;
 
 export const metadata: Metadata = {
-    title: `${guide.title} | Meridian`,
+    title: `${guide.title} | Northward Meridian`,
     description: guide.description,
 
     alternates: {
@@ -175,7 +162,7 @@ export const metadata: Metadata = {
     openGraph: {
         type: "article",
         url: canonicalUrl,
-        siteName: "Meridian",
+        siteName: "Northward Meridian",
         title: guide.title,
         description: guide.description,
         publishedTime: "2026-08-06",

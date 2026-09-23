@@ -14,36 +14,24 @@ import RelatedDecisions from "@/app/components/article/RelatedDecisions";
 import Sources from "@/app/components/article/Sources";
 import TimeshareResaleComparison from "@/app/components/article/TimeshareResaleComparison";
 import WhyThisMatters from "@/app/components/article/WhyThisMatters";
-import type { Guide } from "@/lib/guide";
+import { getGuideBySlug } from "@/lib/guides";
 
-const canonicalUrl =
-  "https://northwardmeridian.com/guides/should-i-buy-a-timeshare-resale";
+const guide = (() => {
+  const found = getGuideBySlug(
+    "should-i-buy-a-timeshare-resale",
+  );
 
-const guide: Guide = {
-  title: "Should I Buy a Timeshare Resale?",
-  category: "Travel",
-  description:
-    "Compare buying a timeshare from a developer with buying resale, including total ownership cost, transferable benefits, booking rules, and contract risks.",
-  updated: "September 2026",
-  readingTime: "8 min",
-  recommendedFor:
-    "Travelers comparing a developer timeshare offer with a resale opportunity.",
-  bottomLine:
-    "A resale timeshare can have a much lower acquisition cost than a developer purchase, but the two should not be treated as equivalent until you verify the ownership rights, booking rules, transferable benefits, recurring fees, and all transfer requirements for the specific program. Compare the complete cost of ownership rather than the sales price alone.",
-  learningObjectives: [
-    "Understand the difference between developer and resale purchases",
-    "Compare total ownership cost rather than purchase price alone",
-    "Identify benefits and restrictions that may differ between ownership types",
-    "Recognize contract and resale scam risks before committing money",
-  ],
-  tags: [
-    "timeshares",
-    "timeshare resale",
-    "vacation ownership",
-    "travel",
-    "developer vs resale",
-  ],
-};
+  if (!found) {
+    throw new Error(
+      "Guide not found: should-i-buy-a-timeshare-resale",
+    );
+  }
+
+  return found;
+})();
+
+const siteUrl = "https://northwardmeridian.com";
+const canonicalUrl = `${siteUrl}${guide.href}`;
 
 const guideSections = [
   {

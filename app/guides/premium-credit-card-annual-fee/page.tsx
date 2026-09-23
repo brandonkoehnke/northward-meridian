@@ -14,36 +14,24 @@ import PremiumCardValueCalculator from "@/app/components/article/PremiumCardValu
 import RelatedDecisions from "@/app/components/article/RelatedDecisions";
 import Sources from "@/app/components/article/Sources";
 import WhyThisMatters from "@/app/components/article/WhyThisMatters";
-import type { Guide } from "@/lib/guide";
+import { getGuideBySlug } from "@/lib/guides";
 
-const canonicalUrl =
-  "https://northwardmeridian.com/guides/premium-credit-card-annual-fee";
+const guide = (() => {
+  const found = getGuideBySlug(
+    "premium-credit-card-annual-fee",
+  );
 
-const guide: Guide = {
-  title: "Is a Premium Credit Card Annual Fee Worth It?",
-  category: "Personal Finance",
-  description:
-    "Calculate the realistic value of a premium credit card by comparing usable credits, incremental rewards, benefits, and the cost of alternatives.",
-  updated: "September 2026",
-  readingTime: "11 min",
-  recommendedFor:
-    "People deciding whether a premium credit card's annual fee is justified by the value they realistically receive.",
-  bottomLine:
-    "A premium credit card is worth its annual fee only when the value you would realistically receive from usable credits, incremental rewards, and benefits exceeds the additional annual cost compared with your alternative. Advertised benefit values are not the same as realized value, and rewards should be compared against what you could earn with another card.",
-  learningObjectives: [
-    "Separate advertised card benefits from the value you would realistically use",
-    "Compare premium-card rewards with the card you would otherwise use",
-    "Account for statement-credit utilization instead of treating every credit at face value",
-    "Decide whether keeping, downgrading, or canceling fits your current situation",
-  ],
-  tags: [
-    "credit cards",
-    "annual fees",
-    "travel rewards",
-    "premium cards",
-    "credit card value",
-  ],
-};
+  if (!found) {
+    throw new Error(
+      "Guide not found: premium-credit-card-annual-fee",
+    );
+  }
+
+  return found;
+})();
+
+const siteUrl = "https://northwardmeridian.com";
+const canonicalUrl = `${siteUrl}${guide.href}`;
 
 const guideSections = [
   {
@@ -190,12 +178,12 @@ const articleJsonLd = {
   author: {
     "@type": "Organization",
     name: "Northward Meridian",
-    url: "https://northwardmeridian.com/about",
+    url: `${siteUrl}/about`,
   },
   publisher: {
     "@type": "Organization",
     name: "Northward Meridian",
-    url: "https://northwardmeridian.com",
+    url: siteUrl,
   },
 };
 
@@ -211,7 +199,11 @@ export default function PremiumCreditCardAnnualFeeGuide() {
       bottomLine={guide.bottomLine}
       structuredData={articleJsonLd}
       sections={guideSections}
-      guidedEntry={<GuidedEntry scenarios={guidedEntryScenarios} />}
+      guidedEntry={
+        <GuidedEntry
+          scenarios={guidedEntryScenarios}
+        />
+      }
     >
       <PremiumCardValueCalculator />
 
@@ -271,8 +263,11 @@ export default function PremiumCreditCardAnnualFeeGuide() {
         </div>
 
         <p>
-          A useful test is simple: <strong>Would I make this purchase or use
-            this service if I did not have the card?</strong>
+          A useful test is simple:{" "}
+          <strong>
+            Would I make this purchase or use this service if I did not have
+            the card?
+          </strong>
         </p>
       </GuideSection>
 
@@ -304,7 +299,7 @@ export default function PremiumCreditCardAnnualFeeGuide() {
             </div>
 
             <div className="flex items-center justify-center text-2xl text-[var(--accent)]">
-              −
+              -
             </div>
 
             <div className="rounded-xl border border-[var(--border)] p-5">
@@ -395,10 +390,9 @@ export default function PremiumCreditCardAnnualFeeGuide() {
         </p>
 
         <p>
-          Then value the points according to how you actually redeem them.
-          One point is not automatically worth one cent, and theoretical
-          redemption values are not the same as the value you personally
-          receive.
+          Then value the points according to how you actually redeem them. One
+          point is not automatically worth one cent, and theoretical redemption
+          values are not the same as the value you personally receive.
         </p>
 
         <div className="grid gap-6 md:grid-cols-2">
@@ -496,11 +490,10 @@ export default function PremiumCreditCardAnnualFeeGuide() {
           <p className="mt-5 text-xl font-semibold leading-8">
             Premium-card usable value
             <br />
-            − Alternative-card value
+            - Alternative-card value
             <br />
-            − Additional annual fee
-            <br />
-            = Net premium-card value
+            - Additional annual fee
+            <br />= Net premium-card value
           </p>
         </div>
 
@@ -709,15 +702,14 @@ export default function PremiumCreditCardAnnualFeeGuide() {
             href: "https://www.consumerfinance.gov/",
           },
           {
-            title:
-              "Understanding Credit Card Accounts and Credit History",
+            title: "Understanding Credit Card Accounts and Credit History",
             publisher: "Federal Trade Commission",
             href: "https://consumer.ftc.gov/",
           },
         ]}
       />
 
-      <RelatedDecisions currentSlug="premium-credit-card-annual-fee" />
+      <RelatedDecisions currentSlug={guide.slug} />
     </GuideLayout>
   );
 }

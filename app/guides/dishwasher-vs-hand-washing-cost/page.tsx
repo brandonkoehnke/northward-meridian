@@ -14,36 +14,24 @@ import QuestionsToAsk from "@/app/components/article/QuestionsToAsk";
 import RelatedDecisions from "@/app/components/article/RelatedDecisions";
 import Sources from "@/app/components/article/Sources";
 import WhyThisMatters from "@/app/components/article/WhyThisMatters";
-import type { Guide } from "@/lib/guide";
+import { getGuideBySlug } from "@/lib/guides";
 
-const canonicalUrl =
-    "https://northwardmeridian.com/guides/dishwasher-vs-hand-washing-cost";
+const guide = (() => {
+    const found = getGuideBySlug(
+        "dishwasher-vs-hand-washing-cost",
+    );
 
-const guide: Guide = {
-    title: "Is It Cheaper to Hand-Wash Dishes or Use a Dishwasher?",
-    category: "Home",
-    description:
-        "Compare the water, energy, and detergent costs of hand-washing dishes with running a dishwasher using your own household assumptions.",
-    updated: "September 2026",
-    readingTime: "10 min",
-    recommendedFor:
-        "Households deciding whether hand-washing dishes or using a dishwasher is cheaper and more water efficient.",
-    bottomLine:
-        "For a reasonably full load, a modern efficient dishwasher can use substantially less water than hand-washing with a continuously running faucet. Whether it also costs less depends on the dishwasher, faucet flow, hand-washing technique, utility rates, detergent, and hot-water use. Efficient basin-style hand washing can narrow the gap considerably, which is why your actual faucet-running time matters more than a universal dishwasher-versus-hand-washing rule.",
-    learningObjectives: [
-        "Compare dishwasher and hand-washing operating costs using your own utility rates",
-        "Understand why faucet-running time strongly affects the hand-washing result",
-        "Separate water use from energy and detergent costs",
-        "Identify when efficient hand washing can approach or beat dishwasher operating costs",
-    ],
-    tags: [
-        "dishwasher",
-        "hand washing dishes",
-        "water usage",
-        "energy cost",
-        "home savings",
-    ],
-};
+    if (!found) {
+        throw new Error(
+            "Guide not found: dishwasher-vs-hand-washing-cost",
+        );
+    }
+
+    return found;
+})();
+
+const siteUrl = "https://northwardmeridian.com";
+const canonicalUrl = `${siteUrl}${guide.href}`;
 
 const guideSections = [
     {
