@@ -348,7 +348,7 @@ export const guides: GuideSummary[] = [
     ],
     published: true,
     relatedSlugs: [
-      "repair-or-replace-water-heater",
+      "dishwasher-vs-hand-washing-cost",
       "can-chest-freezer-save-money",
     ],
   },
@@ -368,7 +368,27 @@ export const guides: GuideSummary[] = [
     ],
     published: true,
     relatedSlugs: [
-      "repair-or-replace-water-heater",
+      "dishwasher-vs-hand-washing-cost",
+      "closing-vents-unused-rooms-save-energy",
+    ],
+  },
+  {
+    slug: "dishwasher-vs-hand-washing-cost",
+    title: "Is It Cheaper to Hand-Wash Dishes or Use a Dishwasher?",
+    description:
+      "Compare the water, energy, and detergent costs of hand-washing dishes with running a dishwasher using your own household assumptions.",
+    category: "Home",
+    href: "/guides/dishwasher-vs-hand-washing-cost",
+    tags: [
+      "dishwasher",
+      "hand washing dishes",
+      "water usage",
+      "energy cost",
+      "home savings",
+    ],
+    published: true,
+    relatedSlugs: [
+      "can-chest-freezer-save-money",
       "closing-vents-unused-rooms-save-energy",
     ],
   },
