@@ -1,12 +1,14 @@
 {
   "name": "northward-meridian-app",
   "version": "0.1.0",
+  "type": "module",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "validate-guides": "node scripts/validate-guides.mjs"
   },
   "dependencies": {
     "@mdx-js/loader": "^3.1.1",
