@@ -241,6 +241,7 @@ export const guides: GuideSummary[] = [
       "roof-rack-gas-mileage-cost",
       "engine-braking-automatic-transmission",
       "tonneau-cover-gas-savings-payback",
+      "dirty-engine-air-filter-gas-mileage",
     ],
   },
   {
@@ -262,6 +263,7 @@ export const guides: GuideSummary[] = [
       "idle-or-turn-car-off-fuel-efficiency",
       "engine-braking-automatic-transmission",
       "tonneau-cover-gas-savings-payback",
+      "dirty-engine-air-filter-gas-mileage",
     ],
   },
   {
@@ -283,6 +285,7 @@ export const guides: GuideSummary[] = [
       "idle-or-turn-car-off-fuel-efficiency",
       "roof-rack-gas-mileage-cost",
       "tonneau-cover-gas-savings-payback",
+      "dirty-engine-air-filter-gas-mileage",
     ],
   },
   {
@@ -304,6 +307,29 @@ export const guides: GuideSummary[] = [
       "roof-rack-gas-mileage-cost",
       "idle-or-turn-car-off-fuel-efficiency",
       "engine-braking-automatic-transmission",
+      "dirty-engine-air-filter-gas-mileage",
+    ],
+  },
+  {
+    slug: "dirty-engine-air-filter-gas-mileage",
+    title: "Does a Dirty Engine Air Filter Really Hurt Gas Mileage?",
+    description:
+      "See what research found about clogged engine air filters, fuel economy, and acceleration in modern fuel-injected vehicles versus older carbureted cars.",
+    category: "Automotive",
+    href: "/guides/dirty-engine-air-filter-gas-mileage",
+    tags: [
+      "engine air filter",
+      "gas mileage",
+      "fuel economy",
+      "car maintenance",
+      "engine performance",
+    ],
+    published: true,
+    relatedSlugs: [
+      "idle-or-turn-car-off-fuel-efficiency",
+      "roof-rack-gas-mileage-cost",
+      "engine-braking-automatic-transmission",
+      "tonneau-cover-gas-savings-payback",
     ],
   },
 ];
