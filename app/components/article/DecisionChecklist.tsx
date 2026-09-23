@@ -26,7 +26,7 @@ export default function DecisionChecklist({
               key={item}
               className="flex items-start gap-4"
             >
-              <div className="mt-1 h-6 w-6 rounded border-2 border-[var(--accent)]" />
+              <div className="mt-1 size-6 shrink-0 rounded border-2 border-[var(--accent)]" />
 
               <span className="text-lg leading-8">
                 {item}
