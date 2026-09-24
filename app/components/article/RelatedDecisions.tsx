@@ -31,7 +31,7 @@ export default function RelatedDecisions({
         </div>
 
         {relatedGuides.length > 0 ? (
-          <div className="-mx-6 mt-8 overflow-x-auto px-6 pb-4">
+          <div className="-mx-6 mt-8 overflow-x-auto px-6 pb-4 pt-2">
             <div className="flex snap-x snap-mandatory gap-5">
               {relatedGuides.map((guide) => (
                 <Link
