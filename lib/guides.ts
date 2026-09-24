@@ -576,6 +576,30 @@ export const guides: GuideSummary[] = [
     bottomLine:
       "A water softener can make sense when measured hardness is high and the system addresses problems that have meaningful value to your household. The financial case depends on the installed price, salt and water use, maintenance, equipment efficiency, and realistic savings. Measure the water first and compare the complete cost rather than relying on a generic payback rule.",
   },
+  {
+    slug: "is-a-home-energy-audit-worth-it",
+    title: "Is a Home Energy Audit Worth It?",
+    description:
+      "Compare the cost of a professional home energy audit with the size of the project it may inform, your energy spending, and the savings needed to recover the audit cost.",
+    category: "Home",
+    href: "/guides/is-a-home-energy-audit-worth-it",
+    tags: [
+      "home energy audit",
+      "energy assessment",
+      "energy efficiency",
+      "home energy",
+      "energy savings",
+      "home improvement",
+    ],
+    published: true,
+    relatedSlugs: [],
+    updated: "September 2026",
+    readingTime: "11 min",
+    recommendedFor:
+      "Homeowners deciding whether professional energy diagnosis is worth paying for before making efficiency improvements or investigating high energy bills and comfort problems.",
+    bottomLine:
+      "A home energy audit can be worth paying for when better diagnosis could change an expensive home-improvement decision, identify the cause of persistent energy or comfort problems, or help you avoid spending money on the wrong fix. The audit itself does not save energy, so compare its net cost with the size of the decision it may influence and the amount of real financial value it would need to create.",
+  },
 ];
 
 export function getGuideBySlug(slug: string) {
