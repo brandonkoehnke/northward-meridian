@@ -1,10 +1,10 @@
 # Northward Meridian
 
-Northward Meridian is a decision-guide website designed to help people make complicated everyday decisions using evidence, math, practical frameworks, and decision tools.
+Northward Meridian is a decision-guide website designed to help people make practical real-world decisions using research, evidence, math, and useful decision tools.
 
-The site is not a traditional chronological blog.
+The site is not organized around a single subject such as homeownership, automotive, technology, travel, or personal finance.
 
-Each guide is built around a concrete decision or question such as:
+The unifying niche is the type of question:
 
 - Is X worth it?
 - Should I do X or Y?
@@ -14,7 +14,7 @@ Each guide is built around a concrete decision or question such as:
 - When does X make financial sense?
 - Does X actually improve Y?
 
-The subject matter can span multiple sectors. The unifying niche is the type of query: a person has a real decision, meaningful tradeoffs exist, and research or analysis can help them make it.
+A Northward Meridian guide should address a concrete decision with meaningful tradeoffs and provide a useful framework for making that decision.
 
 ---
 
@@ -23,8 +23,8 @@ The subject matter can span multiple sectors. The unifying niche is the type of 
 Northward Meridian currently uses:
 
 - Next.js 16
-- TypeScript
 - React
+- TypeScript
 - Tailwind CSS
 - Vercel
 - Cloudflare
@@ -35,41 +35,89 @@ Northward Meridian currently uses:
 
 ---
 
-## Local Development
+## Project Structure
 
-Install dependencies:
-
-```bash
-npm install
-```
-
-Start the development server:
-
-```bash
-npm run dev
-```
-
-Then open:
+Important project locations:
 
 ```text
-http://localhost:3000
+app/
+├── components/
+│   └── article/
+│       ├── GuideLayout.tsx
+│       ├── GuidedEntry.tsx
+│       ├── GuideSection.tsx
+│       ├── GuidePrimitives.tsx
+│       ├── DecisionChecklist.tsx
+│       ├── QuestionsToAsk.tsx
+│       ├── KeyTakeaways.tsx
+│       ├── Sources.tsx
+│       ├── RelatedDecisions.tsx
+│       └── WhyThisMatters.tsx
+│
+├── guides/
+│   ├── [guide-slug]/
+│   │   ├── page.tsx
+│   │   └── [guide-specific components when appropriate]
+│   └── ...
+│
+└── sitemap.ts
+
+lib/
+└── guides.ts
+
+scripts/
+└── validate-guides.mjs
 ```
 
----
+### Shared article components
 
-## Guide Architecture
-
-Published guides live under:
-
-```text
-app/guides/
-```
-
-Shared article components live under:
+Components intended for use across many guides belong in:
 
 ```text
 app/components/article/
 ```
+
+Examples include:
+
+- `GuideLayout`
+- `GuidedEntry`
+- `GuideSection`
+- `DecisionChecklist`
+- `QuestionsToAsk`
+- `KeyTakeaways`
+- `Sources`
+- `RelatedDecisions`
+
+### Guide-specific components
+
+New components that exist only for one guide should generally be colocated with that guide.
+
+Example:
+
+```text
+app/guides/is-a-water-softener-worth-it/
+├── page.tsx
+└── WaterSoftenerPaybackCheck.tsx
+```
+
+The page can then import the component locally:
+
+```tsx
+import WaterSoftenerPaybackCheck from "./WaterSoftenerPaybackCheck";
+```
+
+Some older guide-specific calculators remain in `app/components/article/`.
+
+They do not need to be moved merely for consistency. Existing locations should be left alone unless there is a concrete reason to modify them.
+
+The convention for new work is:
+
+> Shared across guides → `app/components/article/`  
+> Specific to one guide → colocate with that guide
+
+---
+
+## Guide Registry
 
 The canonical guide metadata registry is:
 
@@ -77,77 +125,83 @@ The canonical guide metadata registry is:
 lib/guides.ts
 ```
 
-Guide-level metadata belongs in `lib/guides.ts`, including:
+Guide-level metadata belongs there rather than being duplicated inside individual `page.tsx` files.
 
-- slug
-- title
-- description
-- category
-- href
-- tags
-- published
-- relatedSlugs
-- updated
-- readingTime
-- recommendedFor
-- bottomLine
+Current guide metadata includes fields such as:
 
-Do not duplicate these values inside individual `page.tsx` files.
+- `slug`
+- `title`
+- `description`
+- `category`
+- `href`
+- `tags`
+- `published`
+- `relatedSlugs`
+- `updated`
+- `readingTime`
+- `recommendedFor`
+- `bottomLine`
 
-Page-specific content remains inside the guide page, including:
+Guide pages retrieve their metadata from the registry.
 
+Typical pattern:
+
+```tsx
+const guide = (() => {
+    const found = getGuideBySlug(
+        "guide-slug",
+    );
+
+    if (!found) {
+        throw new Error(
+            "Guide not found: guide-slug",
+        );
+    }
+
+    return found;
+})();
+```
+
+Do not reintroduce separate guide metadata objects inside individual guide pages.
+
+---
+
+## What Stays Inside Each Guide
+
+Content specific to an individual decision belongs in that guide's `page.tsx`.
+
+Examples include:
+
+- section definitions
+- Guided Entry scenarios
 - article copy
-- guide sections
-- scenarios
-- calculator assumptions
+- decision scenarios
 - checklist items
-- questions
+- questions to ask
 - sources
-- structured content
+- structured data
+- guide-specific explanations
 
-Guide pages should retrieve their registry entry with `getGuideBySlug()` rather than defining a second local guide metadata object.
-
----
-
-## Current Guide System
-
-Newer Northward Meridian guides generally use components such as:
-
-- `GuideLayout`
-- `GuidedEntry`
-- `GuideSection`
-- `GuidePrimitives`
-- `WhyThisMatters`
-- `DecisionChecklist`
-- `QuestionsToAsk`
-- `KeyTakeaways`
-- `Sources`
-- `RelatedDecisions`
-
-Custom calculators or decision checks are added when they materially improve the decision.
-
-Older article components still exist and may remain in use by older pages. Do not remove or refactor them simply because a newer architecture exists.
-
-Publishing useful guides currently takes priority over broad architecture cleanup.
+The registry contains shared metadata, not the entire article.
 
 ---
 
-## Typical Guide Flow
+## Standard Guide Architecture
 
-A recent Northward Meridian guide will often follow this general structure:
+Recent guides generally follow this progression:
 
 ```text
 GuideLayout
 ↓
 GuidedEntry
 ↓
-Calculator or decision check, when useful
+calculator / reality check when useful
 ↓
-WhyThisMatters / short answer
+WhyThisMatters
 ↓
-Research-backed GuideSections
+research-backed GuideSections
 ↓
-Real-world scenarios
+real-world scenarios
 ↓
 DecisionChecklist
 ↓
@@ -160,39 +214,21 @@ Sources
 RelatedDecisions
 ```
 
-This is not a rigid template.
+This is a useful default, not a rigid template.
 
-The structure should serve the decision rather than forcing every guide into an identical format.
+The structure should serve the decision.
 
----
-
-## The Meridian Framework
-
-The Meridian Framework is Northward Meridian's general approach to helping a reader move from uncertainty toward a decision.
-
-The exact implementation may vary by guide, but the underlying process is:
-
-1. Understand the decision.
-2. Identify the variables that matter.
-3. Evaluate the evidence and tradeoffs.
-4. Determine which conditions favor each option.
-5. Give the reader a practical path to act.
-
-Calculators, decision checks, scenarios, questions, and checklists are tools used within this broader framework.
-
-The framework should not force a predetermined recommendation. Its purpose is to expose the variables that change the answer.
+A guide should not include a section or tool merely because another guide includes one.
 
 ---
 
 ## Calculators and Decision Tools
 
-Calculators are an important Northward Meridian differentiation strategy.
+Interactive tools are an important part of Northward Meridian's differentiation.
 
-Do not create a calculator merely because a topic can technically support one.
+A calculator should expose variables that materially affect the decision.
 
-A calculator should expose variables that materially change the decision.
-
-A useful calculator generally contains:
+Useful calculator patterns include:
 
 ```text
 Inputs
@@ -201,18 +237,49 @@ Result metrics
 ↓
 Interpretation
 ↓
-Break-even point or decision threshold, when useful
+Break-even / decision threshold when appropriate
 ↓
 Important caveats
 ```
 
-Calculators should not imply greater precision than the underlying evidence supports.
+Calculators should not imply more precision than the underlying evidence supports.
 
-Decision checks, scorecards, comparison tools, and decision trees may be more appropriate than numeric calculators for some guides.
+When a variable cannot be estimated responsibly, either:
+
+1. allow the reader to enter their own assumption,
+2. present it separately as a qualitative factor, or
+3. leave it out of the model.
+
+Do not invent precise assumptions simply to make a calculator more complete.
 
 ---
 
-## Related Guides
+## Sources
+
+Prefer authoritative primary sources whenever practical.
+
+Examples include:
+
+- government agencies
+- regulators
+- universities and extension programs
+- manufacturers for product specifications
+- technical standards organizations
+- academic research
+- official program documentation
+
+Secondary sources can be useful for:
+
+- identifying questions consumers are asking
+- understanding the existing search landscape
+- finding potential research directions
+- providing context
+
+Core factual claims should use stronger sources when those sources are available.
+
+---
+
+## Related Decisions
 
 Related-guide relationships are controlled by:
 
@@ -220,57 +287,72 @@ Related-guide relationships are controlled by:
 relatedSlugs
 ```
 
-inside:
+in:
 
 ```text
 lib/guides.ts
 ```
 
-Only link genuinely related decisions.
+Only create relationships that are genuinely useful to the reader.
 
-Do not create placeholder or future slugs simply to populate the related-guides section.
+Do not add unrelated guides simply to populate the Related Decisions section.
 
-When two published guides have a meaningful relationship, make the relationship reciprocal when appropriate.
-
----
-
-## Creating a New Guide
-
-Do not begin with:
-
-> What article should we write?
-
-Begin by identifying candidate decisions.
-
-The standard workflow is:
-
-1. Research several candidate decision queries.
-2. Examine actual search intent and current search results.
-3. Compare competition and the quality of existing answers.
-4. Determine whether Northward Meridian can provide meaningful additional value.
-5. Verify that authoritative sources are available.
-6. Determine whether a calculator, check, scorecard, comparison, or decision tree would improve the answer.
-7. Select the strongest opportunity.
-8. Research the topic using authoritative sources.
-9. Design and test the calculator or decision tool, if applicable.
-10. Add the guide metadata to `lib/guides.ts`.
-11. Build the guide using the existing article architecture.
-12. Add legitimate `relatedSlugs` relationships.
-13. Add the guide to `app/sitemap.ts`.
-14. Run project validation.
-15. Review the rendered guide.
-16. Deploy.
-17. Confirm the live page and sitemap.
-18. Submit/request indexing when appropriate.
-19. Monitor Search Console data after publication.
-
-See `CONTENT_STRATEGY.md` for the guide-selection methodology.
+When no meaningful related guide exists, the site can fall back to directing the reader to the broader guide library.
 
 ---
 
-## Validation
+## Sitemap
 
-Before committing or deploying guide changes, run:
+The sitemap is currently maintained in:
+
+```text
+app/sitemap.ts
+```
+
+New guides must currently receive a sitemap entry manually.
+
+Typical entry:
+
+```ts
+{
+    url: `${baseUrl}/guides/example-slug`,
+    lastModified: new Date("YYYY-MM-DD"),
+    changeFrequency: "monthly",
+    priority: 0.8,
+},
+```
+
+Do not assume that adding a guide to `lib/guides.ts` automatically adds it to the sitemap.
+
+A future refactor may generate guide sitemap entries from the registry, but that is not the current implementation.
+
+---
+
+## Guide Validation
+
+Northward Meridian includes:
+
+```text
+scripts/validate-guides.mjs
+```
+
+The validator checks important registry and routing relationships, including:
+
+- registered guide count
+- duplicate slugs
+- duplicate hrefs
+- href/slug consistency
+- whether `relatedSlugs` resolve
+- whether registered guides have corresponding route folders
+- whether guide route folders are represented in the registry
+
+The validator intentionally uses plain JavaScript / ESM and does not require additional TypeScript execution dependencies.
+
+---
+
+## Required Checks
+
+Before committing guide or architecture changes, run:
 
 ```bash
 npm run validate-guides
@@ -280,116 +362,126 @@ npm run build
 
 All three should pass.
 
-The guide validator checks relationships between the guide registry and route structure, including duplicate slugs/hrefs, unresolved related guides, and missing routes.
+For guides with calculators or other interactive tools, also test representative scenarios manually before publishing.
 
-Do not bypass validation simply to publish faster.
+For substantial new guides, visual review of the complete rendered page is part of the normal QA process.
 
 ---
 
-## Sitemap
+## New Guide Workflow
 
-The sitemap is currently maintained separately from `lib/guides.ts`.
-
-Every new guide therefore requires an entry in:
+The normal publishing workflow is:
 
 ```text
-app/sitemap.ts
+1. Research candidate decisions
+2. Evaluate search intent and competition
+3. Select the decision
+4. Research authoritative sources
+5. Design the calculator/check when useful
+6. Build and test the tool
+7. Build the guide
+8. Register the guide in lib/guides.ts
+9. Add the sitemap entry
+10. Run validate-guides
+11. Run lint
+12. Run build
+13. Perform visual QA
+14. Test calculator/check scenarios
+15. Commit and push
+16. Verify the production deployment
+17. Verify the live sitemap
+18. Allow search engines to discover/index the page
 ```
 
-Do not assume registering a guide in `lib/guides.ts` automatically adds it to the sitemap.
-
-This may eventually be automated, but it is currently part of the publishing checklist.
+Do not sacrifice research or QA merely to increase guide count.
 
 ---
 
-## Sources
+## Deployment
 
-Northward Meridian prioritizes authoritative primary sources.
-
-Examples include:
-
-- government agencies
-- regulators
-- manufacturers
-- official documentation
-- research organizations
-- academic research
-- technical standards
-- original datasets
-
-Secondary sources can provide useful context but should not replace stronger primary evidence when primary sources are available.
-
-Never fabricate sources or URLs.
-
-Research current information before making claims that can change over time.
-
----
-
-## Code Quality Notes
-
-### Guide Metadata
-
-Do not reintroduce duplicated guide metadata inside individual pages.
-
-Use the central registry.
-
-### TSX Quotation Marks
-
-Pay particular attention to apostrophes, contractions, possessives, and quoted phrases inside TypeScript/TSX strings.
-
-Do not solve apostrophe problems by replacing them with incorrect quotation marks.
-
-### Citation Artifacts
-
-Never paste ChatGPT/internal citation markup into source code.
-
-Source files should never contain artifacts such as:
+The production site is:
 
 ```text
-:contentReference
-oaicite
-{index = ...}
+https://northwardmeridian.com
 ```
 
-Sources displayed on the site should use normal verified URLs through the site's source components.
+The application is deployed through Vercel.
+
+Code is maintained in Git, and pushing the production branch triggers the deployment workflow.
+
+Cloudflare is also part of the site's infrastructure.
+
+After deployment, verify the live page rather than assuming a successful Git push means the production page is correct.
+
+---
+
+## Search and Analytics
+
+Northward Meridian currently uses:
+
+- Google Search Console
+- Google Analytics / GA4
+- Bing Webmaster Tools
+- IndexNow
+
+Search Console data should increasingly inform guide selection as the site accumulates impressions and query data.
+
+The long-term feedback loop is:
+
+```text
+publish
+→ index
+→ collect query data
+→ identify signals
+→ improve winners
+→ build adjacent guides
+→ strengthen internal links
+→ repeat
+```
+
+See `CONTENT_STRATEGY.md` for the broader explore-vs.-exploit strategy and long-term sector and multilingual plans.
 
 ---
 
 ## Editorial Documentation
 
-Three documents govern different parts of Northward Meridian:
+The main project documents serve different purposes:
 
 ### `README.md`
 
-Technical architecture, development workflow, and publishing process.
+How the project is structured and operated.
 
 ### `STYLE_GUIDE.md`
 
-How Northward Meridian guides should be researched, written, structured, and presented.
+How Northward Meridian guides should be written and presented.
 
 ### `CONTENT_STRATEGY.md`
 
-How guide opportunities, sectors, topic clusters, Search Console signals, and future localization should be evaluated.
+How topics, sectors, clusters, and future expansion should be selected.
 
-Keep these responsibilities separate so that implementation details, editorial standards, and portfolio strategy do not become conflated.
+### Meridian framework documentation
+
+The underlying decision methodology used to turn a real-world question into a useful evidence-backed decision guide.
+
+These documents should complement one another rather than duplicate the same instructions.
 
 ---
 
-## Current Development Philosophy
+## Current Development Principle
 
-Prefer publishing useful, differentiated decision guides over unnecessary infrastructure work.
+Northward Meridian should prioritize publishing high-quality decision guides over unnecessary architectural work.
 
-Refactor when there is a concrete reason.
+Refactor when there is a concrete benefit to:
 
-Do not redesign working systems merely because a cleaner abstraction is possible.
+- maintainability
+- reliability
+- consistency
+- performance
+- search visibility
+- reader experience
 
-The long-term advantage of Northward Meridian should come primarily from:
+Do not refactor working systems solely because a different structure would be marginally cleaner.
 
-- useful decision-focused search intent
-- strong research
-- primary sourcing
-- transparent reasoning
-- original calculations
-- practical decision tools
-- interconnected topic clusters
-- continuous improvement using real search data
+The project should become more systematic as it scales without allowing architecture work to replace the core objective:
+
+> Build genuinely useful decision resources, measure what earns search visibility, and expand intelligently from the evidence.
