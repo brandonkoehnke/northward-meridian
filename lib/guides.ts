@@ -528,6 +528,30 @@ export const guides: GuideSummary[] = [
     bottomLine:
       "Paid road-hazard protection can make sense when the premium is low relative to the potential benefit from covered repairs or tire replacements and the contract provides useful coverage. It is less compelling when the plan is expensive, reimbursement is limited, important service costs are excluded, or equivalent protection is already included. Compare the actual contract terms with the cost of a realistic covered event rather than assuming road-hazard protection is automatically worthwhile.",
   },
+  {
+    slug: "should-i-buy-a-nas-or-use-cloud-storage",
+    title: "Should I Buy a NAS or Use Cloud Storage?",
+    description:
+      "Compare the long-term cost of a NAS with cloud storage, including hardware, electricity, maintenance, and off-site backup.",
+    category: "Technology",
+    href: "/guides/should-i-buy-a-nas-or-use-cloud-storage",
+    tags: [
+      "NAS",
+      "cloud storage",
+      "backup",
+      "data storage",
+      "home server",
+      "technology",
+    ],
+    published: true,
+    relatedSlugs: [],
+    updated: "September 2026",
+    readingTime: "11 min",
+    recommendedFor:
+      "People deciding whether to build a NAS or pay for cloud storage for personal files, photos, media, or backups.",
+    bottomLine:
+      "A NAS can cost less than a recurring cloud subscription over a long enough period, especially when you need substantial local capacity. But the comparison should include the enclosure, drives, electricity, maintenance, and an independent off-site backup if the NAS is part of your backup strategy. Cloud storage costs more predictably and requires less hardware management, so the better choice depends on your storage needs, time horizon, backup requirements, and tolerance for maintaining your own system.",
+  },
 ];
 
 export function getGuideBySlug(slug: string) {
