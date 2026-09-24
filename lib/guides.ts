@@ -493,6 +493,7 @@ export const guides: GuideSummary[] = [
     published: true,
     relatedSlugs: [
       "zero-percent-financing-vs-cash",
+      "is-tire-road-hazard-protection-worth-it",
     ],
     updated: "September 2026",
     readingTime: "11 min",
@@ -500,6 +501,32 @@ export const guides: GuideSummary[] = [
       "People deciding whether to buy GAP insurance for a financed or leased vehicle and trying to understand the size and duration of their potential loan-value gap.",
     bottomLine:
       "GAP insurance can be useful when a vehicle could be worth substantially less than the amount owed after a total loss, but the decision depends on the size and duration of that exposure, the price of the GAP product, and its actual contract terms. Compare your current loan payoff with a realistic vehicle value, then check how the gap could change over time rather than assuming today's shortfall will last for the entire loan.",
+  },
+  {
+    slug: "is-tire-road-hazard-protection-worth-it",
+    title: "Is Tire Road Hazard Protection Worth It?",
+    description:
+      "Compare the cost of tire road-hazard protection with the savings from covered repairs and replacements, including coverage limits and excluded costs.",
+    category: "Automotive",
+    href: "/guides/is-tire-road-hazard-protection-worth-it",
+    tags: [
+      "road hazard protection",
+      "tire protection",
+      "tire warranty",
+      "tire repair",
+      "tire replacement",
+      "car maintenance",
+    ],
+    published: true,
+    relatedSlugs: [
+      "is-gap-insurance-worth-it",
+    ],
+    updated: "September 2026",
+    readingTime: "10 min",
+    recommendedFor:
+      "Drivers deciding whether to pay extra for tire road-hazard protection when buying new tires.",
+    bottomLine:
+      "Paid road-hazard protection can make sense when the premium is low relative to the potential benefit from covered repairs or tire replacements and the contract provides useful coverage. It is less compelling when the plan is expensive, reimbursement is limited, important service costs are excluded, or equivalent protection is already included. Compare the actual contract terms with the cost of a realistic covered event rather than assuming road-hazard protection is automatically worthwhile.",
   },
 ];
 
