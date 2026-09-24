@@ -466,6 +466,7 @@ export const guides: GuideSummary[] = [
     published: true,
     relatedSlugs: [
       "premium-credit-card-annual-fee",
+      "is-gap-insurance-worth-it",
     ],
     updated: "September 2026",
     readingTime: "10 min",
@@ -473,6 +474,32 @@ export const guides: GuideSummary[] = [
       "People deciding whether to pay cash for a purchase or use a genuine 0% financing offer.",
     bottomLine:
       "A 0% financing offer can be economically useful when it does not cost more than paying cash and you can reliably make the required payments while keeping the retained cash safe and available. The comparison changes when financing comes with fees, a higher purchase price, lost cash discounts, deferred-interest terms, or a risk of carrying a balance beyond the promotional period.",
+  },
+  {
+    slug: "is-gap-insurance-worth-it",
+    title: "Is GAP Insurance Worth It?",
+    description:
+      "Estimate how large your auto loan-value gap could be, how long it may last, and whether the price and terms of GAP coverage make sense for your situation.",
+    category: "Personal Finance",
+    href: "/guides/is-gap-insurance-worth-it",
+    tags: [
+      "GAP insurance",
+      "auto loans",
+      "car insurance",
+      "negative equity",
+      "vehicle financing",
+      "personal finance",
+    ],
+    published: true,
+    relatedSlugs: [
+      "zero-percent-financing-vs-cash",
+    ],
+    updated: "September 2026",
+    readingTime: "11 min",
+    recommendedFor:
+      "People deciding whether to buy GAP insurance for a financed or leased vehicle and trying to understand the size and duration of their potential loan-value gap.",
+    bottomLine:
+      "GAP insurance can be useful when a vehicle could be worth substantially less than the amount owed after a total loss, but the decision depends on the size and duration of that exposure, the price of the GAP product, and its actual contract terms. Compare your current loan payoff with a realistic vehicle value, then check how the gap could change over time rather than assuming today's shortfall will last for the entire loan.",
   },
 ];
 
