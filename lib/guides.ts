@@ -552,6 +552,30 @@ export const guides: GuideSummary[] = [
     bottomLine:
       "A NAS can cost less than a recurring cloud subscription over a long enough period, especially when you need substantial local capacity. But the comparison should include the enclosure, drives, electricity, maintenance, and an independent off-site backup if the NAS is part of your backup strategy. Cloud storage costs more predictably and requires less hardware management, so the better choice depends on your storage needs, time horizon, backup requirements, and tolerance for maintaining your own system.",
   },
+  {
+    slug: "is-a-water-softener-worth-it",
+    title: "Is a Water Softener Worth It?",
+    description:
+      "Estimate whether a water softener can justify its installation and operating costs based on your water hardness, household use, efficiency, and realistic savings.",
+    category: "Home",
+    href: "/guides/is-a-water-softener-worth-it",
+    tags: [
+      "water softener",
+      "hard water",
+      "water treatment",
+      "home maintenance",
+      "water quality",
+      "home improvement",
+    ],
+    published: true,
+    relatedSlugs: [],
+    updated: "September 2026",
+    readingTime: "11 min",
+    recommendedFor:
+      "Homeowners deciding whether to install a water softener because of hard water, scale, cleaning problems, or water-treatment concerns.",
+    bottomLine:
+      "A water softener can make sense when measured hardness is high and the system addresses problems that have meaningful value to your household. The financial case depends on the installed price, salt and water use, maintenance, equipment efficiency, and realistic savings. Measure the water first and compare the complete cost rather than relying on a generic payback rule.",
+  },
 ];
 
 export function getGuideBySlug(slug: string) {
