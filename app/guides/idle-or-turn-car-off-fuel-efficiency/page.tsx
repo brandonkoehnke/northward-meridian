@@ -8,7 +8,7 @@ import {
     GuideBullet,
     InformationCard,
 } from "@/app/components/article/GuidePrimitives";
-import IdleVsShutdownCalculator from "@/app/components/article/IdleVsShutdownCalculator";
+import IdleVsShutdownCalculator from "./IdleVsShutdownCalculator";
 import KeyTakeaways from "@/app/components/article/KeyTakeaways";
 import QuestionsToAsk from "@/app/components/article/QuestionsToAsk";
 import RelatedDecisions from "@/app/components/article/RelatedDecisions";

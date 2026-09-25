@@ -4,7 +4,7 @@ import DecisionChecklist from "@/app/components/article/DecisionChecklist";
 import GuideLayout from "@/app/components/article/GuideLayout";
 import GuideSection from "@/app/components/article/GuideSection";
 import GuidedEntry from "@/app/components/article/GuidedEntry";
-import TireRoadHazardValueCheck from "@/app/components/article/TireRoadHazardValueCheck";
+import TireRoadHazardValueCheck from "./TireRoadHazardValueCheck";
 import {
     GuideBullet,
     InformationCard,

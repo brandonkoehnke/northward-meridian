@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-import CashVsZeroPercentCalculator from "@/app/components/article/CashVsZeroPercentCalculator";
+import CashVsZeroPercentCalculator from "./CashVsZeroPercentCalculator";
 import DecisionChecklist from "@/app/components/article/DecisionChecklist";
 import GuideLayout from "@/app/components/article/GuideLayout";
 import GuideSection from "@/app/components/article/GuideSection";

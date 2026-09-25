@@ -11,7 +11,7 @@ import {
 import KeyTakeaways from "@/app/components/article/KeyTakeaways";
 import QuestionsToAsk from "@/app/components/article/QuestionsToAsk";
 import RelatedDecisions from "@/app/components/article/RelatedDecisions";
-import RoofRackFuelCalculator from "@/app/components/article/RoofRackFuelCalculator";
+import RoofRackFuelCalculator from "./RoofRackFuelCalculator";
 import Sources from "@/app/components/article/Sources";
 import WhyThisMatters from "@/app/components/article/WhyThisMatters";
 import { getGuideBySlug } from "@/lib/guides";

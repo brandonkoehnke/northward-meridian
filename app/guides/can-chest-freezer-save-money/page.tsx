@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-import ChestFreezerPaybackCalculator from "@/app/components/article/ChestFreezerPaybackCalculator";
+import ChestFreezerPaybackCalculator from "./ChestFreezerPaybackCalculator";
 import DecisionChecklist from "@/app/components/article/DecisionChecklist";
 import GuideLayout from "@/app/components/article/GuideLayout";
 import GuideSection from "@/app/components/article/GuideSection";

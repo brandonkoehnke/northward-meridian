@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 import DecisionChecklist from "@/app/components/article/DecisionChecklist";
-import GalvanizedPlumbingSaleCheck from "@/app/components/article/GalvanizedPlumbingSaleCheck";
+import GalvanizedPlumbingSaleCheck from "./GalvanizedPlumbingSaleCheck";
 import GuideLayout from "@/app/components/article/GuideLayout";
 import GuideSection from "@/app/components/article/GuideSection";
 import GuidedEntry from "@/app/components/article/GuidedEntry";

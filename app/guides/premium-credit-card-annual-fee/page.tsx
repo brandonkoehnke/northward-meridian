@@ -10,7 +10,7 @@ import {
 } from "@/app/components/article/GuidePrimitives";
 import KeyTakeaways from "@/app/components/article/KeyTakeaways";
 import QuestionsToAsk from "@/app/components/article/QuestionsToAsk";
-import PremiumCardValueCalculator from "@/app/components/article/PremiumCardValueCalculator";
+import PremiumCardValueCalculator from "./PremiumCardValueCalculator";
 import RelatedDecisions from "@/app/components/article/RelatedDecisions";
 import Sources from "@/app/components/article/Sources";
 import WhyThisMatters from "@/app/components/article/WhyThisMatters";

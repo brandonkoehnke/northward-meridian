@@ -4,7 +4,7 @@ import DecisionChecklist from "@/app/components/article/DecisionChecklist";
 import GuideLayout from "@/app/components/article/GuideLayout";
 import GuideSection from "@/app/components/article/GuideSection";
 import GuidedEntry from "@/app/components/article/GuidedEntry";
-import NasVsCloudRealityCheck from "@/app/components/article/NasVsCloudRealityCheck";
+import NasVsCloudRealityCheck from "./NasVsCloudRealityCheck";
 import {
     GuideBullet,
     InformationCard,

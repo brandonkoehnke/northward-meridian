@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-import AirFilterRealityCheck from "@/app/components/article/AirFilterRealityCheck";
+import AirFilterRealityCheck from "./AirFilterRealityCheck";
 import DecisionChecklist from "@/app/components/article/DecisionChecklist";
 import GuideLayout from "@/app/components/article/GuideLayout";
 import GuideSection from "@/app/components/article/GuideSection";

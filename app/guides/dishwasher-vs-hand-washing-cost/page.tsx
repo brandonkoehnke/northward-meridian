@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 import DecisionChecklist from "@/app/components/article/DecisionChecklist";
-import DishwasherVsHandWashingCalculator from "@/app/components/article/DishwasherVsHandWashingCalculator";
+import DishwasherVsHandWashingCalculator from "./DishwasherVsHandWashingCalculator";
 import GuideLayout from "@/app/components/article/GuideLayout";
 import GuideSection from "@/app/components/article/GuideSection";
 import GuidedEntry from "@/app/components/article/GuidedEntry";

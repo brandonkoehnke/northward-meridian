@@ -12,7 +12,7 @@ import KeyTakeaways from "@/app/components/article/KeyTakeaways";
 import QuestionsToAsk from "@/app/components/article/QuestionsToAsk";
 import RelatedDecisions from "@/app/components/article/RelatedDecisions";
 import Sources from "@/app/components/article/Sources";
-import UndergroundOilTankSaleCheck from "@/app/components/article/UndergroundOilTankSaleCheck";
+import UndergroundOilTankSaleCheck from "./UndergroundOilTankSaleCheck";
 import WhyThisMatters from "@/app/components/article/WhyThisMatters";
 import { getGuideBySlug } from "@/lib/guides";
 

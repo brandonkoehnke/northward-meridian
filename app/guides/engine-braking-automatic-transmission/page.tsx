@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 import DecisionChecklist from "@/app/components/article/DecisionChecklist";
-import EngineBrakingCheck from "@/app/components/article/EngineBrakingCheck";
+import EngineBrakingCheck from "./EngineBrakingCheck";
 import GuideLayout from "@/app/components/article/GuideLayout";
 import GuideSection from "@/app/components/article/GuideSection";
 import GuidedEntry from "@/app/components/article/GuidedEntry";

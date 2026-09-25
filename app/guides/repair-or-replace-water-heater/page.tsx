@@ -10,7 +10,7 @@ import {
     InformationCard,
 } from "@/app/components/article/GuidePrimitives";
 import GuideSection from "@/app/components/article/GuideSection";
-import SafetyCallout from "@/app/components/article/SafetyCallout";
+import SafetyCallout from "./SafetyCallout";
 import DecisionChecklist from "@/app/components/article/DecisionChecklist";
 import DecisionFramework from "@/app/components/article/DecisionFramework";
 import KeyTakeaways from "@/app/components/article/KeyTakeaways";

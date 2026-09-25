@@ -5,7 +5,7 @@ import DecisionChecklist from "@/app/components/article/DecisionChecklist";
 import GuideLayout from "@/app/components/article/GuideLayout";
 import GuideSection from "@/app/components/article/GuideSection";
 import GuidedEntry from "@/app/components/article/GuidedEntry";
-import ServiceLineCoverageCheck from "@/app/components/article/ServiceLineCoverageCheck";
+import ServiceLineCoverageCheck from "./ServiceLineCoverageCheck";
 import {
   GuideBullet,
   InformationCard,
