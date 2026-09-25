@@ -787,6 +787,39 @@ export const guides: GuideSummary[] = [
       name: "Thermostat Setback Savings Calculator",
     },
   },
+  {
+    slug: "is-an-extended-warranty-worth-it",
+    title: "Is an Extended Warranty Worth It?",
+    description:
+      "Use the free extended warranty value calculator to compare the plan price with covered repair costs, deductibles, coverage limits, and the failure probability needed to break even.",
+    category: "Personal Finance",
+    href: "/guides/is-an-extended-warranty-worth-it",
+    tags: [
+      "extended warranty",
+      "service contract",
+      "protection plan",
+      "warranty calculator",
+      "appliance warranty",
+      "electronics warranty",
+      "personal finance",
+    ],
+    published: true,
+    relatedSlugs: [
+      "zero-percent-financing-vs-cash",
+      "premium-credit-card-annual-fee",
+    ],
+    updated: "September 2026",
+    lastModified: "2026-09-25",
+    readingTime: "11 min",
+    recommendedFor:
+      "People deciding whether to buy an optional extended warranty, protection plan, or service contract for a consumer product or appliance.",
+    bottomLine:
+      "An extended warranty is financially stronger when its price is low relative to the value and probability of a genuinely covered repair during the additional coverage period. Before comparing the math, verify what coverage you already have, when the plan begins, what failures are excluded, the deductible or service fee, and the coverage limit. A plan can have negative expected value while still providing risk-transfer benefits to someone who would have difficulty absorbing an unexpected repair.",
+    tool: {
+      type: "calculator",
+      name: "Extended Warranty Value Calculator",
+    },
+  },
 ];
 
 export function getGuideBySlug(slug: string) {
