@@ -1125,11 +1125,11 @@ Shared article components remain in:
 app/components/article/
 ```
 
-Existing guide-specific calculators do not need to be migrated merely to enforce consistency.
+All current guide-specific calculators and decision checks are colocated with their owning guide.
 
-This convention applies primarily to new work.
+Keep one-off interactive tools inside `app/guides/<slug>/`. Shared article infrastructure remains in `app/components/article/`.
 
-Do not interrupt publishing for a broad component-location refactor unless the current structure creates a concrete maintenance problem.
+Do not interrupt publishing for broad architecture work unless the current structure creates a concrete maintenance problem.
 
 ---
 

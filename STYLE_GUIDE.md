@@ -1000,11 +1000,9 @@ app/guides/is-a-water-softener-worth-it/
 └── WaterSoftenerPaybackCheck.tsx
 ```
 
-Older guide-specific calculators may remain in `app/components/article/`.
+All current guide-specific calculators and decision checks are colocated with their owning guide.
 
-Do not migrate existing working components merely to enforce directory consistency.
-
-The convention applies primarily to new work.
+Keep one-off interactive tools inside `app/guides/<slug>/`. Shared article infrastructure belongs in `app/components/article/`.
 
 ---
 
