@@ -13,6 +13,7 @@ export type GuideSummary = {
   published: boolean;
   relatedSlugs: string[];
   updated: string;
+  lastModified: string;
   readingTime: string;
   recommendedFor: string;
   bottomLine: string;
@@ -38,6 +39,7 @@ export const guides: GuideSummary[] = [
     relatedSlugs: [
       "zero-percent-financing-vs-cash",
     ],
+    lastModified: "2026-09-24",
     updated: "September 2026",
     readingTime: "11 min",
     recommendedFor:
@@ -66,6 +68,7 @@ export const guides: GuideSummary[] = [
     ],
     published: true,
     relatedSlugs: [],
+    lastModified: "2026-09-24",
     updated: "August 2026",
     readingTime: "15 min",
     recommendedFor:
@@ -94,6 +97,7 @@ export const guides: GuideSummary[] = [
     ],
     published: true,
     relatedSlugs: [],
+    lastModified: "2026-09-24",
     updated: "September 2026",
     readingTime: "8 min",
     recommendedFor:
@@ -122,6 +126,7 @@ export const guides: GuideSummary[] = [
     ],
     published: true,
     relatedSlugs: [],
+    lastModified: "2026-09-24",
     updated: "September 2026",
     readingTime: "8 min",
     recommendedFor:
@@ -154,6 +159,7 @@ export const guides: GuideSummary[] = [
       "replace-galvanized-plumbing-before-selling-house",
       "remove-underground-oil-tank-before-selling-house",
     ],
+    lastModified: "2026-09-24",
     updated: "September 2026",
     readingTime: "9 min",
     recommendedFor:
@@ -186,6 +192,7 @@ export const guides: GuideSummary[] = [
       "replace-galvanized-plumbing-before-selling-house",
       "remove-underground-oil-tank-before-selling-house",
     ],
+    lastModified: "2026-09-24",
     updated: "September 2026",
     readingTime: "9 min",
     recommendedFor:
@@ -218,6 +225,7 @@ export const guides: GuideSummary[] = [
       "septic-inspection-before-selling-house",
       "remove-underground-oil-tank-before-selling-house",
     ],
+    lastModified: "2026-09-24",
     updated: "September 2026",
     readingTime: "10 min",
     recommendedFor:
@@ -250,6 +258,7 @@ export const guides: GuideSummary[] = [
       "septic-inspection-before-selling-house",
       "replace-galvanized-plumbing-before-selling-house",
     ],
+    lastModified: "2026-09-24",
     updated: "September 2026",
     readingTime: "10 min",
     recommendedFor:
@@ -283,6 +292,7 @@ export const guides: GuideSummary[] = [
       "tonneau-cover-gas-savings-payback",
       "dirty-engine-air-filter-gas-mileage",
     ],
+    lastModified: "2026-09-24",
     updated: "September 2026",
     readingTime: "9 min",
     recommendedFor:
@@ -316,6 +326,7 @@ export const guides: GuideSummary[] = [
       "tonneau-cover-gas-savings-payback",
       "dirty-engine-air-filter-gas-mileage",
     ],
+    lastModified: "2026-09-24",
     updated: "September 2026",
     readingTime: "9 min",
     recommendedFor:
@@ -349,6 +360,7 @@ export const guides: GuideSummary[] = [
       "tonneau-cover-gas-savings-payback",
       "dirty-engine-air-filter-gas-mileage",
     ],
+    lastModified: "2026-09-24",
     updated: "September 2026",
     readingTime: "9 min",
     recommendedFor:
@@ -382,6 +394,7 @@ export const guides: GuideSummary[] = [
       "engine-braking-automatic-transmission",
       "dirty-engine-air-filter-gas-mileage",
     ],
+    lastModified: "2026-09-24",
     updated: "September 2026",
     readingTime: "9 min",
     recommendedFor:
@@ -415,6 +428,7 @@ export const guides: GuideSummary[] = [
       "engine-braking-automatic-transmission",
       "tonneau-cover-gas-savings-payback",
     ],
+    lastModified: "2026-09-24",
     updated: "September 2026",
     readingTime: "9 min",
     recommendedFor:
@@ -446,6 +460,7 @@ export const guides: GuideSummary[] = [
       "is-a-home-energy-audit-worth-it",
       "does-turning-the-thermostat-down-at-night-save-money",
     ],
+    lastModified: "2026-09-24",
     updated: "September 2026",
     readingTime: "9 min",
     recommendedFor:
@@ -474,6 +489,7 @@ export const guides: GuideSummary[] = [
     ],
     published: true,
     relatedSlugs: [],
+    lastModified: "2026-09-24",
     updated: "September 2026",
     readingTime: "9 min",
     recommendedFor:
@@ -502,6 +518,7 @@ export const guides: GuideSummary[] = [
     ],
     published: true,
     relatedSlugs: [],
+    lastModified: "2026-09-24",
     updated: "September 2026",
     readingTime: "10 min",
     recommendedFor:
@@ -533,6 +550,7 @@ export const guides: GuideSummary[] = [
       "premium-credit-card-annual-fee",
       "is-gap-insurance-worth-it",
     ],
+    lastModified: "2026-09-24",
     updated: "September 2026",
     readingTime: "10 min",
     recommendedFor:
@@ -564,6 +582,7 @@ export const guides: GuideSummary[] = [
     relatedSlugs: [
       "zero-percent-financing-vs-cash",
     ],
+    lastModified: "2026-09-24",
     updated: "September 2026",
     readingTime: "11 min",
     recommendedFor:
@@ -593,6 +612,7 @@ export const guides: GuideSummary[] = [
     ],
     published: true,
     relatedSlugs: [],
+    lastModified: "2026-09-24",
     updated: "September 2026",
     readingTime: "10 min",
     recommendedFor:
@@ -624,6 +644,7 @@ export const guides: GuideSummary[] = [
     relatedSlugs: [
       "do-i-need-cloud-backup-if-i-use-onedrive-icloud-google-drive",
     ],
+    lastModified: "2026-09-24",
     updated: "September 2026",
     readingTime: "11 min",
     recommendedFor:
@@ -653,6 +674,7 @@ export const guides: GuideSummary[] = [
     ],
     published: true,
     relatedSlugs: [],
+    lastModified: "2026-09-24",
     updated: "September 2026",
     readingTime: "11 min",
     recommendedFor:
@@ -685,6 +707,7 @@ export const guides: GuideSummary[] = [
       "closing-vents-unused-rooms-save-energy",
       "does-turning-the-thermostat-down-at-night-save-money",
     ],
+    lastModified: "2026-09-24",
     updated: "September 2026",
     readingTime: "11 min",
     recommendedFor:
@@ -719,6 +742,7 @@ export const guides: GuideSummary[] = [
     relatedSlugs: [
       "should-i-buy-a-nas-or-use-cloud-storage",
     ],
+    lastModified: "2026-09-24",
     updated: "September 2026",
     readingTime: "12 min",
     recommendedFor:
@@ -751,6 +775,7 @@ export const guides: GuideSummary[] = [
     relatedSlugs: [
       "closing-vents-unused-rooms-save-energy",
     ],
+    lastModified: "2026-09-24",
     updated: "September 2026",
     readingTime: "11 min",
     recommendedFor:
