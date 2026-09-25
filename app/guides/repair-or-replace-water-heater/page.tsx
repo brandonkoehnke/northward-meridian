@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+
 import RelatedDecisions from "@/app/components/article/RelatedDecisions";
 import GuideLayout from "@/app/components/article/GuideLayout";
 import GuidedEntry from "@/app/components/article/GuidedEntry";
@@ -17,7 +18,7 @@ import OptionsAndTradeoffs from "@/app/components/article/OptionsAndTradeoffs";
 import QuestionsToAsk from "@/app/components/article/QuestionsToAsk";
 import Recommendation from "@/app/components/article/Recommendation";
 import Sources from "@/app/components/article/Sources";
-import WaterHeaterScorecard from "@/app/components/article/WaterHeaterScorecard";
+import WaterHeaterScorecard from "./WaterHeaterScorecard";
 import WhyThisMatters from "@/app/components/article/WhyThisMatters";
 import { getGuideBySlug } from "@/lib/guides";
 
@@ -42,7 +43,10 @@ const guideSections = [
     {
         id: "safety",
         label: "Secure the situation",
-        stage: "Secure",
+    },
+    {
+        id: "scorecard",
+        label: "Repair-or-replace check",
     },
     {
         id: "why-it-matters",
@@ -51,17 +55,10 @@ const guideSections = [
     {
         id: "diagnosis",
         label: "Diagnose the problem",
-        stage: "Diagnose",
     },
     {
         id: "options",
         label: "Evaluate your options",
-        stage: "Evaluate",
-    },
-    {
-        id: "scorecard",
-        label: "Score the decision",
-        stage: "Decide",
     },
     {
         id: "framework",
@@ -86,7 +83,6 @@ const guideSections = [
     {
         id: "checklist",
         label: "Take action",
-        stage: "Act",
     },
     {
         id: "questions",
@@ -107,7 +103,7 @@ const guidedEntryScenarios = [
         guidance:
             "Start by identifying exactly where the water is coming from. A leak through the tank body usually points toward replacement, while a fitting, valve, or nearby source may still be repairable.",
         destinationId: "diagnosis",
-        destinationLabel: "Diagnosis",
+        destinationLabel: "Find the Source",
     },
     {
         id: "no-hot-water",
@@ -115,9 +111,9 @@ const guidedEntryScenarios = [
         summary:
             "Determine whether the problem may be a replaceable component or a broader system failure.",
         guidance:
-            "Loss of hot water does not automatically mean the tank needs replacement. Start with the diagnosis section and identify what has actually failed.",
+            "Loss of hot water does not automatically mean the tank needs replacement. Start by identifying what has actually failed before comparing repair and replacement.",
         destinationId: "diagnosis",
-        destinationLabel: "Diagnosis",
+        destinationLabel: "Find the Source",
     },
     {
         id: "replacement-recommended",
@@ -125,9 +121,9 @@ const guidedEntryScenarios = [
         summary:
             "Evaluate whether the recommendation is supported by the actual condition of the system.",
         guidance:
-            "A replacement recommendation should be evaluated against the failure source, tank condition, age, warranty, repair history, and complete installed cost.",
+            "A replacement recommendation should be evaluated against the failure source, tank condition, age, warranty, repair history, household needs, and complete installed cost.",
         destinationId: "scorecard",
-        destinationLabel: "Decision Scorecard",
+        destinationLabel: "Repair-or-Replace Check",
     },
     {
         id: "comparing-costs",
@@ -137,7 +133,7 @@ const guidedEntryScenarios = [
         guidance:
             "The useful comparison includes repair labor and parts on one side and equipment, labor, permits, removal, disposal, and required modifications on the other.",
         destinationId: "cost-comparison",
-        destinationLabel: "Cost Comparison",
+        destinationLabel: "Compare Total Cost",
     },
     {
         id: "planning-ahead",
@@ -145,7 +141,7 @@ const guidedEntryScenarios = [
         summary:
             "Explore replacement options before you're dealing with an emergency.",
         guidance:
-            "Planning ahead gives you time to compare capacity, fuel type, efficiency, installation requirements, and different water-heating technologies.",
+            "Planning ahead gives you time to compare capacity, fuel type, efficiency, installation requirements, operating costs, and different water-heating technologies.",
         destinationId: "replacement-options",
         destinationLabel: "Replacement Options",
     },
@@ -208,32 +204,37 @@ export default function RepairOrReplaceWaterHeaterGuide() {
             bottomLine={guide.bottomLine}
             structuredData={articleJsonLd}
             sections={guideSections}
-            guidedEntry={<GuidedEntry scenarios={guidedEntryScenarios} />}
+            guidedEntry={
+                <GuidedEntry scenarios={guidedEntryScenarios} />
+            }
         >
-
             <SafetyCallout />
+
+            <WaterHeaterScorecard id="scorecard" />
 
             <WhyThisMatters id="why-it-matters">
                 <p>
-                    A failed water heater creates two pressures at once: the practical
-                    need to restore hot water and the risk of spending money on the wrong
-                    solution. A low repair quote can be wasteful when the tank is failing,
-                    while replacing a sound, relatively young unit over an isolated
-                    component problem can also be unnecessary.
+                    A failed water heater creates two pressures at once: the
+                    practical need to restore hot water and the risk of
+                    spending money on the wrong solution. A low repair quote
+                    can be wasteful when the tank is failing, while replacing
+                    a sound, relatively young unit over an isolated component
+                    problem can also be unnecessary.
                 </p>
 
                 <p>
-                    The decision is more reliable when it begins with the location and
-                    nature of the failure. Age, repair cost, warranty, corrosion, service
-                    history, household demand, and potential energy savings should then
-                    modify the decision rather than replace a proper diagnosis.
+                    The decision is more reliable when it begins with the
+                    location and nature of the failure. Age, repair cost,
+                    warranty, corrosion, service history, household demand,
+                    and potential energy savings should then modify the
+                    decision rather than replace a proper diagnosis.
                 </p>
 
                 <p>
-                    Avoid making the decision from one rule alone. “It is ten years old,”
-                    “the repair is half the replacement price,” or “there is water near
-                    the tank” may be useful observations, but none independently proves
-                    what should be done.
+                    Avoid making the decision from one rule alone. “It is ten
+                    years old,” “the repair is half the replacement price,” or
+                    “there is water near the tank” may be useful observations,
+                    but none independently proves what should be done.
                 </p>
             </WhyThisMatters>
 
@@ -243,44 +244,70 @@ export default function RepairOrReplaceWaterHeaterGuide() {
                 title="Find the source of the problem before pricing the solution."
             >
                 <p>
-                    A puddle near a water heater does not automatically mean that the
-                    pressure vessel has failed. Water may come from a plumbing
-                    connection, drain valve, relief-system discharge, nearby equipment,
-                    or condensation. The repair decision changes substantially once the
-                    source is confirmed.
+                    A puddle near a water heater does not automatically mean
+                    that the pressure vessel has failed. Water may come from a
+                    plumbing connection, drain valve, relief-system discharge,
+                    nearby equipment, or condensation. The repair decision
+                    changes substantially once the source is confirmed.
                 </p>
 
                 <div className="grid gap-6 md:grid-cols-2">
                     <InformationCard title="Problems that may be serviceable">
                         <ul className="space-y-3">
-                            <GuideBullet>Loose or failed external plumbing connection</GuideBullet>
-                            <GuideBullet>Replaceable drain valve</GuideBullet>
-                            <GuideBullet>Electric heating element or thermostat</GuideBullet>
-                            <GuideBullet>Ignition, sensor, or control component</GuideBullet>
-                            <GuideBullet>Some anode-rod or maintenance-related conditions</GuideBullet>
-                            <GuideBullet>Properly diagnosed relief or expansion-system issue</GuideBullet>
+                            <GuideBullet>
+                                Loose or failed external plumbing connection
+                            </GuideBullet>
+                            <GuideBullet>
+                                Replaceable drain valve
+                            </GuideBullet>
+                            <GuideBullet>
+                                Electric heating element or thermostat
+                            </GuideBullet>
+                            <GuideBullet>
+                                Ignition, sensor, or control component
+                            </GuideBullet>
+                            <GuideBullet>
+                                Some anode-rod or maintenance-related
+                                conditions
+                            </GuideBullet>
+                            <GuideBullet>
+                                Properly diagnosed relief or
+                                expansion-system issue
+                            </GuideBullet>
                         </ul>
                     </InformationCard>
 
                     <InformationCard title="Conditions that favor replacement">
                         <ul className="space-y-3">
-                            <GuideBullet>Confirmed leakage through the tank body</GuideBullet>
-                            <GuideBullet>Leakage from a nonserviceable welded vessel area</GuideBullet>
-                            <GuideBullet>Severe corrosion or physical deformation</GuideBullet>
-                            <GuideBullet>Multiple failures on an aging system</GuideBullet>
-                            <GuideBullet>A system that remains inadequate after repair</GuideBullet>
                             <GuideBullet>
-                                Major repair with weak remaining-life economics
+                                Confirmed leakage through the tank body
+                            </GuideBullet>
+                            <GuideBullet>
+                                Leakage from a nonserviceable welded vessel
+                                area
+                            </GuideBullet>
+                            <GuideBullet>
+                                Severe corrosion or physical deformation
+                            </GuideBullet>
+                            <GuideBullet>
+                                Multiple failures on an aging system
+                            </GuideBullet>
+                            <GuideBullet>
+                                A system that remains inadequate after repair
+                            </GuideBullet>
+                            <GuideBullet>
+                                Major repair with weak remaining-life
+                                economics
                             </GuideBullet>
                         </ul>
                     </InformationCard>
                 </div>
 
                 <p>
-                    Ask the professional to identify the failed part or leak location in
-                    writing. “The water heater is leaking” is not as useful as “the drain
-                    valve is leaking,” “the relief system is discharging,” or “the tank
-                    body is leaking.”
+                    Ask the professional to identify the failed part or leak
+                    location in writing. “The water heater is leaking” is not
+                    as useful as “the drain valve is leaking,” “the relief
+                    system is discharging,” or “the tank body is leaking.”
                 </p>
             </GuideSection>
 
@@ -340,8 +367,6 @@ export default function RepairOrReplaceWaterHeaterGuide() {
                     },
                 ]}
             />
-
-            <WaterHeaterScorecard id="scorecard" />
 
             <DecisionFramework
                 id="framework"
@@ -410,15 +435,17 @@ export default function RepairOrReplaceWaterHeaterGuide() {
                 </div>
 
                 <p>
-                    Do not compare a repair quote with the retail price of an uninstalled
-                    water heater. Compare the repair with the complete installed
-                    replacement cost for a properly sized, code-compliant system.
+                    Do not compare a repair quote with the retail price of an
+                    uninstalled water heater. Compare the repair with the
+                    complete installed replacement cost for a properly sized,
+                    code-compliant system.
                 </p>
 
                 <p>
-                    Also avoid treating an efficiency estimate as guaranteed savings.
-                    Operating cost depends on fuel, local rates, water use, inlet-water
-                    temperature, equipment performance, maintenance, and installation.
+                    Also avoid treating an efficiency estimate as guaranteed
+                    savings. Operating cost depends on fuel, local rates,
+                    water use, inlet-water temperature, equipment performance,
+                    maintenance, and installation.
                 </p>
             </GuideSection>
 
@@ -486,33 +513,37 @@ export default function RepairOrReplaceWaterHeaterGuide() {
                 title="A replacement decision is not automatically a technology decision."
             >
                 <p>
-                    If replacement is warranted, first determine what the household
-                    requires. Storage capacity, first-hour performance, peak simultaneous
-                    use, fuel availability, electrical service, installation space,
-                    airflow, drainage, venting, noise, climate, and utility rates can all
-                    affect the best choice.
+                    If replacement is warranted, first determine what the
+                    household requires. Storage capacity, first-hour
+                    performance, peak simultaneous use, fuel availability,
+                    electrical service, installation space, airflow, drainage,
+                    venting, noise, climate, and utility rates can all affect
+                    the best choice.
                 </p>
 
                 <p>
-                    Heat-pump water heaters can use substantially less electricity than
-                    conventional electric-resistance units in appropriate installations.
-                    They also require consideration of space, ambient conditions, sound,
-                    condensate drainage, recovery behavior, electrical requirements, and
-                    local economics.
+                    Heat-pump water heaters can use substantially less
+                    electricity than conventional electric-resistance units
+                    in appropriate installations. They also require
+                    consideration of space, ambient conditions, sound,
+                    condensate drainage, recovery behavior, electrical
+                    requirements, and local economics.
                 </p>
 
                 <p>
-                    Tankless systems can reduce standby losses and provide continuous hot
-                    water within their flow capability, but they are not automatically
-                    inexpensive upgrades. Gas supply, venting, electrical needs,
-                    temperature rise, simultaneous demand, maintenance, and installation
-                    modifications must be evaluated.
+                    Tankless systems can reduce standby losses and provide
+                    continuous hot water within their flow capability, but they
+                    are not automatically inexpensive upgrades. Gas supply,
+                    venting, electrical needs, temperature rise, simultaneous
+                    demand, maintenance, and installation modifications must be
+                    evaluated.
                 </p>
 
                 <p>
                     Ask for more than one properly scoped option when changing
-                    technologies. The least expensive appliance is not necessarily the
-                    least expensive installed system or the best lifetime value.
+                    technologies. The least expensive appliance is not
+                    necessarily the least expensive installed system or the
+                    best lifetime value.
                 </p>
             </GuideSection>
 
@@ -521,17 +552,20 @@ export default function RepairOrReplaceWaterHeaterGuide() {
                 summary="Repair a sound, suitable system when the failure is isolated and the economics are reasonable. Replace when the vessel has failed, safety or reliability is compromised, repairs are recurring, the system no longer meets household needs, or the complete long-term comparison favors a new installation."
                 items={[
                     {
-                        heading: "Repair when the pressure vessel remains sound",
+                        heading:
+                            "Repair when the pressure vessel remains sound",
                         description:
                             "Repair is strongest when the unit is relatively young, the problem is confined to a serviceable component, warranty coverage remains, prior reliability is good, and the repair restores appropriate performance.",
                     },
                     {
-                        heading: "Replace when the tank or system has reached a practical endpoint",
+                        heading:
+                            "Replace when the tank or system has reached a practical endpoint",
                         description:
                             "Replacement is strongest with confirmed vessel leakage, severe corrosion, repeated failures, inadequate capacity, poor remaining-life economics, or a major repair on an aging installation.",
                     },
                     {
-                        heading: "Diagnose before deciding when the evidence is incomplete",
+                        heading:
+                            "Diagnose before deciding when the evidence is incomplete",
                         description:
                             "An uncertain leak source, vague service description, missing warranty information, or nonitemized quote is a reason to gather better information—not to force an immediate repair-or-replace conclusion.",
                     },
@@ -582,22 +616,26 @@ export default function RepairOrReplaceWaterHeaterGuide() {
                 sources={[
                     {
                         title: "Carbon Monoxide Information and Safety Guidance",
-                        publisher: "U.S. Consumer Product Safety Commission",
+                        publisher:
+                            "U.S. Consumer Product Safety Commission",
                         href: "https://www.cpsc.gov/safety-education/neighborhood-safety-network/toolkits/carbon-monoxide-invisible-killer",
                     },
                     {
                         title: "Home Heating Equipment and Carbon Monoxide Safety",
-                        publisher: "U.S. Consumer Product Safety Commission",
+                        publisher:
+                            "U.S. Consumer Product Safety Commission",
                         href: "https://www.cpsc.gov/Safety-Education/Safety-Education-Centers/Carbon-Monoxide-Information-Center/Home-Heating-Equipment",
                     },
                     {
                         title: "Selecting a New Water Heater",
-                        publisher: "U.S. Department of Energy",
+                        publisher:
+                            "U.S. Department of Energy",
                         href: "https://www.energy.gov/energysaver/articles/selecting-new-water-heater",
                     },
                     {
                         title: "Water Heating",
-                        publisher: "U.S. Department of Energy",
+                        publisher:
+                            "U.S. Department of Energy",
                         href: "https://www.energy.gov/energysaver/heat-and-cool/water-heating",
                     },
                     {

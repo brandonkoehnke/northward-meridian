@@ -1,8 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
-
-import { trackEvent } from "@/lib/analytics";
+import { useMemo, useState } from "react";
 
 type HeaterType =
   | "gas-storage"
@@ -14,6 +12,7 @@ type HeaterType =
 type AgeRange = "under-5" | "5-8" | "9-12" | "over-12" | "unknown";
 
 type FailureType =
+  | "unknown"
   | "replaceable-component"
   | "uncertain-leak"
   | "confirmed-tank-leak"
@@ -21,7 +20,12 @@ type FailureType =
   | "insufficient-capacity"
   | "other";
 
-type RepairCostShare = "under-20" | "20-40" | "40-60" | "over-60" | "unknown";
+type RepairCostShare =
+  | "under-20"
+  | "20-40"
+  | "40-60"
+  | "over-60"
+  | "unknown";
 
 type Recommendation =
   | "safety"
@@ -34,11 +38,18 @@ type WaterHeaterScorecardProps = {
   id?: string;
 };
 
-export default function WaterHeaterScorecard({ id }: WaterHeaterScorecardProps) {
-  const [heaterType, setHeaterType] = useState<HeaterType>("gas-storage");
-  const [ageRange, setAgeRange] = useState<AgeRange>("unknown");
+export default function WaterHeaterScorecard({
+  id,
+}: WaterHeaterScorecardProps) {
+  const [heaterType, setHeaterType] =
+    useState<HeaterType>("gas-storage");
+
+  const [ageRange, setAgeRange] =
+    useState<AgeRange>("unknown");
+
   const [failureType, setFailureType] =
-    useState<FailureType>("replaceable-component");
+    useState<FailureType>("unknown");
+
   const [repairCostShare, setRepairCostShare] =
     useState<RepairCostShare>("unknown");
 
@@ -47,19 +58,6 @@ export default function WaterHeaterScorecard({ id }: WaterHeaterScorecardProps) 
   const [visibleCorrosion, setVisibleCorrosion] = useState(false);
   const [meetsDemand, setMeetsDemand] = useState(true);
   const [safetyConcern, setSafetyConcern] = useState(false);
-
-  const hasStarted = useRef(false);
-  const previousRecommendation = useRef<Recommendation | null>(null);
-
-  const markStarted = () => {
-    if (hasStarted.current) return;
-
-    hasStarted.current = true;
-
-    trackEvent("scorecard_started", {
-      tool: "water_heater_repair_or_replace",
-    });
-  };
 
   const result = useMemo(() => {
     if (safetyConcern) {
@@ -106,6 +104,7 @@ export default function WaterHeaterScorecard({ id }: WaterHeaterScorecardProps) 
     if (
       ageRange === "unknown" ||
       repairCostShare === "unknown" ||
+      failureType === "unknown" ||
       failureType === "uncertain-leak"
     ) {
       return {
@@ -151,25 +150,6 @@ export default function WaterHeaterScorecard({ id }: WaterHeaterScorecardProps) 
     visibleCorrosion,
   ]);
 
-  useEffect(() => {
-    if (!hasStarted.current) {
-      previousRecommendation.current = result.recommendation;
-      return;
-    }
-
-    if (previousRecommendation.current === result.recommendation) {
-      return;
-    }
-
-    trackEvent("scorecard_result_changed", {
-      tool: "water_heater_repair_or_replace",
-      recommendation: result.recommendation,
-      result_heading: result.heading,
-    });
-
-    previousRecommendation.current = result.recommendation;
-  }, [result]);
-
   const resultClasses: Record<Recommendation, string> = {
     safety: "border-red-300 bg-red-50",
     repair: "border-[var(--accent)] bg-white",
@@ -179,29 +159,31 @@ export default function WaterHeaterScorecard({ id }: WaterHeaterScorecardProps) 
   };
 
   return (
-    <section id={id} className="scroll-mt-24 mx-auto max-w-4xl px-6 py-16">
+    <section
+      id={id}
+      className="scroll-mt-24 mx-auto max-w-4xl px-6 py-16"
+    >
       <div className="border-t border-[var(--border)] pt-12">
         <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[var(--accent)]">
-          Repair-or-Replace Scorecard
+          Water Heater Repair-or-Replace Check
         </p>
 
         <h2 className="mt-5 text-3xl font-semibold tracking-tight">
-          Organize the decision before requesting work.
+          Should you repair, replace, or get more information first?
         </h2>
 
         <p className="mt-6 max-w-3xl text-lg leading-8 text-[var(--muted)]">
-          This planning tool cannot diagnose equipment. Use it to identify the
-          facts that should drive a conversation with a qualified professional.
+          Use this free planning check to organize the facts that should
+          drive a conversation with a qualified professional. It cannot
+          diagnose the equipment or replace an inspection, repair estimate,
+          or safety evaluation.
         </p>
 
         <div className="mt-10 space-y-8 rounded-2xl border border-[var(--border)] bg-white p-8">
           <SelectField
             label="Water-heater type"
             value={heaterType}
-            onChange={(value) => {
-              markStarted();
-              setHeaterType(value as HeaterType);
-            }}
+            onChange={(value) => setHeaterType(value as HeaterType)}
             options={[
               ["gas-storage", "Gas storage tank"],
               ["electric-storage", "Electric storage tank"],
@@ -214,10 +196,7 @@ export default function WaterHeaterScorecard({ id }: WaterHeaterScorecardProps) 
           <SelectField
             label="Approximate age"
             value={ageRange}
-            onChange={(value) => {
-              markStarted();
-              setAgeRange(value as AgeRange);
-            }}
+            onChange={(value) => setAgeRange(value as AgeRange)}
             options={[
               ["unknown", "Unknown"],
               ["under-5", "Under 5 years"],
@@ -230,11 +209,9 @@ export default function WaterHeaterScorecard({ id }: WaterHeaterScorecardProps) 
           <SelectField
             label="Primary problem"
             value={failureType}
-            onChange={(value) => {
-              markStarted();
-              setFailureType(value as FailureType);
-            }}
+            onChange={(value) => setFailureType(value as FailureType)}
             options={[
+              ["unknown", "Not sure yet"],
               [
                 "replaceable-component",
                 "Confirmed replaceable component failure",
@@ -253,12 +230,14 @@ export default function WaterHeaterScorecard({ id }: WaterHeaterScorecardProps) 
           <SelectField
             label="Repair quote as a share of installed replacement cost"
             value={repairCostShare}
-            onChange={(value) => {
-              markStarted();
-              setRepairCostShare(value as RepairCostShare);
-            }}
+            onChange={(value) =>
+              setRepairCostShare(value as RepairCostShare)
+            }
             options={[
-              ["unknown", "Unknown—quotes not yet available"],
+              [
+                "unknown",
+                "Unknown—quotes not yet available",
+              ],
               ["under-20", "Under 20%"],
               ["20-40", "20–40%"],
               ["40-60", "40–60%"],
@@ -302,7 +281,8 @@ export default function WaterHeaterScorecard({ id }: WaterHeaterScorecardProps) 
         </div>
 
         <div
-          className={`mt-8 rounded-2xl border p-8 ${resultClasses[result.recommendation]}`}
+          className={`mt-8 rounded-2xl border p-8 ${resultClasses[result.recommendation]
+            }`}
           aria-live="polite"
         >
           <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--accent)]">
