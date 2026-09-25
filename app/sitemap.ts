@@ -17,6 +17,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
             priority: 0.9,
         },
         {
+            url: `${baseUrl}/about`,
+            lastModified: new Date(),
+            changeFrequency: "yearly",
+            priority: 0.4,
+        },
+        {
+            url: `${baseUrl}/contact`,
+            lastModified: new Date(),
+            changeFrequency: "yearly",
+            priority: 0.3,
+        },
+        {
             url: `${baseUrl}/guides/repair-or-replace-water-heater`,
             lastModified: new Date("2026-08-06"),
             changeFrequency: "monthly",
@@ -33,18 +45,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
             lastModified: new Date("2026-09-21"),
             changeFrequency: "monthly",
             priority: 0.8,
-        },
-        {
-            url: `${baseUrl}/about`,
-            lastModified: new Date(),
-            changeFrequency: "yearly",
-            priority: 0.4,
-        },
-        {
-            url: `${baseUrl}/contact`,
-            lastModified: new Date(),
-            changeFrequency: "yearly",
-            priority: 0.3,
         },
         {
             url: `${baseUrl}/guides/should-i-buy-a-timeshare-resale`,
@@ -163,6 +163,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
         {
             url: `${baseUrl}/guides/do-i-need-cloud-backup-if-i-use-onedrive-icloud-google-drive`,
             lastModified: new Date("2026-09-24"),
+            changeFrequency: "monthly",
+            priority: 0.8,
+        },
+        {
+            url: `${baseUrl}/guides/does-turning-the-thermostat-down-at-night-save-money`,
+            lastModified: new Date("2026-09-25"),
             changeFrequency: "monthly",
             priority: 0.8,
         },

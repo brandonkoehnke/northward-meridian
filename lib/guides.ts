@@ -55,7 +55,7 @@ export const guides: GuideSummary[] = [
       "repair or replace",
     ],
     published: true,
-    relatedSlugs: ["is-service-line-coverage-worth-it"],
+    relatedSlugs: [],
     updated: "August 2026",
     readingTime: "15 min",
     recommendedFor:
@@ -79,7 +79,7 @@ export const guides: GuideSummary[] = [
       "insurance",
     ],
     published: true,
-    relatedSlugs: ["repair-or-replace-water-heater"],
+    relatedSlugs: [],
     updated: "September 2026",
     readingTime: "8 min",
     recommendedFor:
@@ -385,8 +385,8 @@ export const guides: GuideSummary[] = [
     ],
     published: true,
     relatedSlugs: [
-      "dishwasher-vs-hand-washing-cost",
-      "can-chest-freezer-save-money",
+      "is-a-home-energy-audit-worth-it",
+      "does-turning-the-thermostat-down-at-night-save-money",
     ],
     updated: "September 2026",
     readingTime: "9 min",
@@ -411,10 +411,7 @@ export const guides: GuideSummary[] = [
       "payback",
     ],
     published: true,
-    relatedSlugs: [
-      "dishwasher-vs-hand-washing-cost",
-      "closing-vents-unused-rooms-save-energy",
-    ],
+    relatedSlugs: [],
     updated: "September 2026",
     readingTime: "9 min",
     recommendedFor:
@@ -438,10 +435,7 @@ export const guides: GuideSummary[] = [
       "home savings",
     ],
     published: true,
-    relatedSlugs: [
-      "can-chest-freezer-save-money",
-      "closing-vents-unused-rooms-save-energy",
-    ],
+    relatedSlugs: [],
     updated: "September 2026",
     readingTime: "10 min",
     recommendedFor:
@@ -449,6 +443,7 @@ export const guides: GuideSummary[] = [
     bottomLine:
       "For a reasonably full load, a modern efficient dishwasher can use substantially less water than hand-washing with a continuously running faucet. Whether it also costs less depends on the dishwasher, faucet flow, hand-washing technique, utility rates, detergent, and hot-water use. Efficient basin-style hand washing can narrow the gap considerably, which is why your actual faucet-running time matters more than a universal dishwasher-versus-hand-washing rule.",
   },
+
   {
     slug: "zero-percent-financing-vs-cash",
     title: "Should I Use 0% Financing or Pay Cash?",
@@ -475,6 +470,7 @@ export const guides: GuideSummary[] = [
     bottomLine:
       "A 0% financing offer can be economically useful when it does not cost more than paying cash and you can reliably make the required payments while keeping the retained cash safe and available. The comparison changes when financing comes with fees, a higher purchase price, lost cash discounts, deferred-interest terms, or a risk of carrying a balance beyond the promotional period.",
   },
+
   {
     slug: "is-gap-insurance-worth-it",
     title: "Is GAP Insurance Worth It?",
@@ -493,7 +489,6 @@ export const guides: GuideSummary[] = [
     published: true,
     relatedSlugs: [
       "zero-percent-financing-vs-cash",
-      "is-tire-road-hazard-protection-worth-it",
     ],
     updated: "September 2026",
     readingTime: "11 min",
@@ -502,6 +497,7 @@ export const guides: GuideSummary[] = [
     bottomLine:
       "GAP insurance can be useful when a vehicle could be worth substantially less than the amount owed after a total loss, but the decision depends on the size and duration of that exposure, the price of the GAP product, and its actual contract terms. Compare your current loan payoff with a realistic vehicle value, then check how the gap could change over time rather than assuming today's shortfall will last for the entire loan.",
   },
+
   {
     slug: "is-tire-road-hazard-protection-worth-it",
     title: "Is Tire Road Hazard Protection Worth It?",
@@ -518,9 +514,7 @@ export const guides: GuideSummary[] = [
       "car maintenance",
     ],
     published: true,
-    relatedSlugs: [
-      "is-gap-insurance-worth-it",
-    ],
+    relatedSlugs: [],
     updated: "September 2026",
     readingTime: "10 min",
     recommendedFor:
@@ -528,6 +522,7 @@ export const guides: GuideSummary[] = [
     bottomLine:
       "Paid road-hazard protection can make sense when the premium is low relative to the potential benefit from covered repairs or tire replacements and the contract provides useful coverage. It is less compelling when the plan is expensive, reimbursement is limited, important service costs are excluded, or equivalent protection is already included. Compare the actual contract terms with the cost of a realistic covered event rather than assuming road-hazard protection is automatically worthwhile.",
   },
+
   {
     slug: "should-i-buy-a-nas-or-use-cloud-storage",
     title: "Should I Buy a NAS or Use Cloud Storage?",
@@ -554,6 +549,7 @@ export const guides: GuideSummary[] = [
     bottomLine:
       "A NAS can cost less than a recurring cloud subscription over a long enough period, especially when you need substantial local capacity. But the comparison should include the enclosure, drives, electricity, maintenance, and an independent off-site backup if the NAS is part of your backup strategy. Cloud storage costs more predictably and requires less hardware management, so the better choice depends on your storage needs, time horizon, backup requirements, and tolerance for maintaining your own system.",
   },
+
   {
     slug: "is-a-water-softener-worth-it",
     title: "Is a Water Softener Worth It?",
@@ -578,6 +574,7 @@ export const guides: GuideSummary[] = [
     bottomLine:
       "A water softener can make sense when measured hardness is high and the system addresses problems that have meaningful value to your household. The financial case depends on the installed price, salt and water use, maintenance, equipment efficiency, and realistic savings. Measure the water first and compare the complete cost rather than relying on a generic payback rule.",
   },
+
   {
     slug: "is-a-home-energy-audit-worth-it",
     title: "Is a Home Energy Audit Worth It?",
@@ -594,7 +591,10 @@ export const guides: GuideSummary[] = [
       "home improvement",
     ],
     published: true,
-    relatedSlugs: [],
+    relatedSlugs: [
+      "closing-vents-unused-rooms-save-energy",
+      "does-turning-the-thermostat-down-at-night-save-money",
+    ],
     updated: "September 2026",
     readingTime: "11 min",
     recommendedFor:
@@ -602,6 +602,7 @@ export const guides: GuideSummary[] = [
     bottomLine:
       "A home energy audit can be worth paying for when better diagnosis could change an expensive home-improvement decision, identify the cause of persistent energy or comfort problems, or help you avoid spending money on the wrong fix. The audit itself does not save energy, so compare its net cost with the size of the decision it may influence and the amount of real financial value it would need to create.",
   },
+
   {
     slug: "do-i-need-cloud-backup-if-i-use-onedrive-icloud-google-drive",
     title:
@@ -631,6 +632,34 @@ export const guides: GuideSummary[] = [
     bottomLine:
       "OneDrive, iCloud, and Google Drive can provide meaningful protection through synchronization, version history, deleted-file recovery, and other features. But those capabilities do not necessarily cover every failure mode. Check what you can recover, how long recovery remains available, whether an independent copy exists, and whether you have tested an actual restore before deciding whether another backup layer is necessary.",
   },
+
+  {
+    slug: "does-turning-the-thermostat-down-at-night-save-money",
+    title: "Does Turning the Thermostat Down at Night Actually Save Money?",
+    description:
+      "Use the free thermostat setback savings calculator to estimate how a nighttime temperature setback could affect your heating and cooling costs.",
+    category: "Home",
+    href:
+      "/guides/does-turning-the-thermostat-down-at-night-save-money",
+    tags: [
+      "thermostat setback",
+      "thermostat savings",
+      "heating costs",
+      "cooling costs",
+      "energy savings",
+      "home energy",
+    ],
+    published: true,
+    relatedSlugs: [
+      "closing-vents-unused-rooms-save-energy",
+    ],
+    updated: "September 2026",
+    readingTime: "11 min",
+    recommendedFor:
+      "Homeowners deciding whether lowering the thermostat during sleep or unoccupied periods can meaningfully reduce heating and cooling costs.",
+    bottomLine:
+      "Lowering a thermostat during appropriate periods can reduce heating and cooling energy use, but the size of the savings depends on the setback, duration, climate, building, and HVAC system. DOE describes a 7 to 10 degree Fahrenheit setback for eight hours per day as a potentially meaningful strategy for conventional systems, while air-source heat pumps can require a different control approach. Use the calculator with a conservative savings assumption rather than treating a general benchmark as a guarantee.",
+  },
 ];
 
 export function getGuideBySlug(slug: string) {
@@ -648,7 +677,9 @@ export function getRelatedGuides(
   }
 
   return currentGuide.relatedSlugs
-    .map((relatedSlug) => getGuideBySlug(relatedSlug))
+    .map((relatedSlug) =>
+      getGuideBySlug(relatedSlug),
+    )
     .filter(
       (guide): guide is GuideSummary =>
         Boolean(
