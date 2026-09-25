@@ -30,7 +30,7 @@ const guide = (() => {
     return found;
 })();
 
-const siteUrl = "https://northwardmeridian.com";
+const siteUrl = "https://www.northwardmeridian.com";
 const canonicalUrl = `${siteUrl}${guide.href}`;
 
 const guideSections = [
@@ -182,12 +182,12 @@ const articleJsonLd = {
     author: {
         "@type": "Organization",
         name: "Northward Meridian",
-        url: "https://northwardmeridian.com/about",
+        url: "https://www.northwardmeridian.com/about",
     },
     publisher: {
         "@type": "Organization",
         name: "Northward Meridian",
-        url: "https://northwardmeridian.com",
+        url: "https://www.northwardmeridian.com",
     },
 };
 

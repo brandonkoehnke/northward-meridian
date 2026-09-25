@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 
 import { guides } from "@/lib/guides";
 
-const baseUrl = "https://northwardmeridian.com";
+const baseUrl = "https://www.northwardmeridian.com";
 
 export default function sitemap(): MetadataRoute.Sitemap {
     const guideEntries = guides

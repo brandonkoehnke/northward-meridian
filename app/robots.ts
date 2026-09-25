@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: "https://northwardmeridian.com/sitemap.xml",
+    sitemap: "https://www.northwardmeridian.com/sitemap.xml",
   };
 }

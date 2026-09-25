@@ -32,7 +32,7 @@ const guide = (() => {
     return found;
 })();
 
-const siteUrl = "https://northwardmeridian.com";
+const siteUrl = "https://www.northwardmeridian.com";
 const canonicalUrl = `${siteUrl}${guide.href}`;
 
 const guideSections = [
