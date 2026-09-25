@@ -1,5 +1,4 @@
 import Link from "next/link";
-
 import { guides } from "@/lib/guides";
 
 export default function GuidesPage() {
@@ -17,7 +16,8 @@ export default function GuidesPage() {
         </h1>
 
         <p className="mt-8 max-w-2xl text-xl leading-9 text-[var(--muted)]">
-          Decision-focused guides that help you understand your options and move
+          Research-backed decision guides with interactive calculators and decision
+          checks that help you understand your options, test your situation, and move
           forward with clarity.
         </p>
 
@@ -27,13 +27,29 @@ export default function GuidesPage() {
               key={guide.href}
               className="rounded-2xl border border-[var(--border)] bg-white p-10"
             >
-              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--accent)]">
-                {guide.category}
-              </p>
+              <div className="flex flex-wrap items-center gap-3">
+                <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--accent)]">
+                  {guide.category}
+                </p>
+
+                {guide.tool ? (
+                  <span className="rounded-full border border-[var(--border)] bg-[var(--background)] px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-[var(--muted)]">
+                    {guide.tool.type === "calculator"
+                      ? "Calculator"
+                      : "Decision Check"}
+                  </span>
+                ) : null}
+              </div>
 
               <h2 className="mt-4 text-2xl font-semibold tracking-tight">
                 {guide.title}
               </h2>
+
+              {guide.tool ? (
+                <p className="mt-3 text-sm font-medium text-[var(--accent)]">
+                  Includes: {guide.tool.name}
+                </p>
+              ) : null}
 
               <p className="mt-4 max-w-3xl leading-8 text-[var(--muted)]">
                 {guide.description}
