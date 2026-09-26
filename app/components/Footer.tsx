@@ -18,8 +18,8 @@ export default function Footer() {
             </h2>
 
             <p className="mt-4 max-w-xl leading-8 text-[var(--muted)]">
-              Helping people navigate complex decisions through practical
-              guidance, thoughtful research, and useful tools.
+              Research-backed decision guides and interactive tools for navigating
+              complex decisions with clarity.
             </p>
           </div>
 
@@ -43,7 +43,7 @@ export default function Footer() {
           <p>© 2026 Northward Meridian</p>
 
           <p className="uppercase tracking-[0.2em] text-[var(--accent)]">
-            Built with clarity.
+            Decisions, made clearer.
           </p>
         </div>
       </div>

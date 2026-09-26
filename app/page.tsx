@@ -13,9 +13,10 @@ export default function Home() {
           Navigate complex decisions with confidence.
         </h1>
 
-        <p className="mt-8 max-w-2xl text-xl leading-9 text-zinc-600">
-          Practical guides, thoughtful research, and useful tools that help you
-          move forward with clarity.
+        <p className="mt-8 max-w-2xl text-xl leading-9 text-[var(--muted)]">
+          Research-backed decision guides and interactive tools that help you
+          understand the tradeoffs, test your situation, and move forward with
+          clarity.
         </p>
 
         <Link
@@ -28,10 +29,10 @@ export default function Home() {
 
       {/* Feature Cards */}
       <section className="mx-auto grid max-w-6xl gap-8 px-6 pb-32 md:grid-cols-3">
-
         <div className="rounded-2xl border border-[var(--border)] bg-white p-10">
           <div className="mb-6 flex items-center gap-3">
             <span className="h-px w-8 bg-[var(--accent)]"></span>
+
             <span className="text-sm font-semibold uppercase tracking-wider text-[var(--accent)]">
               Guide
             </span>
@@ -42,47 +43,48 @@ export default function Home() {
           </h2>
 
           <p className="leading-8 text-[var(--muted)]">
-            Clear explanations that help you understand complicated topics without
-            unnecessary jargon.
+            Clear explanations built around the decision you are trying to
+            make, without unnecessary jargon or filler.
           </p>
         </div>
 
         <div className="rounded-2xl border border-[var(--border)] bg-white p-10">
           <div className="mb-6 flex items-center gap-3">
             <span className="h-px w-8 bg-[var(--accent)]"></span>
+
             <span className="text-sm font-semibold uppercase tracking-wider text-[var(--accent)]">
               Research
             </span>
           </div>
 
           <h2 className="mb-4 text-2xl font-semibold">
-            Thoughtful Research
+            Research That Clarifies
           </h2>
 
           <p className="leading-8 text-[var(--muted)]">
-            Carefully researched content focused on helping you make better
-            decisions—not generating more noise.
+            Carefully researched guidance focused on the facts, tradeoffs, and
+            uncertainties that can change the decision.
           </p>
         </div>
 
         <div className="rounded-2xl border border-[var(--border)] bg-white p-10">
           <div className="mb-6 flex items-center gap-3">
             <span className="h-px w-8 bg-[var(--accent)]"></span>
+
             <span className="text-sm font-semibold uppercase tracking-wider text-[var(--accent)]">
               Tools
             </span>
           </div>
 
           <h2 className="mb-4 text-2xl font-semibold">
-            Useful Tools
+            Interactive Decision Tools
           </h2>
 
           <p className="leading-8 text-[var(--muted)]">
-            Downloadable resources, calculators, and templates designed to turn
-            information into action.
+            Calculators and decision checks built into each guide to help you
+            test assumptions and apply the research to your own situation.
           </p>
         </div>
-
       </section>
     </main>
   );

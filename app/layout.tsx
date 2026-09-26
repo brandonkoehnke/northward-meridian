@@ -19,7 +19,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Northward Meridian",
   description:
-    "Practical guides, thoughtful research, and useful tools that help people navigate complex decisions.",
+    "Research-backed decision guides and interactive tools that help people navigate complex decisions with clarity.",
 };
 
 export default function RootLayout({
