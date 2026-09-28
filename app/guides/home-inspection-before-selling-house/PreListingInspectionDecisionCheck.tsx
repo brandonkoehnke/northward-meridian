@@ -5,21 +5,10 @@ import { useRef, useState } from "react";
 import { trackEvent } from "@/lib/analytics";
 
 type RecentInspection = "yes" | "no" | "unknown";
-type KnownProblems =
-    | "none"
-    | "minor"
-    | "significant";
-type SurpriseImportance =
-    | "low"
-    | "moderate"
-    | "high";
-type SaleTimeline =
-    | "no"
-    | "somewhat"
-    | "yes";
-type TargetedConcern =
-    | "broad"
-    | "targeted";
+type KnownProblems = "none" | "minor" | "significant";
+type SurpriseImportance = "low" | "moderate" | "high";
+type SaleTimeline = "no" | "somewhat" | "yes";
+type TargetedConcern = "broad" | "targeted";
 type ChangePlan =
     | "repair"
     | "evaluate"
@@ -33,10 +22,7 @@ type ResultType =
     | "lower-information-value"
     | "targeted-evaluation";
 
-type ResultTone =
-    | "positive"
-    | "neutral"
-    | "warning";
+type ResultTone = "positive" | "neutral" | "warning";
 
 type Result = {
     type: ResultType;
@@ -56,50 +42,31 @@ const warningSignOptions = [
     ["other", "Another unexplained condition"],
 ] as const;
 
-const changePlanOptions: Array<
-    [ChangePlan, string]
-> = [
-        ["repair", "Repair significant findings before listing"],
-        ["evaluate", "Get specialist evaluations or estimates"],
-        ["pricing", "Adjust pricing or sale strategy"],
-        ["documentation", "Prepare documentation or disclosures"],
-        ["no-change", "Probably make no change"],
-    ];
+const changePlanOptions: Array<[ChangePlan, string]> = [
+    ["repair", "Repair significant findings before listing"],
+    ["evaluate", "Get specialist evaluations or estimates"],
+    ["pricing", "Adjust pricing or sale strategy"],
+    ["documentation", "Prepare documentation or disclosures"],
+    ["no-change", "Probably make no change"],
+];
 
 export default function PreListingInspectionDecisionCheck() {
-    const [hasInteracted, setHasInteracted] =
-        useState(false);
+    const [hasInteracted, setHasInteracted] = useState(false);
 
-    const [homeAge, setHomeAge] =
-        useState("50");
-
-    const [ownershipYears, setOwnershipYears] =
-        useState("10");
-
+    const [homeAge, setHomeAge] = useState("50");
+    const [ownershipYears, setOwnershipYears] = useState("10");
     const [recentInspection, setRecentInspection] =
-        useState<RecentInspection>("no");
+        useState<RecentInspection>("unknown");
 
     const [knownProblems, setKnownProblems] =
-        useState<KnownProblems>("minor");
-
-    const [warningSigns, setWarningSigns] =
-        useState<string[]>([]);
-
-    const [changePlans, setChangePlans] =
-        useState<ChangePlan[]>([
-            "repair",
-            "evaluate",
-        ]);
-
+        useState<KnownProblems>("none");
+    const [warningSigns, setWarningSigns] = useState<string[]>([]);
+    const [changePlans, setChangePlans] = useState<ChangePlan[]>([]);
     const [surpriseImportance, setSurpriseImportance] =
-        useState<SurpriseImportance>("high");
-
+        useState<SurpriseImportance>("moderate");
     const [tightTimeline, setTightTimeline] =
-        useState<SaleTimeline>("somewhat");
-
-    const [wantsMultipleQuotes, setWantsMultipleQuotes] =
-        useState(true);
-
+        useState<SaleTimeline>("no");
+    const [wantsMultipleQuotes, setWantsMultipleQuotes] = useState(false);
     const [targetedConcern, setTargetedConcern] =
         useState<TargetedConcern>("broad");
 
@@ -109,67 +76,81 @@ export default function PreListingInspectionDecisionCheck() {
         if (!hasStarted.current) {
             hasStarted.current = true;
 
-            trackEvent(
-                "pre_listing_inspection_decision_started",
-                {
-                    tool: "pre_listing_inspection_decision",
-                },
-            );
+            trackEvent("pre_listing_inspection_decision_started", {
+                tool: "pre_listing_inspection_decision",
+            });
         }
 
         setHasInteracted(true);
     };
 
-    const toggleWarningSign = (
-        value: string,
-    ) => {
+    const toggleWarningSign = (value: string) => {
         markStarted();
 
         setWarningSigns((current) =>
             current.includes(value)
-                ? current.filter(
-                    (item) => item !== value,
-                )
+                ? current.filter((item) => item !== value)
                 : [...current, value],
         );
     };
 
-    const toggleChangePlan = (
-        value: ChangePlan,
-    ) => {
+    const toggleChangePlan = (value: ChangePlan) => {
         markStarted();
 
-        setChangePlans((current) =>
-            current.includes(value)
-                ? current.filter(
-                    (item) => item !== value,
-                )
-                : [...current, value],
-        );
+        setChangePlans((current) => {
+            if (value === "no-change") {
+                return current.includes("no-change") ? [] : ["no-change"];
+            }
+
+            const withoutNoChange = current.filter(
+                (item) => item !== "no-change",
+            );
+
+            return withoutNoChange.includes(value)
+                ? withoutNoChange.filter((item) => item !== value)
+                : [...withoutNoChange, value];
+        });
     };
 
     const result: Result = (() => {
-        const age = Math.max(
-            Number(homeAge) || 0,
-            0,
-        );
-
-        const ownership = Math.max(
-            Number(ownershipYears) || 0,
-            0,
-        );
+        const age = Math.max(Number(homeAge) || 0, 0);
+        const ownership = Math.max(Number(ownershipYears) || 0, 0);
 
         const reasonCodes: string[] = [];
 
-        /*
-         * A targeted concern changes the nature of the decision.
-         * If most of the uncertainty is concentrated in one known
-         * system, a specialist may answer the question more directly
-         * than a general inspection.
-         */
+        const decisionUse = changePlans.filter(
+            (item) => item !== "no-change",
+        ).length;
+
+        const hasRecentInformation = recentInspection === "yes";
+        const hasNoRecentInspection = recentInspection === "no";
+
+        const hasWarningSigns = warningSigns.length > 0;
+
+        const hasMeaningfulUncertainty =
+            knownProblems === "significant" ||
+            hasWarningSigns ||
+            recentInspection !== "yes";
+
+        const hasStrongConditionUncertainty =
+            knownProblems === "significant" ||
+            hasWarningSigns;
+
+        const highSurpriseConcern = surpriseImportance === "high";
+        const moderateSurpriseConcern = surpriseImportance === "moderate";
+        const hasTimelineValue = tightTimeline !== "no";
+
+        const wouldActOnFindings = decisionUse > 0;
+        const wouldSeekEstimates =
+            wantsMultipleQuotes ||
+            changePlans.includes("evaluate");
+
+        const olderHome = age >= 50;
+        const longerOwnership = ownership >= 10;
+
         if (
             targetedConcern === "targeted" &&
-            warningSigns.length > 0
+            (hasWarningSigns || knownProblems !== "none")
         ) {
             reasonCodes.push(
                 "Your uncertainty is concentrated in a particular condition or system.",
@@ -179,57 +160,45 @@ export default function PreListingInspectionDecisionCheck() {
                 "A specialist evaluation may provide more useful information than a broad inspection.",
             );
 
-            if (
-                changePlans.includes("repair") ||
-                changePlans.includes("evaluate")
-            ) {
+            if (changePlans.includes("repair")) {
                 reasonCodes.push(
-                    "You would use the findings to decide whether additional work is warranted.",
+                    "You would use the findings to decide whether additional repair work is warranted.",
+                );
+            }
+
+            if (changePlans.includes("evaluate")) {
+                reasonCodes.push(
+                    "You would use the findings to decide whether a specialist evaluation or estimate is warranted.",
+                );
+            }
+
+            if (changePlans.includes("pricing")) {
+                reasonCodes.push(
+                    "You would use the findings to inform your pricing or sale strategy.",
+                );
+            }
+
+            if (changePlans.includes("documentation")) {
+                reasonCodes.push(
+                    "You would use the findings to prepare documentation or disclosures.",
+                );
+            }
+
+            if (wantsMultipleQuotes) {
+                reasonCodes.push(
+                    "You would benefit from having time to obtain estimates before listing.",
                 );
             }
 
             return {
                 type: "targeted-evaluation",
                 tone: "warning",
-                heading:
-                    "A targeted evaluation may fit your situation better",
+                heading: "A targeted evaluation may fit your situation better",
                 description:
                     "Your answers suggest that the main uncertainty is concentrated in a specific condition. A specialist evaluation may answer that question more directly than paying for a broad pre-listing inspection.",
                 reasons: reasonCodes,
             };
         }
-
-        const decisionUse =
-            changePlans.filter(
-                (item) => item !== "no-change",
-            ).length;
-
-        const hasNoRecentInspection =
-            recentInspection === "no";
-
-        const hasUncertainty =
-            knownProblems !== "none" ||
-            warningSigns.length > 0 ||
-            recentInspection !== "yes";
-
-        const highSurpriseConcern =
-            surpriseImportance === "high";
-
-        const moderateSurpriseConcern =
-            surpriseImportance === "moderate";
-
-        const timelinePressure =
-            tightTimeline !== "no";
-
-        const wantsControl =
-            wantsMultipleQuotes ||
-            decisionUse > 0;
-
-        const olderHome =
-            age >= 50;
-
-        const longerOwnership =
-            ownership >= 10;
 
         if (hasNoRecentInspection) {
             reasonCodes.push(
@@ -237,13 +206,13 @@ export default function PreListingInspectionDecisionCheck() {
             );
         }
 
-        if (hasUncertainty) {
+        if (hasStrongConditionUncertainty) {
             reasonCodes.push(
                 "You identified meaningful uncertainty about the home's condition.",
             );
         }
 
-        if (warningSigns.length > 0) {
+        if (hasWarningSigns) {
             reasonCodes.push(
                 "You identified one or more unexplained condition concerns.",
             );
@@ -255,7 +224,7 @@ export default function PreListingInspectionDecisionCheck() {
             );
         }
 
-        if (decisionUse > 0) {
+        if (wouldActOnFindings) {
             reasonCodes.push(
                 "You would use new information to influence repairs, evaluations, pricing, or documentation.",
             );
@@ -267,23 +236,53 @@ export default function PreListingInspectionDecisionCheck() {
             );
         }
 
-        if (timelinePressure) {
+        if (moderateSurpriseConcern) {
+            reasonCodes.push(
+                "Avoiding a major surprise after accepting an offer is moderately important to you.",
+            );
+        }
+
+        if (hasTimelineValue) {
             reasonCodes.push(
                 "Your sale timeline creates some value in learning about problems earlier.",
             );
         }
 
-        if (wantsControl) {
+        if (wouldSeekEstimates) {
             reasonCodes.push(
-                "You would benefit from having time to investigate or obtain competing estimates before listing.",
+                "You would benefit from having time to investigate or obtain estimates before listing.",
             );
         }
 
-        if (
-            hasNoRecentInspection &&
-            (highSurpriseConcern ||
-                decisionUse > 0)
-        ) {
+        /*
+         * HIGHER INFORMATION VALUE
+         *
+         * We want this branch reserved for situations where there is a
+         * meaningful combination of uncertainty and practical decision value.
+         *
+         * Stronger signals:
+         * - significant known problems or warning signs, OR
+         * - actionable use of findings plus high surprise concern, OR
+         * - multiple strong contextual signals around uncertainty and action.
+         */
+        const higherValue =
+            !hasRecentInformation &&
+            (
+                hasStrongConditionUncertainty &&
+                wouldActOnFindings
+                ||
+                hasStrongConditionUncertainty &&
+                highSurpriseConcern
+                ||
+                wouldActOnFindings &&
+                highSurpriseConcern &&
+                (hasTimelineValue || wantsMultipleQuotes)
+                ||
+                knownProblems === "significant" &&
+                wouldActOnFindings
+            );
+
+        if (higherValue) {
             return {
                 type: "higher-information-value",
                 tone: "positive",
@@ -291,31 +290,30 @@ export default function PreListingInspectionDecisionCheck() {
                     "A pre-listing inspection may have higher decision value",
                 description:
                     "You have meaningful uncertainty about the home's condition and appear likely to use what you learn before listing. Getting information while you still control the timing can give you more opportunity to investigate, repair, document, price, or otherwise plan around material findings.",
-                reasons: reasonCodes,
+                reasons:
+                    reasonCodes.length > 0
+                        ? reasonCodes
+                        : [
+                            "You have meaningful uncertainty about the home's condition.",
+                            "You would use the findings to influence what happens before listing.",
+                        ],
             };
         }
 
-        if (
-            knownProblems === "significant" &&
-            decisionUse > 0
-        ) {
-            return {
-                type: "higher-information-value",
-                tone: "positive",
-                heading:
-                    "A pre-listing inspection may have higher decision value",
-                description:
-                    "You already know there are significant issues and would use additional information to guide what happens next. The inspection may help you identify other material conditions and prioritize specialist evaluations or repairs before the sale.",
-                reasons: reasonCodes,
-            };
-        }
-
-        if (
+        /*
+         * LOWER INFORMATION VALUE
+         *
+         * A recent inspection, no meaningful issues, and little reason to
+         * change course is the strongest lower-value pattern.
+         */
+        const lowerValue =
             recentInspection === "yes" &&
             knownProblems === "none" &&
-            warningSigns.length === 0 &&
-            surpriseImportance === "low"
-        ) {
+            !hasWarningSigns &&
+            surpriseImportance === "low" &&
+            changePlans.includes("no-change");
+
+        if (lowerValue) {
             return {
                 type: "lower-information-value",
                 tone: "neutral",
@@ -331,32 +329,22 @@ export default function PreListingInspectionDecisionCheck() {
             };
         }
 
+        /*
+         * MODERATE INFORMATION VALUE
+         *
+         * Everything that does not clearly belong in the higher or lower
+         * categories lands here. This is intentionally the broad middle.
+         */
         if (
-            recentInspection === "yes" &&
-            decisionUse === 0 &&
-            surpriseImportance !== "high"
-        ) {
-            return {
-                type: "lower-information-value",
-                tone: "neutral",
-                heading:
-                    "A broad pre-listing inspection may add less incremental information",
-                description:
-                    "You already have relatively recent inspection information and do not expect new findings to change what you do before selling. The inspection could still provide reassurance, but its practical decision value appears limited from these answers.",
-                reasons: [
-                    "You already have recent condition information.",
-                    "You do not currently expect inspection findings to change your plan.",
-                    "The expected benefit is primarily additional information rather than a specific action.",
-                ],
-            };
-        }
-
-        if (
-            moderateSurpriseConcern ||
-            olderHome ||
-            longerOwnership ||
-            wantsControl ||
-            timelinePressure
+            hasNoRecentInspection &&
+            (
+                wouldActOnFindings ||
+                moderateSurpriseConcern ||
+                hasMeaningfulUncertainty ||
+                olderHome ||
+                longerOwnership ||
+                hasTimelineValue
+            )
         ) {
             return {
                 type: "moderate-information-value",
@@ -369,8 +357,34 @@ export default function PreListingInspectionDecisionCheck() {
                     reasonCodes.length > 0
                         ? reasonCodes
                         : [
-                            "You have some uncertainty about the home's condition.",
-                            "The value of an inspection depends on what you would do with the findings.",
+                            "You do not have a recent whole-home inspection.",
+                            "The practical value depends on how you would use the findings.",
+                        ],
+            };
+        }
+
+        if (
+            recentInspection === "yes" &&
+            (
+                wouldActOnFindings ||
+                moderateSurpriseConcern ||
+                hasWarningSigns ||
+                knownProblems !== "none"
+            )
+        ) {
+            return {
+                type: "moderate-information-value",
+                tone: "neutral",
+                heading:
+                    "A pre-listing inspection could be useful",
+                description:
+                    "You already have some recent condition information, but your answers suggest that additional findings could still influence what you do before listing.",
+                reasons:
+                    reasonCodes.length > 0
+                        ? reasonCodes
+                        : [
+                            "You already have some recent condition information.",
+                            "Additional findings could still influence your preparation or sale strategy.",
                         ],
             };
         }
@@ -387,27 +401,21 @@ export default function PreListingInspectionDecisionCheck() {
                     ? reasonCodes
                     : [
                         "The inspection's value depends on what you would do with the findings.",
-                        "Compare the inspection cost with the practical value of reducing uncertainty before listing.",
+                        "Compare the cost of the inspection with the practical value of reducing uncertainty before listing.",
                     ],
         };
     })();
 
-    const resultClasses: Record<
-        ResultTone,
-        string
-    > = {
-        positive:
-            "border-[var(--accent)] bg-white",
-        neutral:
-            "border-[var(--border)] bg-white",
-        warning:
-            "border-amber-300 bg-amber-50",
+    const resultClasses: Record<ResultTone, string> = {
+        positive: "border-[var(--accent)] bg-white",
+        neutral: "border-[var(--border)] bg-white",
+        warning: "border-amber-300 bg-amber-50",
     };
 
     return (
         <section
             id="pre-listing-inspection-decision-check"
-            className="scroll-mt-24 mx-auto max-w-4xl px-6 py-16"
+            className="mx-auto max-w-4xl scroll-mt-24 px-6 py-16"
         >
             <div className="border-t border-[var(--border)] pt-12">
                 <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[var(--accent)]">
@@ -415,15 +423,15 @@ export default function PreListingInspectionDecisionCheck() {
                 </p>
 
                 <h2 className="mt-5 text-3xl font-semibold tracking-tight">
-                    Would knowing more about your house before listing change anything you can still control?
+                    Would knowing more about your house before listing change anything
+                    you can still control?
                 </h2>
 
                 <p className="mt-6 max-w-3xl text-lg leading-8 text-[var(--muted)]">
-                    This free planning check helps you think through whether a
-                    broad pre-listing inspection could provide useful
-                    information, whether a targeted specialist may be more
-                    appropriate, or whether you already know enough to move
-                    forward.
+                    This free planning check helps you think through whether a broad
+                    pre-listing inspection could provide useful information, whether a
+                    targeted specialist may be more appropriate, or whether you already
+                    know enough to move forward.
                 </p>
 
                 <div className="mt-10 rounded-2xl border border-[var(--border)] bg-white p-8">
@@ -446,9 +454,7 @@ export default function PreListingInspectionDecisionCheck() {
                             step="1"
                             onChange={(value) => {
                                 markStarted();
-                                setOwnershipYears(
-                                    value,
-                                );
+                                setOwnershipYears(value);
                             }}
                         />
                     </div>
@@ -469,18 +475,9 @@ export default function PreListingInspectionDecisionCheck() {
                                     );
                                 }}
                                 options={[
-                                    [
-                                        "no",
-                                        "No",
-                                    ],
-                                    [
-                                        "yes",
-                                        "Yes",
-                                    ],
-                                    [
-                                        "unknown",
-                                        "Not sure / not recent enough",
-                                    ],
+                                    ["no", "No"],
+                                    ["yes", "Yes"],
+                                    ["unknown", "Not sure / not recent enough"],
                                 ]}
                             />
 
@@ -494,18 +491,9 @@ export default function PreListingInspectionDecisionCheck() {
                                     );
                                 }}
                                 options={[
-                                    [
-                                        "none",
-                                        "None that I know of",
-                                    ],
-                                    [
-                                        "minor",
-                                        "Minor or localized issues",
-                                    ],
-                                    [
-                                        "significant",
-                                        "Significant or uncertain issues",
-                                    ],
+                                    ["none", "None that I know of"],
+                                    ["minor", "Minor or localized issues"],
+                                    ["significant", "Significant or uncertain issues"],
                                 ]}
                             />
                         </div>
@@ -516,25 +504,14 @@ export default function PreListingInspectionDecisionCheck() {
                             </p>
 
                             <div className="mt-4 grid gap-3 md:grid-cols-2">
-                                {warningSignOptions.map(
-                                    ([
-                                        value,
-                                        label,
-                                    ]) => (
-                                        <CheckboxField
-                                            key={value}
-                                            label={label}
-                                            checked={warningSigns.includes(
-                                                value,
-                                            )}
-                                            onChange={() =>
-                                                toggleWarningSign(
-                                                    value,
-                                                )
-                                            }
-                                        />
-                                    ),
-                                )}
+                                {warningSignOptions.map(([value, label]) => (
+                                    <CheckboxField
+                                        key={value}
+                                        label={label}
+                                        checked={warningSigns.includes(value)}
+                                        onChange={() => toggleWarningSign(value)}
+                                    />
+                                ))}
                             </div>
                         </div>
                     </div>
@@ -545,30 +522,19 @@ export default function PreListingInspectionDecisionCheck() {
                         </p>
 
                         <p className="mt-3 text-sm leading-6 text-[var(--muted)]">
-                            Select every realistic use. This is one of the most
-                            important parts of the check.
+                            Select every realistic use. This is one of the most important
+                            parts of the check.
                         </p>
 
                         <div className="mt-5 space-y-3">
-                            {changePlanOptions.map(
-                                ([
-                                    value,
-                                    label,
-                                ]) => (
-                                    <CheckboxField
-                                        key={value}
-                                        label={label}
-                                        checked={changePlans.includes(
-                                            value,
-                                        )}
-                                        onChange={() =>
-                                            toggleChangePlan(
-                                                value,
-                                            )
-                                        }
-                                    />
-                                ),
-                            )}
+                            {changePlanOptions.map(([value, label]) => (
+                                <CheckboxField
+                                    key={value}
+                                    label={label}
+                                    checked={changePlans.includes(value)}
+                                    onChange={() => toggleChangePlan(value)}
+                                />
+                            ))}
                         </div>
                     </div>
 
@@ -588,18 +554,9 @@ export default function PreListingInspectionDecisionCheck() {
                                     );
                                 }}
                                 options={[
-                                    [
-                                        "low",
-                                        "Low",
-                                    ],
-                                    [
-                                        "moderate",
-                                        "Moderate",
-                                    ],
-                                    [
-                                        "high",
-                                        "High",
-                                    ],
+                                    ["low", "Low"],
+                                    ["moderate", "Moderate"],
+                                    ["high", "High"],
                                 ]}
                             />
 
@@ -608,23 +565,12 @@ export default function PreListingInspectionDecisionCheck() {
                                 value={tightTimeline}
                                 onChange={(value) => {
                                     markStarted();
-                                    setTightTimeline(
-                                        value as SaleTimeline,
-                                    );
+                                    setTightTimeline(value as SaleTimeline);
                                 }}
                                 options={[
-                                    [
-                                        "no",
-                                        "No",
-                                    ],
-                                    [
-                                        "somewhat",
-                                        "Somewhat",
-                                    ],
-                                    [
-                                        "yes",
-                                        "Yes",
-                                    ],
+                                    ["no", "No"],
+                                    ["somewhat", "Somewhat"],
+                                    ["yes", "Yes"],
                                 ]}
                             />
                         </div>
@@ -632,16 +578,10 @@ export default function PreListingInspectionDecisionCheck() {
                         <div className="mt-6">
                             <CheckboxField
                                 label="I would like time to obtain multiple repair or specialist estimates before listing"
-                                checked={
-                                    wantsMultipleQuotes
-                                }
-                                onChange={(
-                                    checked,
-                                ) => {
+                                checked={wantsMultipleQuotes}
+                                onChange={(checked) => {
                                     markStarted();
-                                    setWantsMultipleQuotes(
-                                        checked,
-                                    );
+                                    setWantsMultipleQuotes(checked);
                                 }}
                             />
                         </div>
@@ -677,15 +617,14 @@ export default function PreListingInspectionDecisionCheck() {
 
                         <div className="mt-6 rounded-xl border border-[var(--border)] bg-[var(--background)] p-5">
                             <p className="font-semibold">
-                                A general inspection is not always the
-                                highest-value next step
+                                A general inspection is not always the highest-value next
+                                step
                             </p>
 
                             <p className="mt-3 text-sm leading-6 text-[var(--muted)]">
-                                A known roof, septic, structural, plumbing,
-                                electrical, or HVAC concern may call for a
-                                specialist evaluation rather than another
-                                broad inspection.
+                                A known roof, septic, structural, plumbing, electrical, or
+                                HVAC concern may call for a specialist evaluation rather than
+                                another broad inspection.
                             </p>
                         </div>
                     </div>
@@ -714,45 +653,37 @@ export default function PreListingInspectionDecisionCheck() {
                             </p>
 
                             <ul className="mt-4 space-y-3">
-                                {result.reasons.map(
-                                    (reason) => (
-                                        <li
-                                            key={reason}
-                                            className="flex gap-3 leading-7"
-                                        >
-                                            <span
-                                                aria-hidden="true"
-                                                className="mt-3 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--accent)]"
-                                            />
+                                {result.reasons.map((reason) => (
+                                    <li
+                                        key={reason}
+                                        className="flex gap-3 leading-7"
+                                    >
+                                        <span
+                                            aria-hidden="true"
+                                            className="mt-3 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--accent)]"
+                                        />
 
-                                            <span>
-                                                {reason}
-                                            </span>
-                                        </li>
-                                    ),
-                                )}
+                                        <span>{reason}</span>
+                                    </li>
+                                ))}
                             </ul>
                         </div>
 
                         <div className="mt-7 rounded-xl border border-[var(--border)] bg-[var(--background)] p-5">
-                            <p className="font-semibold">
-                                Disclosure check
-                            </p>
+                            <p className="font-semibold">Disclosure check</p>
 
                             <p className="mt-3 text-sm leading-6 text-[var(--muted)]">
-                                Learning about a condition can affect what you
-                                need to disclose during a sale. Requirements
-                                vary by jurisdiction. Check the rules that
-                                apply to your transaction before ordering an
-                                inspection specifically to uncover unknown
-                                conditions.
+                                Learning about a condition can affect what you need to
+                                disclose during a sale. Requirements vary by jurisdiction.
+                                Check the rules that apply to your transaction before ordering
+                                an inspection specifically to uncover unknown conditions.
                             </p>
                         </div>
 
                         <p className="mt-6 text-sm leading-6 text-[var(--muted)]">
-                            This is a planning aid, not a property inspection,
-                            legal opinion, defect diagnosis, or guarantee that
-                            an inspection will identify every condition.
+                            This is a planning aid, not a property inspection, legal
+                            opinion, defect diagnosis, or guarantee that an inspection will
+                            identify every condition.
                         </p>
                     </div>
                 ) : (
@@ -769,9 +700,8 @@ export default function PreListingInspectionDecisionCheck() {
                         </h3>
 
                         <p className="mt-4 max-w-3xl leading-8 text-[var(--muted)]">
-                            The result is based on whether a new inspection is
-                            likely to provide information you can still use
-                            before listing.
+                            The result is based on whether a new inspection is likely to
+                            provide information you can still use before listing.
                         </p>
                     </div>
                 )}
@@ -808,11 +738,7 @@ function NumberField({
                     step={step}
                     inputMode="numeric"
                     value={value}
-                    onChange={(event) =>
-                        onChange(
-                            event.target.value,
-                        )
-                    }
+                    onChange={(event) => onChange(event.target.value)}
                     className="w-full bg-transparent px-2 py-3 text-[var(--foreground)] outline-none"
                 />
 
@@ -847,26 +773,14 @@ function SelectField({
 
             <select
                 value={value}
-                onChange={(event) =>
-                    onChange(
-                        event.target.value,
-                    )
-                }
+                onChange={(event) => onChange(event.target.value)}
                 className="mt-3 w-full rounded-xl border border-[var(--border)] bg-[var(--background)] px-4 py-3 text-[var(--foreground)] outline-none focus:border-[var(--accent)]"
             >
-                {options.map(
-                    ([
-                        optionValue,
-                        optionLabel,
-                    ]) => (
-                        <option
-                            key={optionValue}
-                            value={optionValue}
-                        >
-                            {optionLabel}
-                        </option>
-                    ),
-                )}
+                {options.map(([optionValue, optionLabel]) => (
+                    <option key={optionValue} value={optionValue}>
+                        {optionLabel}
+                    </option>
+                ))}
             </select>
         </label>
     );
@@ -888,11 +802,7 @@ function CheckboxField({
             <input
                 type="checkbox"
                 checked={checked}
-                onChange={(event) =>
-                    onChange(
-                        event.target.checked,
-                    )
-                }
+                onChange={(event) => onChange(event.target.checked)}
                 className="mt-1 h-5 w-5 accent-[var(--accent)]"
             />
 

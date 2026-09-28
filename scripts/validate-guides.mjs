@@ -41,11 +41,6 @@ const source = fs.readFileSync(GUIDES_FILE, "utf8");
 
 // --------------------------------------------------
 // Extract guide records
-//
-// We deliberately read the registry as source text
-// instead of importing the TypeScript module.
-// This keeps the validator dependency-free and avoids
-// changing the project's TypeScript/module settings.
 // --------------------------------------------------
 
 const slugMatches = [
@@ -127,14 +122,16 @@ if (
 }
 
 // --------------------------------------------------
-// Extract and validate relatedSlugs
+// Extract and validate clusters
 // --------------------------------------------------
 
 const slugSet = new Set(slugs);
 
 const guideBlocks = source.split(/\n\s*\{\s*\n/);
 
-let relatedErrors = 0;
+let clusterErrors = 0;
+
+const clusterMembership = new Map();
 
 for (const block of guideBlocks) {
     const slugMatch = block.match(
@@ -147,49 +144,77 @@ for (const block of guideBlocks) {
 
     const slug = slugMatch[1];
 
-    const relatedMatch = block.match(
-        /relatedSlugs:\s*\[([\s\S]*?)\]/,
+    const clusterMatch = block.match(
+        /clusters:\s*\[([\s\S]*?)\]/,
     );
 
-    if (!relatedMatch) {
-        error(`${slug} is missing relatedSlugs.`);
-        relatedErrors++;
+    if (!clusterMatch) {
+        error(`${slug} is missing clusters.`);
+        clusterErrors++;
         continue;
     }
 
-    const relatedSlugs = [
-        ...relatedMatch[1].matchAll(/"([^"]+)"/g),
+    const clusters = [
+        ...clusterMatch[1].matchAll(/"([^"]+)"/g),
     ].map((match) => match[1]);
 
-    const duplicateRelated =
-        getDuplicateValues(relatedSlugs);
+    const duplicateClusters =
+        getDuplicateValues(clusters);
 
-    for (const duplicate of duplicateRelated) {
+    for (const duplicate of duplicateClusters) {
         error(
-            `${slug} contains duplicate relatedSlug: ${duplicate}`,
+            `${slug} contains duplicate cluster: ${duplicate}`,
         );
-        relatedErrors++;
+        clusterErrors++;
     }
 
-    for (const relatedSlug of relatedSlugs) {
-        if (relatedSlug === slug) {
+    for (const cluster of clusters) {
+        if (!cluster.trim()) {
             error(
-                `${slug} references itself in relatedSlugs.`,
+                `${slug} contains an empty cluster.`,
             );
-            relatedErrors++;
+            clusterErrors++;
+            continue;
         }
 
-        if (!slugSet.has(relatedSlug)) {
-            error(
-                `${slug} references missing related guide: ${relatedSlug}`,
-            );
-            relatedErrors++;
+        if (!clusterMembership.has(cluster)) {
+            clusterMembership.set(cluster, []);
         }
+
+        clusterMembership.get(cluster).push(slug);
     }
 }
 
-if (relatedErrors === 0) {
-    success("All relatedSlugs resolve correctly.");
+if (clusterErrors === 0) {
+    success("All guide clusters are valid.");
+}
+
+// --------------------------------------------------
+// Validate known cluster structure
+//
+// A cluster only needs to be meaningful when it has
+// multiple guides. Empty clusters are permitted for
+// guides that do not currently belong to a cluster.
+// --------------------------------------------------
+
+for (const [cluster, members] of clusterMembership) {
+    if (members.length > 1) {
+        success(
+            `Cluster "${cluster}" contains ${members.length} guides.`,
+        );
+    }
+}
+
+// --------------------------------------------------
+// Ensure old relationship architecture is gone
+// --------------------------------------------------
+
+if (source.includes("relatedSlugs")) {
+    error(
+        "lib/guides.ts still contains relatedSlugs. Clusters are now the sole related-guide mechanism.",
+    );
+} else {
+    success("No legacy relatedSlugs references.");
 }
 
 // --------------------------------------------------
@@ -249,8 +274,7 @@ console.log("");
 
 if (errors > 0) {
     console.error(
-        `Guide validation failed with ${errors} error${errors === 1 ? "" : "s"
-        }.`,
+        `Guide validation failed with ${errors} error${errors === 1 ? "" : "s"}.`,
     );
 
     process.exit(1);
