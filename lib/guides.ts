@@ -791,6 +791,36 @@ export const guides: GuideSummary[] = [
       name: "Level 2 Home Charger Cost & Charging Check",
     },
   },
+  {
+    slug: "is-travel-insurance-worth-it",
+    title: "Is Travel Insurance Worth It?",
+    description:
+      "Estimate how much of your trip you could actually lose, identify medical and evacuation coverage gaps, and see how existing credit-card or other protections change the travel insurance decision.",
+    category: "Travel",
+    href: "/guides/is-travel-insurance-worth-it",
+    tags: [
+      "travel insurance",
+      "trip insurance",
+      "travel medical insurance",
+      "medical evacuation",
+      "trip cancellation",
+      "cruise insurance",
+      "travel protection",
+    ],
+    published: true,
+    clusters: ["travel-protection"],
+    lastModified: "2026-09-29",
+    updated: "September 2026",
+    readingTime: "13 min",
+    recommendedFor:
+      "Travelers deciding whether to buy travel insurance for an upcoming trip, especially when the trip is expensive, nonrefundable, international, or difficult to replace.",
+    bottomLine:
+      "Travel insurance is most useful when a trip exposes you to losses or medical risks that you could not comfortably absorb or that your existing coverage does not address. Start by identifying the money you could actually lose, then check your existing card, health, and evacuation coverage before paying for another policy.",
+    tool: {
+      type: "calculator",
+      name: "Travel Insurance Coverage Gap Check",
+    },
+  },
 ]
 export function getGuideBySlug(slug: string) {
   return guides.find((guide) => guide.slug === slug);

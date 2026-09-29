@@ -190,19 +190,25 @@ if (clusterErrors === 0) {
 }
 
 // --------------------------------------------------
-// Validate known cluster structure
+// Report cluster inventory
 //
-// A cluster only needs to be meaningful when it has
-// multiple guides. Empty clusters are permitted for
-// guides that do not currently belong to a cluster.
+// List every named cluster, including clusters that
+// currently contain only one guide. Larger clusters
+// are shown first so established content groups are
+// easy to identify. Alphabetical order breaks ties.
 // --------------------------------------------------
 
-for (const [cluster, members] of clusterMembership) {
-    if (members.length > 1) {
-        success(
-            `Cluster "${cluster}" contains ${members.length} guides.`,
-        );
-    }
+const sortedClusters = [...clusterMembership.entries()].sort(
+    ([clusterA, membersA], [clusterB, membersB]) =>
+        membersB.length - membersA.length ||
+        clusterA.localeCompare(clusterB),
+);
+
+for (const [cluster, members] of sortedClusters) {
+    success(
+        `Cluster "${cluster}" contains ${members.length} guide${members.length === 1 ? "" : "s"
+        }.`,
+    );
 }
 
 // --------------------------------------------------
