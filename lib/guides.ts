@@ -821,6 +821,36 @@ export const guides: GuideSummary[] = [
       name: "Travel Insurance Coverage Gap Check",
     },
   },
+  {
+    slug: "is-a-heat-pump-water-heater-worth-it",
+    title: "Is a Heat-Pump Water Heater Worth It?",
+    description:
+      "Estimate the operating savings and payback of replacing your current water heater with a heat-pump model, while accounting for installation cost, incentives, energy use, and the type of heater you have now.",
+    category: "Home",
+    href: "/guides/is-a-heat-pump-water-heater-worth-it",
+    tags: [
+      "heat pump water heater",
+      "hybrid water heater",
+      "water heater",
+      "HPWH",
+      "energy efficiency",
+      "home energy",
+      "water heating",
+    ],
+    published: true,
+    clusters: ["home-energy"],
+    lastModified: "2026-09-29",
+    updated: "September 2026",
+    readingTime: "13 min",
+    recommendedFor:
+      "Homeowners deciding whether to replace an existing water heater with a heat-pump model, especially when comparing an aging electric-resistance, gas, propane, or oil water heater.",
+    bottomLine:
+      "A heat-pump water heater can substantially reduce energy use, but the financial case depends on what you are replacing, your local energy prices, the installed cost, and available incentives. Electric-resistance replacements often have the clearest operating-cost calculation; fuel-fired replacements require more careful rate and installation comparisons.",
+    tool: {
+      type: "calculator",
+      name: "Heat-Pump Water Heater Payback Check",
+    },
+  },
 ]
 export function getGuideBySlug(slug: string) {
   return guides.find((guide) => guide.slug === slug);

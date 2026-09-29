@@ -127,36 +127,22 @@ if (
 
 const slugSet = new Set(slugs);
 
-const guideBlocks = source.split(/\n\s*\{\s*\n/);
+const guideBlocks = [
+    ...source.matchAll(
+        /\{\s*slug:\s*"([^"]+)"[\s\S]*?clusters:\s*\[([\s\S]*?)\]/g,
+    ),
+];
 
 let clusterErrors = 0;
 
 const clusterMembership = new Map();
 
-for (const block of guideBlocks) {
-    const slugMatch = block.match(
-        /\bslug:\s*"([^"]+)"/,
-    );
-
-    if (!slugMatch) {
-        continue;
-    }
-
-    const slug = slugMatch[1];
-
-    const clusterMatch = block.match(
-        /clusters:\s*\[([\s\S]*?)\]/,
-    );
-
-    if (!clusterMatch) {
-        error(`${slug} is missing clusters.`);
-        clusterErrors++;
-        continue;
-    }
+for (const match of guideBlocks) {
+    const slug = match[1];
 
     const clusters = [
-        ...clusterMatch[1].matchAll(/"([^"]+)"/g),
-    ].map((match) => match[1]);
+        ...match[2].matchAll(/"([^"]+)"/g),
+    ].map((clusterMatch) => clusterMatch[1]);
 
     const duplicateClusters =
         getDuplicateValues(clusters);
