@@ -761,6 +761,36 @@ export const guides: GuideSummary[] = [
       name: "Pre-Listing Inspection Decision Check",
     },
   },
+  {
+    slug: "is-a-level-2-home-ev-charger-worth-it",
+    title: "Is a Level 2 Home EV Charger Worth It?",
+    description:
+      "Understand when a Level 2 home EV charger solves a real charging problem, when it can pay for itself by replacing public charging, and when a standard 120-volt outlet may already be enough. Then use the free calculator to test the numbers for your situation.",
+    category: "Automotive",
+    href: "/guides/is-a-level-2-home-ev-charger-worth-it",
+    tags: [
+      "EV charger",
+      "Level 2 charger",
+      "home EV charging",
+      "electric vehicles",
+      "EV charging",
+      "EV ownership",
+      "charging costs",
+    ],
+    published: true,
+    clusters: ["home-ev-charging"],
+    lastModified: "2026-09-29",
+    updated: "September 2026",
+    readingTime: "12 min",
+    recommendedFor:
+      "EV owners deciding whether to install a 240-volt Level 2 charger at home instead of relying on Level 1 charging or public charging.",
+    bottomLine:
+      "A Level 2 home charger is primarily a charging-speed and convenience upgrade, not an electricity-cost reduction compared with Level 1. It becomes financially more compelling when it replaces enough public charging to offset the installation cost. If Level 1 already restores enough range during your normal parking window, the economic case for upgrading depends mostly on how much you value faster charging and flexibility.",
+    tool: {
+      type: "calculator",
+      name: "Level 2 Home Charger Cost & Charging Check",
+    },
+  },
 ]
 export function getGuideBySlug(slug: string) {
   return guides.find((guide) => guide.slug === slug);
