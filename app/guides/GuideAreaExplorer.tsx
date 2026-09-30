@@ -88,7 +88,7 @@ export default function GuideAreaExplorer({
 
     return (
         <section
-            className="mt-16"
+            className="mt-10"
             aria-labelledby="explore-by-area"
         >
             <div>
