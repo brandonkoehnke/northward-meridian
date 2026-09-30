@@ -881,6 +881,36 @@ export const guides: GuideSummary[] = [
       name: "Home Battery Backup Coverage Check",
     },
   },
+  {
+    slug: "is-a-heat-pump-dryer-worth-it",
+    title: "Is a Heat-Pump Dryer Worth It?",
+    description:
+      "Compare a heat-pump dryer with the replacement you would otherwise buy, estimate annual energy savings and payback, and account for ventless installation, laundry volume, and current dryer type.",
+    category: "Home",
+    href: "/guides/is-a-heat-pump-dryer-worth-it",
+    tags: [
+      "heat pump dryer",
+      "heat-pump dryer",
+      "clothes dryer",
+      "dryer energy use",
+      "dryer savings",
+      "ventless dryer",
+      "energy efficiency",
+    ],
+    published: true,
+    clusters: ["home-energy"],
+    lastModified: "2026-09-30",
+    updated: "September 2026",
+    readingTime: "15 min",
+    recommendedFor:
+      "Homeowners deciding whether a heat-pump dryer is worth its additional purchase cost and how laundry volume, energy prices, installation, and dryer type affect the decision.",
+    bottomLine:
+      "A heat-pump dryer can reduce electricity use substantially, but the financial case depends on your laundry volume, energy prices, purchase-price premium, and installation differences. Compare it with the conventional replacement you would otherwise buy, use model-specific energy data when available, and treat ventless installation and practical performance as separate parts of the decision.",
+    tool: {
+      type: "calculator",
+      name: "Heat-Pump Dryer Payback Check",
+    },
+  },
 ]
 export function getGuideBySlug(slug: string) {
   return guides.find((guide) => guide.slug === slug);

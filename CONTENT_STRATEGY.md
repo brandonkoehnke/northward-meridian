@@ -285,6 +285,39 @@ Translate small efficiency changes into annual fuel cost and payback.
 Future guides should use the model that fits the decision rather than
 forcing every topic into the same mathematical structure.
 
+## Calculator QA and numeric-input behavior
+
+Interactive calculators should be tested as decision systems, not only
+checked for compilation.
+
+At minimum, test:
+
+-   the default state,
+-   major conditional branches,
+-   zero-value boundaries,
+-   negative-result cases when negative values are mathematically meaningful,
+-   values above permitted dependent limits,
+-   select-all-and-retype behavior,
+-   empty-field behavior,
+-   conditional input branches,
+-   and result-heading changes at important thresholds.
+
+For dependent numeric inputs, do not destructively clamp a related field
+during `onChange` merely because the user is partway through typing a new
+number. Allow normal entry and normalize or clamp dependent values on
+`onBlur` when appropriate.
+
+Example: if an incentive cannot exceed installed cost, typing a new
+installed cost should not reduce the incentive to the first digit entered.
+Normalize the incentive after the installed-cost field loses focus.
+
+Do not suppress mathematically meaningful negative results merely because
+they require interpretation. Preserve the sign and use the metric label and
+supporting text to explain it. For example, a negative incremental project
+cost means the proposed option costs less upfront, while a negative net
+financial benefit means the additional upfront cost has not yet been
+recovered.
+
 ------------------------------------------------------------------------
 
 # 11. SOURCE QUALITY
@@ -330,6 +363,33 @@ Commercial and secondary sources can help identify:
 
 But the strongest version of a guide should rely on authoritative
 evidence for its core factual claims whenever possible.
+
+## External source selection
+
+Sources exist to substantiate the guide's factual claims, assumptions, and
+decision framework. Do not add sources merely to reach a target source
+count.
+
+Prefer, in order:
+
+1.  primary government or regulatory sources,
+2.  authoritative standards, research institutions, official program
+    documentation, and relevant manufacturer technical documentation,
+3.  high-quality secondary sources when they provide useful information
+    not available from stronger primary sources.
+
+Avoid linking to third-party calculators or decision tools that
+substantially duplicate a Northward Meridian calculator or decision check
+unless the external tool provides a distinct capability, authoritative
+dataset, or methodology that materially benefits the reader.
+
+A smaller set of strong, directly relevant sources is preferable to
+padding the source list with weaker or redundant links.
+
+Before publication, manually verify that every external source link still
+resolves to the intended resource. Government and institutional sites can
+move or retire URLs, so a source that worked during research should not be
+assumed to work at publication time.
 
 ------------------------------------------------------------------------
 
@@ -474,6 +534,15 @@ Current implemented clusters include:
 -   `automotive-efficiency`
 -   `home-energy`
 -   `data-storage-backup`
+-   `home-ev-charging`
+-   `travel-protection`
+-   `home-backup`
+
+The guide validator should report every named cluster, including clusters
+that currently contain only one guide. Report clusters by size descending,
+with alphabetical ordering for ties. Singleton clusters are intentionally
+visible so an emerging cluster is not forgotten when future guides are
+planned.
 
 Do not create a `misc` cluster simply to ensure every guide has related
 links.
@@ -983,35 +1052,60 @@ network of irrelevant ones.
 
 Northward Meridian may eventually publish in multiple languages.
 
-This is explicitly NOT a current priority.
+English remains the primary publishing language during the current
+early-stage discovery phase, but multilingual opportunity should not be
+treated only as translation of proven English winners.
 
-The reason is strategic rather than technical.
+There are two distinct multilingual opportunities:
 
-Before translating hundreds of pages, first determine which English
-guides and topic clusters demonstrate actual search demand.
+1.  **Localization of proven English winners.** Search Console can identify
+    English guides and clusters that already demonstrate demand. Those
+    decisions can then be researched and selectively localized for other
+    language markets.
+2.  **Language-specific SERP opportunities.** A decision that is already
+    well served in English may still be poorly served in another language.
+    Other-language SERP research can therefore identify worthwhile guides
+    that would not be selected merely by translating English winners.
+
+Search Console and SERP research should be used together rather than as
+substitutes for one another. GSC reveals what Northward Meridian is already
+earning visibility for; SERP analysis reveals where useful decision content
+may be underserved, including opportunities that NM has not yet published
+in English.
 
 Current plan:
 
 ## Phase 1
 
-Publish and test guides in English.
+Continue building and testing the English library while establishing the
+core publishing, sourcing, calculator, cluster, and measurement systems.
 
 ## Phase 2
 
-Identify English winners using Search Console data.
+Use English Search Console data to identify demonstrated winners and
+promising clusters. In parallel, begin targeted research of selected
+other-language SERPs to look for strong decision intent, weak existing
+answers, authoritative sourcing, and useful tool opportunities.
 
 ## Phase 3
 
-Translate proven winners into selected languages.
+Run small multilingual experiments from both opportunity paths:
+
+-   localize selected proven English winners, and
+-   publish selected language-specific decisions when SERP research shows a
+    compelling underserved opportunity, even if the equivalent English SERP
+    is already well served or NM does not yet have an English version.
 
 ## Phase 4
 
-Measure whether translated versions rank and generate meaningful
-traffic.
+Measure translated and language-specific pages independently using
+impressions, clicks, rankings, query alignment, engagement, maintenance
+burden, and the quality of adjacent opportunities.
 
 ## Phase 5
 
-Expand successful language/topic combinations.
+Expand successful language/topic combinations while continuing to test
+new language-specific opportunities selectively.
 
 ------------------------------------------------------------------------
 
@@ -1055,27 +1149,38 @@ The exact localization architecture has not yet been selected.
 
 # 33. NICHE-LANGUAGE OPPORTUNITY
 
-A more experimental future strategy is to investigate languages with:
+A complementary multilingual strategy is to investigate languages with:
 
 -   growing online populations,
 -   meaningful search demand,
 -   relatively weak existing search results,
 -   fewer high-quality decision resources.
 
-A guide that is moderately competitive in English may face substantially
-weaker competition in another language.
+A decision that is highly competitive and already well served in English
+may still represent a strong Northward Meridian opportunity in another
+language. English SERP difficulty should therefore not automatically
+disqualify the same underlying decision elsewhere.
 
-This creates a possible future strategy:
+Two discovery paths should operate in parallel:
 
 ``` text
-English guide proves the topic
+English GSC winner
 → research the same decision in other-language SERPs
-→ identify languages with demand + weak competition
-→ localize selectively
+→ localize where demand + competition justify it
+```
+
+and:
+
+``` text
+research other-language decision SERPs directly
+→ identify underserved decision intent
+→ evaluate sources + tool opportunity + localization requirements
+→ publish selectively even without an English NM winner
 ```
 
 Do NOT assume every English winner will automatically succeed in another
-language.
+language, and do not assume every worthwhile other-language guide must
+first prove itself in English.
 
 Search behavior, competition, economics, regulations, products, and
 cultural context can differ.
@@ -1086,7 +1191,9 @@ cultural context can differ.
 
 The current constraint is not the ability to generate translations.
 
-The constraint is knowing WHAT deserves to be translated.
+The constraint is knowing WHERE multilingual effort has the best expected
+return. English performance is one source of evidence, but other-language
+SERP opportunity is another.
 
 If NM publishes 500 English guides and only 50 become meaningful
 organic-search winners, translating all 500 into five languages would
@@ -1169,8 +1276,10 @@ The portfolio can contain:
 -   some low performers,
 -   experimental pages that reveal new opportunities.
 
-Winning English guides can then potentially multiply their value through
-localization.
+Winning English guides can potentially multiply their value through
+localization. Separately, direct research of other-language SERPs can
+identify worthwhile decision guides that do not need an English NM winner
+as a prerequisite.
 
 The objective is not to predict every winner perfectly before
 publishing.
@@ -1430,14 +1539,30 @@ build topical authority
 repeat
 ```
 
-Later:
+Later, multilingual discovery can follow either of two paths:
 
 ``` text
 proven English winner
 ↓
-research other-language opportunity
+research the same decision in other-language SERPs
 ↓
-localize selectively
+localize selectively where the opportunity is strong
+↓
+measure
+↓
+expand successful language/topic combinations
+```
+
+or:
+
+``` text
+research other-language decision SERPs directly
+↓
+identify underserved decision intent
+↓
+evaluate sources + tool opportunity + localization requirements
+↓
+publish selectively
 ↓
 measure
 ↓
