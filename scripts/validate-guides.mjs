@@ -28,43 +28,295 @@ function getDuplicateValues(values) {
         .map(([value]) => value);
 }
 
+/**
+ * Find the guides array in lib/guides.ts.
+ */
+function findGuidesArrayStart(source) {
+    const guidesDeclaration =
+        /\b(?:export\s+)?const\s+guides\b[\s\S]*?=\s*\[/m;
+
+    const match = guidesDeclaration.exec(source);
+
+    if (!match) {
+        return -1;
+    }
+
+    return match.index + match[0].lastIndexOf("[");
+}
+
+/**
+ * Extract top-level object literals from the guides array.
+ *
+ * This is intentionally a small source scanner rather than a large regex.
+ * It understands strings, template literals, and comments so braces inside
+ * text do not accidentally terminate a guide object.
+ */
+function extractGuideObjects(source, arrayStart) {
+    const objects = [];
+
+    let arrayDepth = 0;
+    let braceDepth = 0;
+
+    let stringQuote = null;
+    let inLineComment = false;
+    let inBlockComment = false;
+    let escaped = false;
+
+    let objectStart = -1;
+
+    for (let index = arrayStart; index < source.length; index++) {
+        const character = source[index];
+        const nextCharacter = source[index + 1];
+
+        if (inLineComment) {
+            if (character === "\n") {
+                inLineComment = false;
+            }
+
+            continue;
+        }
+
+        if (inBlockComment) {
+            if (character === "*" && nextCharacter === "/") {
+                inBlockComment = false;
+                index++;
+            }
+
+            continue;
+        }
+
+        if (stringQuote !== null) {
+            if (escaped) {
+                escaped = false;
+                continue;
+            }
+
+            if (character === "\\") {
+                escaped = true;
+                continue;
+            }
+
+            if (character === stringQuote) {
+                stringQuote = null;
+            }
+
+            continue;
+        }
+
+        if (
+            character === "/" &&
+            nextCharacter === "/"
+        ) {
+            inLineComment = true;
+            index++;
+            continue;
+        }
+
+        if (
+            character === "/" &&
+            nextCharacter === "*"
+        ) {
+            inBlockComment = true;
+            index++;
+            continue;
+        }
+
+        if (
+            character === '"' ||
+            character === "'" ||
+            character === "`"
+        ) {
+            stringQuote = character;
+            continue;
+        }
+
+        if (character === "[") {
+            arrayDepth++;
+            continue;
+        }
+
+        if (character === "]") {
+            arrayDepth--;
+
+            if (arrayDepth <= 0) {
+                break;
+            }
+
+            continue;
+        }
+
+        if (arrayDepth !== 1) {
+            continue;
+        }
+
+        if (character === "{") {
+            if (braceDepth === 0) {
+                objectStart = index;
+            }
+
+            braceDepth++;
+            continue;
+        }
+
+        if (character === "}") {
+            if (braceDepth === 0) {
+                continue;
+            }
+
+            braceDepth--;
+
+            if (braceDepth === 0 && objectStart !== -1) {
+                objects.push(
+                    source.slice(
+                        objectStart,
+                        index + 1,
+                    ),
+                );
+
+                objectStart = -1;
+            }
+        }
+    }
+
+    return objects;
+}
+
+/**
+ * Read a simple quoted string field from a guide object.
+ */
+function getStringField(block, fieldName) {
+    const pattern = new RegExp(
+        `(?:^|\\n)\\s*${fieldName}\\s*:\\s*"([^"]*)"`,
+        "m",
+    );
+
+    const match = pattern.exec(block);
+
+    return match ? match[1] : null;
+}
+
+/**
+ * Read a clusters array from a guide object.
+ */
+function getClustersField(block) {
+    const match = block.match(
+        /(?:^|\n)\s*clusters\s*:\s*\[([\s\S]*?)\]/m,
+    );
+
+    if (!match) {
+        return null;
+    }
+
+    return [
+        ...match[1].matchAll(
+            /"([^"]*)"/g,
+        ),
+    ].map((match) => match[1]);
+}
+
+/**
+ * Validate the relationship between a slug and its route.
+ */
+function expectedHrefForSlug(slug) {
+    return `/guides/${slug}`;
+}
+
 // --------------------------------------------------
 // Read lib/guides.ts
 // --------------------------------------------------
 
 if (!fs.existsSync(GUIDES_FILE)) {
-    console.error("✗ lib/guides.ts does not exist.");
+    error("lib/guides.ts does not exist.");
     process.exit(1);
 }
 
-const source = fs.readFileSync(GUIDES_FILE, "utf8");
+const source = fs.readFileSync(
+    GUIDES_FILE,
+    "utf8",
+);
 
 // --------------------------------------------------
-// Extract guide records
+// Find and extract guide records
 // --------------------------------------------------
 
-const slugMatches = [
-    ...source.matchAll(/\bslug:\s*"([^"]+)"/g),
-];
+const guidesArrayStart =
+    findGuidesArrayStart(source);
 
-const hrefMatches = [
-    ...source.matchAll(/\bhref:\s*"([^"]+)"/g),
-];
+if (guidesArrayStart === -1) {
+    error(
+        "Could not find the guides array in lib/guides.ts.",
+    );
+    process.exit(1);
+}
 
-const slugs = slugMatches.map((match) => match[1]);
-const hrefs = hrefMatches.map((match) => match[1]);
+const guideBlocks = extractGuideObjects(
+    source,
+    guidesArrayStart,
+);
 
-if (slugs.length === 0) {
-    error("No guide slugs were found in lib/guides.ts.");
-} else {
-    success(`${slugs.length} guides registered.`);
+if (guideBlocks.length === 0) {
+    error(
+        "No guide objects were found in the guides array.",
+    );
+    process.exit(1);
 }
 
 // --------------------------------------------------
-// Duplicate slugs
+// Parse guide records
 // --------------------------------------------------
 
-const duplicateSlugs = getDuplicateValues(slugs);
+const guides = guideBlocks.map(
+    (block, index) => ({
+        index,
+        block,
+        slug: getStringField(block, "slug"),
+        href: getStringField(block, "href"),
+        clusters: getClustersField(block),
+    }),
+);
+
+success(
+    `${guides.length} guides registered.`,
+);
+
+// --------------------------------------------------
+// Validate required fields
+// --------------------------------------------------
+
+for (const guide of guides) {
+    if (!guide.slug) {
+        error(
+            `Guide #${guide.index + 1} is missing a slug.`,
+        );
+    }
+
+    if (!guide.href) {
+        error(
+            `${guide.slug ??
+            `Guide #${guide.index + 1}`
+            } is missing an href.`,
+        );
+    }
+
+    if (guide.clusters === null) {
+        error(
+            `${guide.slug ??
+            `Guide #${guide.index + 1}`
+            } is missing clusters.`,
+        );
+    }
+}
+
+// --------------------------------------------------
+// Validate slugs
+// --------------------------------------------------
+
+const validSlugs = guides
+    .map((guide) => guide.slug)
+    .filter(Boolean);
+
+const duplicateSlugs =
+    getDuplicateValues(validSlugs);
 
 if (duplicateSlugs.length > 0) {
     for (const slug of duplicateSlugs) {
@@ -75,10 +327,15 @@ if (duplicateSlugs.length > 0) {
 }
 
 // --------------------------------------------------
-// Duplicate hrefs
+// Validate hrefs
 // --------------------------------------------------
 
-const duplicateHrefs = getDuplicateValues(hrefs);
+const validHrefs = guides
+    .map((guide) => guide.href)
+    .filter(Boolean);
+
+const duplicateHrefs =
+    getDuplicateValues(validHrefs);
 
 if (duplicateHrefs.length > 0) {
     for (const href of duplicateHrefs) {
@@ -92,82 +349,83 @@ if (duplicateHrefs.length > 0) {
 // Validate slug ↔ href relationship
 // --------------------------------------------------
 
-for (let index = 0; index < slugs.length; index++) {
-    const slug = slugs[index];
-    const href = hrefs[index];
+let slugHrefErrors = 0;
 
-    if (!href) {
-        error(`Guide is missing an href: ${slug}`);
+for (const guide of guides) {
+    if (!guide.slug || !guide.href) {
         continue;
     }
 
-    const expectedHref = `/guides/${slug}`;
+    const expectedHref =
+        expectedHrefForSlug(guide.slug);
 
-    if (href !== expectedHref) {
+    if (guide.href !== expectedHref) {
         error(
-            `${slug} has href "${href}" but expected "${expectedHref}".`,
+            `${guide.slug} has href "${guide.href}" but expected "${expectedHref}".`,
         );
+
+        slugHrefErrors++;
     }
 }
 
-if (
-    slugs.length > 0 &&
-    slugs.length === hrefs.length &&
-    slugs.every(
-        (slug, index) =>
-            hrefs[index] === `/guides/${slug}`,
-    )
-) {
+if (slugHrefErrors === 0) {
     success("All guide hrefs match their slugs.");
 }
 
 // --------------------------------------------------
-// Extract and validate clusters
+// Validate clusters
 // --------------------------------------------------
 
-const slugSet = new Set(slugs);
-
-const guideBlocks = [
-    ...source.matchAll(
-        /\{\s*slug:\s*"([^"]+)"[\s\S]*?clusters:\s*\[([\s\S]*?)\]/g,
-    ),
-];
-
+const clusterMembership = new Map();
 let clusterErrors = 0;
 
-const clusterMembership = new Map();
+for (const guide of guides) {
+    if (!guide.slug) {
+        continue;
+    }
 
-for (const match of guideBlocks) {
-    const slug = match[1];
-
-    const clusters = [
-        ...match[2].matchAll(/"([^"]+)"/g),
-    ].map((clusterMatch) => clusterMatch[1]);
+    if (guide.clusters === null) {
+        continue;
+    }
 
     const duplicateClusters =
-        getDuplicateValues(clusters);
+        getDuplicateValues(
+            guide.clusters,
+        );
 
     for (const duplicate of duplicateClusters) {
         error(
-            `${slug} contains duplicate cluster: ${duplicate}`,
+            `${guide.slug} contains duplicate cluster: ${duplicate}`,
         );
+
         clusterErrors++;
     }
 
-    for (const cluster of clusters) {
-        if (!cluster.trim()) {
+    for (const cluster of guide.clusters) {
+        const normalizedCluster =
+            cluster.trim();
+
+        if (!normalizedCluster) {
             error(
-                `${slug} contains an empty cluster.`,
+                `${guide.slug} contains an empty cluster.`,
             );
+
             clusterErrors++;
             continue;
         }
 
-        if (!clusterMembership.has(cluster)) {
-            clusterMembership.set(cluster, []);
+        if (!clusterMembership.has(
+            normalizedCluster,
+        )) {
+            clusterMembership.set(
+                normalizedCluster,
+                [],
+            );
         }
 
-        clusterMembership.get(cluster).push(slug);
+        clusterMembership
+            .get(normalizedCluster)
+            .push(guide.slug);
     }
 }
 
@@ -178,22 +436,27 @@ if (clusterErrors === 0) {
 // --------------------------------------------------
 // Report cluster inventory
 //
-// List every named cluster, including clusters that
-// currently contain only one guide. Larger clusters
-// are shown first so established content groups are
-// easy to identify. Alphabetical order breaks ties.
+// Every named cluster is shown, including singletons.
+// Larger clusters appear first; alphabetical order
+// breaks ties.
 // --------------------------------------------------
 
-const sortedClusters = [...clusterMembership.entries()].sort(
+const sortedClusters = [
+    ...clusterMembership.entries(),
+].sort(
     ([clusterA, membersA], [clusterB, membersB]) =>
         membersB.length - membersA.length ||
         clusterA.localeCompare(clusterB),
 );
 
 for (const [cluster, members] of sortedClusters) {
+    const noun =
+        members.length === 1
+            ? "guide"
+            : "guides";
+
     success(
-        `Cluster "${cluster}" contains ${members.length} guide${members.length === 1 ? "" : "s"
-        }.`,
+        `Cluster "${cluster}" contains ${members.length} ${noun}.`,
     );
 }
 
@@ -206,16 +469,18 @@ if (source.includes("relatedSlugs")) {
         "lib/guides.ts still contains relatedSlugs. Clusters are now the sole related-guide mechanism.",
     );
 } else {
-    success("No legacy relatedSlugs references.");
+    success(
+        "No legacy relatedSlugs references.",
+    );
 }
 
 // --------------------------------------------------
-// Registry ↔ route checks
+// Validate guide routes
 // --------------------------------------------------
 
 if (!fs.existsSync(GUIDES_DIR)) {
-    console.error(
-        "✗ app/guides directory does not exist.",
+    error(
+        "app/guides directory does not exist.",
     );
     process.exit(1);
 }
@@ -226,19 +491,45 @@ const routeDirectories = fs
     })
     .filter((entry) => entry.isDirectory())
     .map((entry) => entry.name)
-    .filter((name) => !name.startsWith("."));
+    .filter(
+        (name) => !name.startsWith("."),
+    );
+
+const slugSet = new Set(
+    validSlugs,
+);
 
 let routeErrors = 0;
 
-for (const slug of slugs) {
-    const pagePath = path.join(
+for (const guide of guides) {
+    if (!guide.slug) {
+        continue;
+    }
+
+    const guideDirectory = path.join(
         GUIDES_DIR,
-        slug,
+        guide.slug,
+    );
+
+    const pagePath = path.join(
+        guideDirectory,
         "page.tsx",
     );
 
+    if (!fs.existsSync(guideDirectory)) {
+        error(
+            `Registry guide has no route directory: ${guide.slug}`,
+        );
+
+        routeErrors++;
+        continue;
+    }
+
     if (!fs.existsSync(pagePath)) {
-        error(`Registry guide has no page.tsx: ${slug}`);
+        error(
+            `Registry guide has no page.tsx: ${guide.slug}`,
+        );
+
         routeErrors++;
     }
 }
@@ -248,6 +539,7 @@ for (const routeSlug of routeDirectories) {
         error(
             `app/guides/${routeSlug} exists but is missing from lib/guides.ts.`,
         );
+
         routeErrors++;
     }
 }
@@ -266,7 +558,8 @@ console.log("");
 
 if (errors > 0) {
     console.error(
-        `Guide validation failed with ${errors} error${errors === 1 ? "" : "s"}.`,
+        `Guide validation failed with ${errors} error${errors === 1 ? "" : "s"
+        }.`,
     );
 
     process.exit(1);
