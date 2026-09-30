@@ -972,6 +972,37 @@ export const guides: GuideSummary[] = [
       name: "AWD Ownership Cost & Use-Case Check",
     },
   },
+  {
+    slug: "is-gigabit-internet-worth-it",
+    title: "Is Gigabit Internet Worth It?",
+    description:
+      "Compare gigabit internet with a slower plan using household bandwidth demand, download and upload speeds, large-file transfer times, Wi-Fi limitations, and the long-term upgrade cost.",
+    category: "Technology",
+    href: "/guides/is-gigabit-internet-worth-it",
+    tags: [
+      "gigabit internet",
+      "internet speed",
+      "broadband",
+      "fiber internet",
+      "Wi-Fi",
+      "internet upgrade",
+      "download speed",
+      "upload speed",
+    ],
+    published: true,
+    clusters: ["home-connectivity"],
+    lastModified: "2026-09-30",
+    updated: "September 2026",
+    readingTime: "16 min",
+    recommendedFor:
+      "Households deciding whether upgrading to gigabit internet will materially improve streaming, downloads, uploads, remote work, gaming, or simultaneous usage enough to justify the recurring cost.",
+    bottomLine:
+      "Gigabit internet can materially improve large transfers and provide substantial shared bandwidth, but a faster ISP tier does not automatically improve Wi-Fi coverage, latency, device performance, or other bottlenecks. Compare your actual simultaneous demand, download and upload needs, equipment, and long-term price difference before upgrading.",
+    tool: {
+      type: "calculator",
+      name: "Internet Speed & Upgrade Cost Check",
+    },
+  },
 ]
 export function getGuideBySlug(slug: string) {
   return guides.find((guide) => guide.slug === slug);
