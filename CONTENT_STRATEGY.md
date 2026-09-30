@@ -155,6 +155,41 @@ Good Northward Meridian intent usually involves:
 
 Avoid informational queries where the decision layer is weak.
 
+## Title architecture
+
+Northward Meridian does not use a fixed title formula.
+
+Titles should reflect the clearest natural-language expression of the
+searcher's decision and the wording supported by query and SERP
+research. `Is X worth it?` is appropriate when it accurately represents
+genuine search intent, but it should not be applied automatically simply
+because a topic can be forced into that structure.
+
+Depending on the underlying decision, stronger title structures may
+include:
+
+-   Should I do X or Y?
+-   X vs. Y
+-   Does X actually do Y?
+-   Does X save enough to pay for itself?
+-   Should I repair or replace X?
+-   Should I replace X before Y?
+-   Do I need X if I already have Y?
+-   Should I upgrade from X to Y?
+-   Is it better to X or Y?
+-   What determines whether X makes financial sense?
+
+Title diversity should emerge from **intent diversity**, not cosmetic
+rewriting.
+
+Do not select a topic merely because it can be expressed as
+`Is X worth it?` Identify the decision first, research how searchers and
+the current SERP frame that decision, and determine the title afterward.
+
+The recognizable Northward Meridian pattern should be the quality of the
+decision framework, evidence, and interactive tool -- not repetition of
+one headline construction.
+
 ------------------------------------------------------------------------
 
 # 7. COMPETITION
@@ -295,7 +330,8 @@ At minimum, test:
 -   the default state,
 -   major conditional branches,
 -   zero-value boundaries,
--   negative-result cases when negative values are mathematically meaningful,
+-   negative-result cases when negative values are mathematically
+    meaningful,
 -   values above permitted dependent limits,
 -   select-all-and-retype behavior,
 -   empty-field behavior,
@@ -303,20 +339,70 @@ At minimum, test:
 -   and result-heading changes at important thresholds.
 
 For dependent numeric inputs, do not destructively clamp a related field
-during `onChange` merely because the user is partway through typing a new
-number. Allow normal entry and normalize or clamp dependent values on
-`onBlur` when appropriate.
+during `onChange` merely because the user is partway through typing a
+new number. Allow normal entry and normalize or clamp dependent values
+on `onBlur` when appropriate.
 
 Example: if an incentive cannot exceed installed cost, typing a new
-installed cost should not reduce the incentive to the first digit entered.
-Normalize the incentive after the installed-cost field loses focus.
+installed cost should not reduce the incentive to the first digit
+entered. Normalize the incentive after the installed-cost field loses
+focus.
 
-Do not suppress mathematically meaningful negative results merely because
-they require interpretation. Preserve the sign and use the metric label and
-supporting text to explain it. For example, a negative incremental project
-cost means the proposed option costs less upfront, while a negative net
-financial benefit means the additional upfront cost has not yet been
-recovered.
+Do not suppress mathematically meaningful negative results merely
+because they require interpretation. Preserve the sign and use the
+metric label and supporting text to explain it. For example, a negative
+incremental project cost means the proposed option costs less upfront,
+while a negative net financial benefit means the additional upfront cost
+has not yet been recovered.
+
+## Consumer-facing calculator language
+
+Calculator terminology should be mathematically precise **and**
+immediately understandable to a general reader.
+
+Prefer plain-language labels when they communicate the same concept as
+more technical terminology. Examples include:
+
+``` text
+net ownership premium
+→ net ownership cost difference
+
+monthly upgrade premium
+→ monthly upgrade cost difference
+
+download headroom
+→ remaining download capacity
+```
+
+When a signed result can be positive or negative, preserve the
+mathematically meaningful sign and explain what each direction means. Do
+not make the reader infer that a `negative premium` means the modeled
+option costs less.
+
+For example:
+
+``` text
+Positive = the modeled option costs more.
+Negative = the modeled option costs less.
+```
+
+When a capacity result becomes negative, prefer language that describes
+the shortfall directly rather than saying that a negative percentage
+"remains."
+
+Example:
+
+``` text
+The modeled demand exceeds the plan's stated download capacity by 10 Mbps.
+```
+
+Technical terms such as `latency`, `throughput`, or `headroom` may still
+be used when they are important to the decision, but define them or
+replace them with plainer wording when the technical term adds
+interpretation burden without adding useful precision.
+
+The goal is not to remove technical accuracy. It is to make the result
+self-interpreting.
 
 ------------------------------------------------------------------------
 
@@ -366,9 +452,9 @@ evidence for its core factual claims whenever possible.
 
 ## External source selection
 
-Sources exist to substantiate the guide's factual claims, assumptions, and
-decision framework. Do not add sources merely to reach a target source
-count.
+Sources exist to substantiate the guide's factual claims, assumptions,
+and decision framework. Do not add sources merely to reach a target
+source count.
 
 Prefer, in order:
 
@@ -379,17 +465,18 @@ Prefer, in order:
     not available from stronger primary sources.
 
 Avoid linking to third-party calculators or decision tools that
-substantially duplicate a Northward Meridian calculator or decision check
-unless the external tool provides a distinct capability, authoritative
-dataset, or methodology that materially benefits the reader.
+substantially duplicate a Northward Meridian calculator or decision
+check unless the external tool provides a distinct capability,
+authoritative dataset, or methodology that materially benefits the
+reader.
 
 A smaller set of strong, directly relevant sources is preferable to
 padding the source list with weaker or redundant links.
 
-Before publication, manually verify that every external source link still
-resolves to the intended resource. Government and institutional sites can
-move or retire URLs, so a source that worked during research should not be
-assumed to work at publication time.
+Before publication, manually verify that every external source link
+still resolves to the intended resource. Government and institutional
+sites can move or retire URLs, so a source that worked during research
+should not be assumed to work at publication time.
 
 ------------------------------------------------------------------------
 
@@ -537,12 +624,13 @@ Current implemented clusters include:
 -   `home-ev-charging`
 -   `travel-protection`
 -   `home-backup`
+-   `home-connectivity`
 
-The guide validator should report every named cluster, including clusters
-that currently contain only one guide. Report clusters by size descending,
-with alphabetical ordering for ties. Singleton clusters are intentionally
-visible so an emerging cluster is not forgotten when future guides are
-planned.
+The guide validator should report every named cluster, including
+clusters that currently contain only one guide. Report clusters by size
+descending, with alphabetical ordering for ties. Singleton clusters are
+intentionally visible so an emerging cluster is not forgotten when
+future guides are planned.
 
 Do not create a `misc` cluster simply to ensure every guide has related
 links.
@@ -1058,20 +1146,21 @@ treated only as translation of proven English winners.
 
 There are two distinct multilingual opportunities:
 
-1.  **Localization of proven English winners.** Search Console can identify
-    English guides and clusters that already demonstrate demand. Those
-    decisions can then be researched and selectively localized for other
-    language markets.
+1.  **Localization of proven English winners.** Search Console can
+    identify English guides and clusters that already demonstrate
+    demand. Those decisions can then be researched and selectively
+    localized for other language markets.
 2.  **Language-specific SERP opportunities.** A decision that is already
-    well served in English may still be poorly served in another language.
-    Other-language SERP research can therefore identify worthwhile guides
-    that would not be selected merely by translating English winners.
+    well served in English may still be poorly served in another
+    language. Other-language SERP research can therefore identify
+    worthwhile guides that would not be selected merely by translating
+    English winners.
 
 Search Console and SERP research should be used together rather than as
-substitutes for one another. GSC reveals what Northward Meridian is already
-earning visibility for; SERP analysis reveals where useful decision content
-may be underserved, including opportunities that NM has not yet published
-in English.
+substitutes for one another. GSC reveals what Northward Meridian is
+already earning visibility for; SERP analysis reveals where useful
+decision content may be underserved, including opportunities that NM has
+not yet published in English.
 
 Current plan:
 
@@ -1092,9 +1181,10 @@ answers, authoritative sourcing, and useful tool opportunities.
 Run small multilingual experiments from both opportunity paths:
 
 -   localize selected proven English winners, and
--   publish selected language-specific decisions when SERP research shows a
-    compelling underserved opportunity, even if the equivalent English SERP
-    is already well served or NM does not yet have an English version.
+-   publish selected language-specific decisions when SERP research
+    shows a compelling underserved opportunity, even if the equivalent
+    English SERP is already well served or NM does not yet have an
+    English version.
 
 ## Phase 4
 
@@ -1191,9 +1281,9 @@ cultural context can differ.
 
 The current constraint is not the ability to generate translations.
 
-The constraint is knowing WHERE multilingual effort has the best expected
-return. English performance is one source of evidence, but other-language
-SERP opportunity is another.
+The constraint is knowing WHERE multilingual effort has the best
+expected return. English performance is one source of evidence, but
+other-language SERP opportunity is another.
 
 If NM publishes 500 English guides and only 50 become meaningful
 organic-search winners, translating all 500 into five languages would
@@ -1278,8 +1368,8 @@ The portfolio can contain:
 
 Winning English guides can potentially multiply their value through
 localization. Separately, direct research of other-language SERPs can
-identify worthwhile decision guides that do not need an English NM winner
-as a prerequisite.
+identify worthwhile decision guides that do not need an English NM
+winner as a prerequisite.
 
 The objective is not to predict every winner perfectly before
 publishing.
