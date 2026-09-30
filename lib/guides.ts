@@ -911,6 +911,36 @@ export const guides: GuideSummary[] = [
       name: "Heat-Pump Dryer Payback Check",
     },
   },
+  {
+    slug: "is-a-whole-house-generator-worth-it",
+    title: "Is a Whole-House Generator Worth It?",
+    description:
+      "Estimate generator fuel costs, ownership costs, and outage expenses while accounting for generator capacity, maintenance, fuel type, and your home's outage pattern.",
+    category: "Home",
+    href: "/guides/is-a-whole-house-generator-worth-it",
+    tags: [
+      "whole-house generator",
+      "standby generator",
+      "generator cost",
+      "generator fuel",
+      "backup power",
+      "generator maintenance",
+      "power outages",
+    ],
+    published: true,
+    clusters: ["home-backup"],
+    lastModified: "2026-09-30",
+    updated: "September 2026",
+    readingTime: "15 min",
+    recommendedFor:
+      "Homeowners deciding whether the cost of an automatic standby generator is justified by their outage frequency, fuel costs, maintenance, and desired backup capability.",
+    bottomLine:
+      "A whole-house generator can provide automatic backup during outages, but its value depends on installation cost, fuel consumption, maintenance, outage frequency, and the loads you expect it to support. Use manufacturer fuel-use data and your own outage history rather than treating generic ownership or outage-cost estimates as universal.",
+    tool: {
+      type: "calculator",
+      name: "Whole-House Generator Ownership & Outage Cost Check",
+    },
+  },
 ]
 export function getGuideBySlug(slug: string) {
   return guides.find((guide) => guide.slug === slug);
