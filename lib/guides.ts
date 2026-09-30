@@ -941,6 +941,37 @@ export const guides: GuideSummary[] = [
       name: "Whole-House Generator Ownership & Outage Cost Check",
     },
   },
+  {
+    slug: "is-all-wheel-drive-worth-it",
+    title: "Is All-Wheel Drive Worth It?",
+    description:
+      "Compare the traction benefits and ownership costs of AWD versus front-wheel drive, including fuel economy, purchase price, maintenance, tires, and the conditions where AWD matters most.",
+    category: "Automotive",
+    href: "/guides/is-all-wheel-drive-worth-it",
+    tags: [
+      "all-wheel drive",
+      "AWD",
+      "AWD vs FWD",
+      "four wheel drive",
+      "winter driving",
+      "winter tires",
+      "AWD cost",
+      "fuel economy",
+    ],
+    published: true,
+    clusters: ["automotive-efficiency"],
+    lastModified: "2026-09-30",
+    updated: "September 2026",
+    readingTime: "16 min",
+    recommendedFor:
+      "Drivers deciding whether the additional cost of all-wheel drive is justified by their driving conditions, winter needs, fuel use, maintenance, and expected ownership period.",
+    bottomLine:
+      "AWD can provide additional propulsion traction on slippery surfaces, but it does not replace appropriate tires or eliminate the effects of road conditions on braking and cornering. Compare the actual AWD purchase premium, fuel-economy difference, maintenance, ownership period, and expected resale value for the vehicle you are considering, then weigh those costs against how often additional traction is useful in your driving.",
+    tool: {
+      type: "calculator",
+      name: "AWD Ownership Cost & Use-Case Check",
+    },
+  },
 ]
 export function getGuideBySlug(slug: string) {
   return guides.find((guide) => guide.slug === slug);
