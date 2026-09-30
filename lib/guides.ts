@@ -851,6 +851,36 @@ export const guides: GuideSummary[] = [
       name: "Heat-Pump Water Heater Payback Check",
     },
   },
+  {
+    slug: "is-a-home-battery-backup-worth-it",
+    title: "Is a Home Battery Backup Worth It?",
+    description:
+      "Estimate how long a home battery can support your essential loads, check whether its power output can handle them, and compare outage coverage, solar recharging, and financial payback.",
+    category: "Home",
+    href: "/guides/is-a-home-battery-backup-worth-it",
+    tags: [
+      "home battery backup",
+      "battery storage",
+      "home energy storage",
+      "backup power",
+      "solar battery",
+      "power outage",
+      "battery runtime",
+    ],
+    published: true,
+    clusters: ["home-backup"],
+    lastModified: "2026-09-29",
+    updated: "September 2026",
+    readingTime: "15 min",
+    recommendedFor:
+      "Homeowners considering a battery for outage backup, solar energy storage, time-of-use savings, or utility programs and trying to determine how much backup the system would actually provide.",
+    bottomLine:
+      "A home battery is easiest to evaluate by separating backup performance from financial payback. Start with the essential loads you need during an outage, determine whether the battery has enough energy and power to support them, and then evaluate solar recharging and bill savings separately. A battery can provide meaningful resilience even when bill savings alone do not produce a short payback.",
+    tool: {
+      type: "calculator",
+      name: "Home Battery Backup Coverage Check",
+    },
+  },
 ]
 export function getGuideBySlug(slug: string) {
   return guides.find((guide) => guide.slug === slug);
