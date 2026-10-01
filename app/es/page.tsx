@@ -1,6 +1,8 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 
+import { getGuidesByLocale } from "@/lib/guides";
+
 const siteUrl = "https://www.northwardmeridian.com";
 const canonicalUrl = `${siteUrl}/es`;
 
@@ -25,6 +27,8 @@ export const metadata: Metadata = {
     },
 };
 
+const spanishGuides = getGuidesByLocale("es");
+
 export default function SpanishHome() {
     return (
         <main className="min-h-screen bg-[var(--background)] text-[var(--foreground)]">
@@ -43,37 +47,64 @@ export default function SpanishHome() {
                         costos, riesgos y alternativas detrás de decisiones
                         importantes en Estados Unidos.
                     </p>
+
+                    <div className="mt-10 flex flex-wrap items-center gap-4">
+                        <span className="rounded-full border border-[var(--border)] bg-white px-4 py-2 text-sm font-semibold">
+                            {spanishGuides.length}{" "}
+                            {spanishGuides.length === 1
+                                ? "guía de decisión"
+                                : "guías de decisión"}
+                        </span>
+                    </div>
                 </div>
 
                 <section className="border-t border-[var(--border)] pt-12">
                     <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--accent)]">
                         Guías disponibles
                     </p>
+
                     <h2 className="mt-3 text-3xl font-semibold tracking-tight">
-                        Decisiones para compradores de automóviles
+                        Explore las decisiones disponibles en español.
                     </h2>
 
-                    <div className="mt-8 grid gap-5">
-                        <article className="rounded-2xl border border-[var(--border)] bg-white p-7">
-                            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--accent)]">
-                                Automóviles
-                            </p>
-                            <h3 className="mt-4 text-2xl font-semibold tracking-tight">
-                                ¿Qué pasa si debo más de lo que vale mi carro?
-                            </h3>
-                            <p className="mt-4 max-w-3xl text-[var(--muted)]">
-                                Entienda el valor neto negativo y use la
-                                calculadora para ver cómo una deuda anterior
-                                puede cambiar el monto financiado, el pago
-                                mensual y el interés total del próximo préstamo.
-                            </p>
-                            <Link
-                                href="/es/guides/que-pasa-si-debo-mas-de-lo-que-vale-mi-carro"
-                                className="mt-6 inline-block font-semibold text-[var(--accent)]"
+                    <div className="mt-8 grid gap-5 md:grid-cols-2">
+                        {spanishGuides.map((guide) => (
+                            <article
+                                key={guide.href}
+                                className="rounded-2xl border border-[var(--border)] bg-white p-7"
                             >
-                                Leer la guía →
-                            </Link>
-                        </article>
+                                <div className="flex flex-wrap items-center gap-3">
+                                    <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--accent)]">
+                                        {guide.category}
+                                    </p>
+
+                                    <span className="rounded-full border border-[var(--border)] bg-[var(--background)] px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-[var(--muted)]">
+                                        {guide.tool.type === "calculator"
+                                            ? "Calculadora"
+                                            : "Guía de decisión"}
+                                    </span>
+                                </div>
+
+                                <h3 className="mt-4 text-2xl font-semibold tracking-tight">
+                                    {guide.title}
+                                </h3>
+
+                                <p className="mt-3 text-sm font-medium text-[var(--accent)]">
+                                    Incluye: {guide.tool.name}
+                                </p>
+
+                                <p className="mt-4 leading-7 text-[var(--muted)]">
+                                    {guide.description}
+                                </p>
+
+                                <Link
+                                    href={guide.href}
+                                    className="mt-6 inline-block font-semibold text-[var(--accent)] transition-colors hover:text-[var(--accent-hover)]"
+                                >
+                                    Leer la guía →
+                                </Link>
+                            </article>
+                        ))}
                     </div>
                 </section>
 
@@ -81,6 +112,7 @@ export default function SpanishHome() {
                     <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--accent)]">
                         Sobre estas guías
                     </p>
+
                     <p className="mt-4 leading-8 text-[var(--muted)]">
                         Esta sección está comenzando con un pequeño número de
                         experimentos en español. El objetivo es ofrecer

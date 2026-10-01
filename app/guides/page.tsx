@@ -2,9 +2,9 @@ import Link from "next/link";
 
 import GuideAreaExplorer from "./GuideAreaExplorer";
 import GuideDirectory from "./GuideDirectory";
-import { guides } from "@/lib/guides";
+import { getGuidesByLocale } from "@/lib/guides";
 
-const publishedGuides = guides.filter((guide) => guide.published);
+const publishedGuides = getGuidesByLocale("en");
 
 const preferredCategoryOrder = [
   "Home",
