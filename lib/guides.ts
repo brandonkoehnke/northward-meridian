@@ -2,12 +2,14 @@ export type GuideTool = {
   type: "calculator" | "decision-check";
   name: string;
 };
+export type GuideLocale = "en" | "es";
 export type GuideSummary = {
   slug: string;
   title: string;
   description: string;
   category: string;
   href: string;
+  locale: GuideLocale;
   tags: string[];
   published: boolean;
   clusters: string[];
@@ -26,6 +28,7 @@ export const guides: GuideSummary[] = [
       "Understand how to evaluate a premium credit card's annual fee using the benefits you actually use, incremental rewards, and your realistic alternative. Then use the free calculator to test the numbers for your situation.",
     category: "Personal Finance",
     href: "/guides/premium-credit-card-annual-fee",
+    locale: "en",
     tags: [
       "credit cards",
       "annual fees",
@@ -54,6 +57,7 @@ export const guides: GuideSummary[] = [
       "Compare the factors that favor repairing or replacing a water heater, including failure type, age, warranty, repair cost, repair history, capacity, and safety. Then use the free decision check to organize the facts for your situation.",
     category: "Home",
     href: "/guides/repair-or-replace-water-heater",
+    locale: "en",
     tags: [
       "water heaters",
       "home repair",
@@ -82,6 +86,7 @@ export const guides: GuideSummary[] = [
       "Understand what service-line coverage protects, what exposure you may already have, and which policy terms can change its value. Then use the free decision check to evaluate the coverage against your situation.",
     category: "Home",
     href: "/guides/is-service-line-coverage-worth-it",
+    locale: "en",
     tags: [
       "service line coverage",
       "sewer line coverage",
@@ -110,6 +115,7 @@ export const guides: GuideSummary[] = [
       "Understand how developer and resale timeshare ownership differ in purchase cost, financing, recurring fees, booking rights, and long-term cost. Then use the free calculator to compare the options for your situation.",
     category: "Travel",
     href: "/guides/should-i-buy-a-timeshare-resale",
+    locale: "en",
     tags: [
       "timeshares",
       "timeshare resale",
@@ -138,6 +144,7 @@ export const guides: GuideSummary[] = [
       "Understand when a roof problem may be worth addressing before a home sale, including condition, buyer concerns, repair versus replacement, and transaction considerations. Then use the free decision check to work through your situation.",
     category: "Home",
     href: "/guides/replace-roof-before-selling-house",
+    locale: "en",
     tags: [
       "roof replacement",
       "selling a house",
@@ -166,6 +173,7 @@ export const guides: GuideSummary[] = [
       "Understand when a pre-sale septic inspection may be useful, what system history and warning signs matter, and which transaction requirements can change the decision. Then use the free decision check to evaluate your situation.",
     category: "Home",
     href: "/guides/septic-inspection-before-selling-house",
+    locale: "en",
     tags: [
       "septic inspection",
       "selling a house",
@@ -194,6 +202,7 @@ export const guides: GuideSummary[] = [
       "Understand when galvanized plumbing may need attention before selling, including remaining piping, visible condition, flow, leaks, repair history, and buyer considerations. Then use the free decision check to organize your options.",
     category: "Home",
     href: "/guides/replace-galvanized-plumbing-before-selling-house",
+    locale: "en",
     tags: [
       "galvanized plumbing",
       "selling a house",
@@ -222,6 +231,7 @@ export const guides: GuideSummary[] = [
       "Understand what to establish before deciding whether to investigate, remove, or otherwise address a possible underground oil tank, including documentation, tank status, and local requirements. Then use the free decision check to work through the situation.",
     category: "Home",
     href: "/guides/remove-underground-oil-tank-before-selling-house",
+    locale: "en",
     tags: [
       "underground oil tank",
       "selling a house",
@@ -250,6 +260,7 @@ export const guides: GuideSummary[] = [
       "Understand when idling versus shutting off a vehicle changes fuel use, and why vehicle design, conditions, HVAC needs, and operating requirements matter. Then use the free calculator to estimate the fuel-cost difference for your situation.",
     category: "Automotive",
     href: "/guides/idle-or-turn-car-off-fuel-efficiency",
+    locale: "en",
     tags: [
       "idling",
       "fuel economy",
@@ -278,6 +289,7 @@ export const guides: GuideSummary[] = [
       "Understand how a roof rack or crossbars can affect fuel economy, why the effect varies with speed and vehicle, and whether removing unused equipment could matter financially. Then use the free calculator to test the assumptions for your driving.",
     category: "Automotive",
     href: "/guides/roof-rack-gas-mileage-cost",
+    locale: "en",
     tags: [
       "roof rack",
       "gas mileage",
@@ -306,6 +318,7 @@ export const guides: GuideSummary[] = [
       "Understand how engine braking works in automatic transmissions and what gear selection, engine speed, road conditions, and manufacturer guidance have to do with safe use. Then use the free decision check to work through your situation.",
     category: "Automotive",
     href: "/guides/engine-braking-automatic-transmission",
+    locale: "en",
     tags: [
       "engine braking",
       "automatic transmission",
@@ -334,6 +347,7 @@ export const guides: GuideSummary[] = [
       "Understand whether a tonneau cover is likely to produce enough fuel savings to matter, including MPG assumptions, driving, fuel price, and the cover cost. Then use the free calculator to estimate the payback for your truck.",
     category: "Automotive",
     href: "/guides/tonneau-cover-gas-savings-payback",
+    locale: "en",
     tags: [
       "tonneau cover",
       "truck bed cover",
@@ -362,6 +376,7 @@ export const guides: GuideSummary[] = [
       "Understand what a dirty engine air filter can and cannot do to fuel economy and performance across modern and older vehicle designs. Then use the free decision check to compare the evidence with your vehicle and symptoms.",
     category: "Automotive",
     href: "/guides/dirty-engine-air-filter-gas-mileage",
+    locale: "en",
     tags: [
       "engine air filter",
       "gas mileage",
@@ -390,6 +405,7 @@ export const guides: GuideSummary[] = [
       "Understand why closing vents in unused rooms can behave differently across HVAC systems and how airflow, pressure, and zoning affect the result. Then use the free decision check to evaluate your setup.",
     category: "Home",
     href: "/guides/closing-vents-unused-rooms-save-energy",
+    locale: "en",
     tags: [
       "HVAC",
       "closing vents",
@@ -418,6 +434,7 @@ export const guides: GuideSummary[] = [
       "Understand when a chest freezer can reduce grocery costs and when electricity use or food waste can erase the savings. Then use the free calculator to estimate the payback for your household.",
     category: "Home",
     href: "/guides/can-chest-freezer-save-money",
+    locale: "en",
     tags: [
       "chest freezer",
       "grocery savings",
@@ -446,6 +463,7 @@ export const guides: GuideSummary[] = [
       "Understand how dishwasher and hand-washing costs depend on water use, energy, detergent, hot-water demand, and washing technique. Then use the free calculator to compare the methods using your household assumptions.",
     category: "Home",
     href: "/guides/dishwasher-vs-hand-washing-cost",
+    locale: "en",
     tags: [
       "dishwasher",
       "hand washing dishes",
@@ -474,6 +492,7 @@ export const guides: GuideSummary[] = [
       "Understand when genuine 0% financing can be economically useful and how cash discounts, fees, retained-cash earnings, and deferred-interest terms change the comparison. Then use the free calculator to test the numbers for your purchase.",
     category: "Personal Finance",
     href: "/guides/zero-percent-financing-vs-cash",
+    locale: "en",
     tags: [
       "0% APR",
       "financing",
@@ -502,6 +521,7 @@ export const guides: GuideSummary[] = [
       "Understand how negative equity develops, how vehicle value and loan payoff interact after a total loss, and what can change the size and duration of the gap. Then use the free calculator to estimate your exposure.",
     category: "Personal Finance",
     href: "/guides/is-gap-insurance-worth-it",
+    locale: "en",
     tags: [
       "GAP insurance",
       "auto loans",
@@ -531,6 +551,7 @@ export const guides: GuideSummary[] = [
       "Understand what tire road-hazard protection covers, what costs and exclusions matter, and when the plan might offset a covered repair or replacement. Then use the free calculator to compare the plan with a realistic covered event.",
     category: "Automotive",
     href: "/guides/is-tire-road-hazard-protection-worth-it",
+    locale: "en",
     tags: [
       "road hazard protection",
       "tire protection",
@@ -560,6 +581,7 @@ export const guides: GuideSummary[] = [
       "Understand the real cost and tradeoffs of a NAS versus cloud storage, including hardware, electricity, maintenance, backup, capacity, and recurring fees. Then use the free calculator to compare the options over your time horizon.",
     category: "Technology",
     href: "/guides/should-i-buy-a-nas-or-use-cloud-storage",
+    locale: "en",
     tags: [
       "NAS",
       "cloud storage",
@@ -589,6 +611,7 @@ export const guides: GuideSummary[] = [
       "Understand when a water softener can address meaningful hard-water problems and what installation, salt, water, maintenance, and operating costs mean for the economics. Then use the free calculator to estimate the payback for your household.",
     category: "Home",
     href: "/guides/is-a-water-softener-worth-it",
+    locale: "en",
     tags: [
       "water softener",
       "hard water",
@@ -618,6 +641,7 @@ export const guides: GuideSummary[] = [
       "Understand when a professional home energy audit can change an expensive efficiency or comfort decision, and what makes the audit worth its cost. Then use the free calculator to estimate the value for your situation.",
     category: "Home",
     href: "/guides/is-a-home-energy-audit-worth-it",
+    locale: "en",
     tags: [
       "home energy audit",
       "energy assessment",
@@ -647,8 +671,8 @@ export const guides: GuideSummary[] = [
     description:
       "Understand what cloud synchronization, version history, and deleted-file recovery protect against—and what they do not. Then use the free decision check to identify recovery gaps in your setup.",
     category: "Technology",
-    href:
-      "/guides/do-i-need-cloud-backup-if-i-use-onedrive-icloud-google-drive",
+    href: "/guides/do-i-need-cloud-backup-if-i-use-onedrive-icloud-google-drive",
+    locale: "en",
     tags: [
       "cloud backup",
       "OneDrive",
@@ -678,8 +702,8 @@ export const guides: GuideSummary[] = [
     description:
       "Understand when lowering the thermostat can reduce heating and cooling costs, how setback depth and duration matter, and why heat pumps can require different control strategies. Then use the free calculator to test a conservative savings assumption.",
     category: "Home",
-    href:
-      "/guides/does-turning-the-thermostat-down-at-night-save-money",
+    href: "/guides/does-turning-the-thermostat-down-at-night-save-money",
+    locale: "en",
     tags: [
       "thermostat setback",
       "thermostat savings",
@@ -709,6 +733,7 @@ export const guides: GuideSummary[] = [
       "Understand when an extended warranty or service contract may be worth the cost, what coverage and exclusions matter, and how to evaluate the risk. Then use the free calculator to test the numbers for your situation.",
     category: "Personal Finance",
     href: "/guides/is-an-extended-warranty-worth-it",
+    locale: "en",
     tags: [
       "extended warranty",
       "service contract",
@@ -739,6 +764,7 @@ export const guides: GuideSummary[] = [
       "Understand when a pre-listing home inspection can reduce uncertainty before a sale, what information it can and cannot provide, and how repair plans and disclosure requirements affect the decision. Then use the free decision check to evaluate your situation.",
     category: "Home",
     href: "/guides/home-inspection-before-selling-house",
+    locale: "en",
     tags: [
       "pre-listing inspection",
       "home inspection",
@@ -768,6 +794,7 @@ export const guides: GuideSummary[] = [
       "Understand when a Level 2 home EV charger solves a real charging problem, when it can pay for itself by replacing public charging, and when a standard 120-volt outlet may already be enough. Then use the free calculator to test the numbers for your situation.",
     category: "Automotive",
     href: "/guides/is-a-level-2-home-ev-charger-worth-it",
+    locale: "en",
     tags: [
       "EV charger",
       "Level 2 charger",
@@ -798,6 +825,7 @@ export const guides: GuideSummary[] = [
       "Estimate how much of your trip you could actually lose, identify medical and evacuation coverage gaps, and see how existing credit-card or other protections change the travel insurance decision.",
     category: "Travel",
     href: "/guides/is-travel-insurance-worth-it",
+    locale: "en",
     tags: [
       "travel insurance",
       "trip insurance",
@@ -828,6 +856,7 @@ export const guides: GuideSummary[] = [
       "Estimate the operating savings and payback of replacing your current water heater with a heat-pump model, while accounting for installation cost, incentives, energy use, and the type of heater you have now.",
     category: "Home",
     href: "/guides/is-a-heat-pump-water-heater-worth-it",
+    locale: "en",
     tags: [
       "heat pump water heater",
       "hybrid water heater",
@@ -858,6 +887,7 @@ export const guides: GuideSummary[] = [
       "Estimate how long a home battery can support your essential loads, check whether its power output can handle them, and compare outage coverage, solar recharging, and financial payback.",
     category: "Home",
     href: "/guides/is-a-home-battery-backup-worth-it",
+    locale: "en",
     tags: [
       "home battery backup",
       "battery storage",
@@ -888,6 +918,7 @@ export const guides: GuideSummary[] = [
       "Compare a heat-pump dryer with the replacement you would otherwise buy, estimate annual energy savings and payback, and account for ventless installation, laundry volume, and current dryer type.",
     category: "Home",
     href: "/guides/is-a-heat-pump-dryer-worth-it",
+    locale: "en",
     tags: [
       "heat pump dryer",
       "heat-pump dryer",
@@ -918,6 +949,7 @@ export const guides: GuideSummary[] = [
       "Estimate generator fuel costs, ownership costs, and outage expenses while accounting for generator capacity, maintenance, fuel type, and your home's outage pattern.",
     category: "Home",
     href: "/guides/is-a-whole-house-generator-worth-it",
+    locale: "en",
     tags: [
       "whole-house generator",
       "standby generator",
@@ -948,6 +980,7 @@ export const guides: GuideSummary[] = [
       "Compare the traction benefits and ownership costs of AWD versus front-wheel drive, including fuel economy, purchase price, maintenance, tires, and the conditions where AWD matters most.",
     category: "Automotive",
     href: "/guides/is-all-wheel-drive-worth-it",
+    locale: "en",
     tags: [
       "all-wheel drive",
       "AWD",
@@ -979,6 +1012,7 @@ export const guides: GuideSummary[] = [
       "Compare gigabit internet with a slower plan using household bandwidth demand, download and upload speeds, large-file transfer times, Wi-Fi limitations, and the long-term upgrade cost.",
     category: "Technology",
     href: "/guides/is-gigabit-internet-worth-it",
+    locale: "en",
     tags: [
       "gigabit internet",
       "internet speed",
@@ -1003,9 +1037,43 @@ export const guides: GuideSummary[] = [
       name: "Internet Speed & Upgrade Cost Check",
     },
   },
+  {
+    slug: "que-pasa-si-debo-mas-de-lo-que-vale-mi-carro",
+    title: "¿Qué pasa si debo más de lo que vale mi carro?",
+    description:
+      "Entienda el valor neto negativo antes de entregar su carro como parte de pago y vea cómo una deuda anterior puede cambiar el costo del próximo préstamo.",
+    category: "Automóviles",
+    href: "/es/guides/que-pasa-si-debo-mas-de-lo-que-vale-mi-carro",
+    locale: "es",
+    tags: [
+      "valor neto negativo",
+      "préstamo de auto",
+      "valor de canje",
+      "financiamiento de auto",
+      "deuda de auto",
+    ],
+    published: true,
+    clusters: ["spanish-auto-finance"],
+    lastModified: "2026-10-01",
+    updated: "Octubre 2026",
+    readingTime: "12 min",
+    recommendedFor:
+      "Personas que deben dinero por su carro actual y están considerando entregarlo como parte de pago.",
+    bottomLine:
+      "Si debe más por su carro de lo que vale, la diferencia no desaparece al entregarlo. Puede tener que pagarla en efectivo, cubrirla con parte del pago inicial o incorporarla al nuevo préstamo.",
+    tool: {
+      type: "calculator",
+      name: "Calculadora de valor neto negativo y canje",
+    },
+  },
 ]
 export function getGuideBySlug(slug: string) {
   return guides.find((guide) => guide.slug === slug);
+}
+export function getGuidesByLocale(locale: GuideLocale) {
+  return guides.filter(
+    (guide) => guide.published && guide.locale === locale,
+  );
 }
 export function getRelatedGuides(
   slug: string,
@@ -1019,6 +1087,7 @@ export function getRelatedGuides(
     .filter(
       (guide) =>
         guide.published &&
+        guide.locale === currentGuide.locale &&
         guide.slug !== slug &&
         guide.clusters.some((cluster) =>
           currentGuide.clusters.includes(cluster),

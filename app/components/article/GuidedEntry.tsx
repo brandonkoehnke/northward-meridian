@@ -4,159 +4,183 @@ import { useState } from "react";
 
 import { trackEvent } from "@/lib/analytics";
 
+import type { GuideLocale } from "./GuideLocale";
+
 export type GuidedEntryScenario = {
-  id: string;
-  title: string;
-  summary: string;
-  guidance: string;
-  destinationId: string;
-  destinationLabel: string;
+    id: string;
+    title: string;
+    summary: string;
+    guidance: string;
+    destinationId: string;
+    destinationLabel: string;
 };
 
 type GuidedEntryProps = {
-  scenarios: readonly GuidedEntryScenario[];
+    locale?: GuideLocale;
+    scenarios: readonly GuidedEntryScenario[];
 };
 
-export default function GuidedEntry({ scenarios }: GuidedEntryProps) {
-  const [selectedId, setSelectedId] = useState<string | null>(null);
+export default function GuidedEntry({
+    locale = "en",
+    scenarios,
+}: GuidedEntryProps) {
+    const [selectedId, setSelectedId] = useState<string | null>(null);
 
-  const selectedScenario =
-    scenarios.find((scenario) => scenario.id === selectedId) ?? null;
+    const selectedScenario =
+        scenarios.find((scenario) => scenario.id === selectedId) ?? null;
 
-  const goToSection = () => {
-    if (!selectedScenario) return;
+    const goToSection = () => {
+        if (!selectedScenario) return;
 
-    const section = document.getElementById(
-      selectedScenario.destinationId,
-    );
+        const section = document.getElementById(
+            selectedScenario.destinationId,
+        );
 
-    if (!section) return;
+        if (!section) return;
 
-    trackEvent("guided_entry_destination_clicked", {
-      scenario_id: selectedScenario.id,
-      scenario_title: selectedScenario.title,
-      destination_id: selectedScenario.destinationId,
-      destination_label: selectedScenario.destinationLabel,
-    });
+        trackEvent("guided_entry_destination_clicked", {
+            scenario_id: selectedScenario.id,
+            scenario_title: selectedScenario.title,
+            destination_id: selectedScenario.destinationId,
+            destination_label: selectedScenario.destinationLabel,
+        });
 
-    window.history.replaceState(
-      null,
-      "",
-      `#${selectedScenario.destinationId}`,
-    );
+        window.history.replaceState(
+            null,
+            "",
+            `#${selectedScenario.destinationId}`,
+        );
 
-    section.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-    });
+        section.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+        });
 
-    section.classList.remove("guide-destination-highlight");
+        section.classList.remove("guide-destination-highlight");
 
-    requestAnimationFrame(() => {
-      section.classList.add("guide-destination-highlight");
-    });
+        requestAnimationFrame(() => {
+            section.classList.add("guide-destination-highlight");
+        });
 
-    window.setTimeout(() => {
-      section.classList.remove("guide-destination-highlight");
-    }, 1800);
-  };
+        window.setTimeout(() => {
+            section.classList.remove("guide-destination-highlight");
+        }, 1800);
+    };
 
-  return (
-    <section
-      aria-labelledby="guided-entry-title"
-      className="mx-auto max-w-4xl px-6 py-12"
-    >
-      <div className="rounded-3xl border border-[var(--border)] bg-white p-7 shadow-sm md:p-9">
-        <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[var(--accent)]">
-          Start here
-        </p>
+    const labels =
+        locale === "es"
+            ? {
+                  eyebrow: "Empiece aquí",
+                  title: "¿Qué está pasando hoy?",
+                  description:
+                      "Elija la situación que mejor corresponde a la suya. Le indicaremos la parte más relevante de esta guía.",
+                  startWith: "Empiece con esto",
+                  goTo: "Ir a",
+              }
+            : {
+                  eyebrow: "Start here",
+                  title: "What's happening today?",
+                  description:
+                      "Choose the situation that best matches yours. We'll point you to the most relevant part of this guide.",
+                  startWith: "Start with this",
+                  goTo: "Go to",
+              };
 
-        <h2
-          id="guided-entry-title"
-          className="mt-3 text-3xl font-semibold tracking-tight"
+    return (
+        <section
+            aria-labelledby="guided-entry-title"
+            className="mx-auto max-w-4xl px-6 py-12"
         >
-          What&apos;s happening today?
-        </h2>
+            <div className="rounded-3xl border border-[var(--border)] bg-white p-7 shadow-sm md:p-9">
+                <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[var(--accent)]">
+                    {labels.eyebrow}
+                </p>
 
-        <p className="mt-3 max-w-2xl leading-7 text-[var(--muted)]">
-          Choose the situation that best matches yours. We&apos;ll point you
-          to the most relevant part of this guide.
-        </p>
-
-        <div className="mt-7 space-y-3">
-          {scenarios.map((scenario) => {
-            const isSelected = scenario.id === selectedId;
-
-            return (
-              <div key={scenario.id}>
-                <button
-                  type="button"
-                  onClick={() => {
-                    setSelectedId(scenario.id);
-
-                    trackEvent("guided_entry_selected", {
-                      scenario_id: scenario.id,
-                      scenario_title: scenario.title,
-                      destination_id: scenario.destinationId,
-                    });
-                  }}
-                  aria-pressed={isSelected}
-                  className={`w-full rounded-2xl border p-5 text-left transition ${isSelected
-                      ? "border-[var(--accent)] bg-[var(--accent-soft)]"
-                      : "border-[var(--border)] bg-white hover:border-[var(--accent)] hover:bg-[var(--background)]"
-                    }`}
+                <h2
+                    id="guided-entry-title"
+                    className="mt-3 text-3xl font-semibold tracking-tight"
                 >
-                  <div className="flex items-start justify-between gap-4">
-                    <div>
-                      <h3 className="text-base font-semibold">
-                        {scenario.title}
-                      </h3>
+                    {labels.title}
+                </h2>
 
-                      <p className="mt-1.5 text-sm leading-6 text-[var(--muted)]">
-                        {scenario.summary}
-                      </p>
-                    </div>
+                <p className="mt-3 max-w-2xl leading-7 text-[var(--muted)]">
+                    {labels.description}
+                </p>
 
-                    <span
-                      aria-hidden="true"
-                      className={`mt-1 shrink-0 transition ${isSelected
-                          ? "rotate-90 text-[var(--accent)]"
-                          : "text-[var(--muted)]"
-                        }`}
-                    >
-                      →
-                    </span>
-                  </div>
-                </button>
+                <div className="mt-7 space-y-3">
+                    {scenarios.map((scenario) => {
+                        const isSelected = scenario.id === selectedId;
 
-                {isSelected ? (
-                  <div
-                    aria-live="polite"
-                    className="mt-3 rounded-2xl border border-[var(--border)] bg-[var(--background)] p-6"
-                  >
-                    <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--accent)]">
-                      Start with this
-                    </p>
+                        return (
+                            <div key={scenario.id}>
+                                <button
+                                    type="button"
+                                    onClick={() => {
+                                        setSelectedId(scenario.id);
 
-                    <p className="mt-3 leading-7">
-                      {scenario.guidance}
-                    </p>
+                                        trackEvent("guided_entry_selected", {
+                                            scenario_id: scenario.id,
+                                            scenario_title: scenario.title,
+                                            destination_id:
+                                                scenario.destinationId,
+                                        });
+                                    }}
+                                    aria-pressed={isSelected}
+                                    className={`w-full rounded-2xl border p-5 text-left transition ${isSelected
+                                        ? "border-[var(--accent)] bg-[var(--accent-soft)]"
+                                        : "border-[var(--border)] bg-white hover:border-[var(--accent)] hover:bg-[var(--background)]"
+                                    }`}
+                                >
+                                    <div className="flex items-start justify-between gap-4">
+                                        <div>
+                                            <h3 className="text-base font-semibold">
+                                                {scenario.title}
+                                            </h3>
+                                            <p className="mt-1.5 text-sm leading-6 text-[var(--muted)]">
+                                                {scenario.summary}
+                                            </p>
+                                        </div>
 
-                    <button
-                      type="button"
-                      onClick={goToSection}
-                      className="mt-5 inline-flex items-center gap-2 rounded-xl bg-[var(--accent)] px-5 py-3 text-sm font-semibold text-white transition hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
-                    >
-                      Go to {scenario.destinationLabel}
-                      <span aria-hidden="true">↓</span>
-                    </button>
-                  </div>
-                ) : null}
-              </div>
-            );
-          })}
-        </div>
-      </div>
-    </section>
-  );
+                                        <span
+                                            aria-hidden="true"
+                                            className={`mt-1 shrink-0 transition ${isSelected
+                                                ? "rotate-90 text-[var(--accent)]"
+                                                : "text-[var(--muted)]"
+                                            }`}
+                                        >
+                                            →
+                                        </span>
+                                    </div>
+                                </button>
+
+                                {isSelected ? (
+                                    <div
+                                        aria-live="polite"
+                                        className="mt-3 rounded-2xl border border-[var(--border)] bg-[var(--background)] p-6"
+                                    >
+                                        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--accent)]">
+                                            {labels.startWith}
+                                        </p>
+
+                                        <p className="mt-3 leading-7">
+                                            {scenario.guidance}
+                                        </p>
+
+                                        <button
+                                            type="button"
+                                            onClick={goToSection}
+                                            className="mt-5 inline-flex items-center gap-2 rounded-xl bg-[var(--accent)] px-5 py-3 text-sm font-semibold text-white transition hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
+                                        >
+                                            {labels.goTo} {scenario.destinationLabel}
+                                            <span aria-hidden="true">↓</span>
+                                        </button>
+                                    </div>
+                                ) : null}
+                            </div>
+                        );
+                    })}
+                </div>
+            </div>
+        </section>
+    );
 }
