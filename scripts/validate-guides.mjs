@@ -3,7 +3,10 @@ import path from "node:path";
 
 const ROOT = process.cwd();
 const GUIDES_FILE = path.join(ROOT, "lib", "guides.ts");
-const GUIDES_DIR = path.join(ROOT, "app", "guides");
+const GUIDE_ROUTE_ROOTS = {
+    en: path.join(ROOT, "app", "guides"),
+    es: path.join(ROOT, "app", "es", "guides"),
+};
 
 let errors = 0;
 
@@ -217,8 +220,16 @@ function getClustersField(block) {
 /**
  * Validate the relationship between a slug and its route.
  */
-function expectedHrefForSlug(slug) {
-    return `/guides/${slug}`;
+function expectedHrefForGuide(guide) {
+    if (guide.locale === "en") {
+        return `/guides/${guide.slug}`;
+    }
+
+    if (guide.locale === "es") {
+        return `/es/guides/${guide.slug}`;
+    }
+
+    return null;
 }
 
 // --------------------------------------------------
@@ -271,6 +282,7 @@ const guides = guideBlocks.map(
         block,
         slug: getStringField(block, "slug"),
         href: getStringField(block, "href"),
+        locale: getStringField(block, "locale"),
         clusters: getClustersField(block),
     }),
 );
@@ -295,6 +307,22 @@ for (const guide of guides) {
             `${guide.slug ??
             `Guide #${guide.index + 1}`
             } is missing an href.`,
+        );
+    }
+
+    if (!guide.locale) {
+        error(
+            `${guide.slug ??
+            `Guide #${guide.index + 1}`
+            } is missing a locale.`,
+        );
+    } else if (
+        !Object.hasOwn(GUIDE_ROUTE_ROOTS, guide.locale)
+    ) {
+        error(
+            `${guide.slug ??
+            `Guide #${guide.index + 1}`
+            } has unsupported locale "${guide.locale}".`,
         );
     }
 
@@ -357,7 +385,11 @@ for (const guide of guides) {
     }
 
     const expectedHref =
-        expectedHrefForSlug(guide.slug);
+        expectedHrefForGuide(guide);
+
+    if (!expectedHref) {
+        continue;
+    }
 
     if (guide.href !== expectedHref) {
         error(
@@ -478,76 +510,94 @@ if (source.includes("relatedSlugs")) {
 // Validate guide routes
 // --------------------------------------------------
 
-if (!fs.existsSync(GUIDES_DIR)) {
-    error(
-        "app/guides directory does not exist.",
-    );
-    process.exit(1);
-}
-
-const routeDirectories = fs
-    .readdirSync(GUIDES_DIR, {
-        withFileTypes: true,
-    })
-    .filter((entry) => entry.isDirectory())
-    .map((entry) => entry.name)
-    .filter(
-        (name) => !name.startsWith("."),
-    );
-
-const slugSet = new Set(
-    validSlugs,
-);
-
 let routeErrors = 0;
 
-for (const guide of guides) {
-    if (!guide.slug) {
+for (const [locale, guidesDir] of Object.entries(
+    GUIDE_ROUTE_ROOTS,
+)) {
+    const localeGuides = guides.filter(
+        (guide) => guide.locale === locale,
+    );
+
+    if (!fs.existsSync(guidesDir)) {
+        if (localeGuides.length > 0) {
+            error(
+                `${path.relative(ROOT, guidesDir)} directory does not exist.`,
+            );
+            routeErrors++;
+        }
+
         continue;
     }
 
-    const guideDirectory = path.join(
-        GUIDES_DIR,
-        guide.slug,
-    );
-
-    const pagePath = path.join(
-        guideDirectory,
-        "page.tsx",
-    );
-
-    if (!fs.existsSync(guideDirectory)) {
-        error(
-            `Registry guide has no route directory: ${guide.slug}`,
+    const routeDirectories = fs
+        .readdirSync(guidesDir, {
+            withFileTypes: true,
+        })
+        .filter((entry) => entry.isDirectory())
+        .map((entry) => entry.name)
+        .filter(
+            (name) => !name.startsWith("."),
         );
 
-        routeErrors++;
-        continue;
-    }
-
-    if (!fs.existsSync(pagePath)) {
-        error(
-            `Registry guide has no page.tsx: ${guide.slug}`,
-        );
-
-        routeErrors++;
-    }
-}
-
-for (const routeSlug of routeDirectories) {
-    if (!slugSet.has(routeSlug)) {
-        error(
-            `app/guides/${routeSlug} exists but is missing from lib/guides.ts.`,
-        );
-
-        routeErrors++;
-    }
-}
-
-if (routeErrors === 0) {
-    success(
-        `${routeDirectories.length} guide routes match the registry.`,
+    const localeSlugSet = new Set(
+        localeGuides
+            .map((guide) => guide.slug)
+            .filter(Boolean),
     );
+
+    for (const guide of localeGuides) {
+        if (!guide.slug) {
+            continue;
+        }
+
+        const guideDirectory = path.join(
+            guidesDir,
+            guide.slug,
+        );
+
+        const pagePath = path.join(
+            guideDirectory,
+            "page.tsx",
+        );
+
+        if (!fs.existsSync(guideDirectory)) {
+            error(
+                `Registry guide has no route directory: ${guide.href ?? guide.slug}`,
+            );
+
+            routeErrors++;
+            continue;
+        }
+
+        if (!fs.existsSync(pagePath)) {
+            error(
+                `Registry guide has no page.tsx: ${guide.href ?? guide.slug}`,
+            );
+
+            routeErrors++;
+        }
+    }
+
+    for (const routeSlug of routeDirectories) {
+        if (!localeSlugSet.has(routeSlug)) {
+            error(
+                `${path.relative(
+                    ROOT,
+                    path.join(guidesDir, routeSlug),
+                )} exists but is missing from lib/guides.ts for locale "${locale}".`,
+            );
+
+            routeErrors++;
+        }
+    }
+
+    if (routeErrors === 0) {
+        success(
+            `${routeDirectories.length} ${locale} guide route${routeDirectories.length === 1 ? "" : "s"
+            } match the registry.`,
+        );
+    }
 }
 
 // --------------------------------------------------
