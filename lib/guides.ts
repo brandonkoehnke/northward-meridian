@@ -1097,6 +1097,37 @@ export const guides: GuideSummary[] = [
       name: "Calculadora del costo de extras financiados",
     },
   },
+  {
+    slug: "vale-la-pena-comprar-gap-para-mi-carro",
+    title: "¿Vale la pena comprar GAP para mi carro?",
+    description:
+      "Entienda qué cubre GAP, estime su posible exposición si su carro queda en pérdida total y compare el costo de la cobertura con el riesgo que enfrenta.",
+    category: "Automóviles",
+    href: "/es/guides/vale-la-pena-comprar-gap-para-mi-carro",
+    locale: "es",
+    tags: [
+      "GAP",
+      "seguro GAP",
+      "seguro de auto",
+      "préstamo de auto",
+      "pérdida total",
+      "valor del carro",
+      "valor neto negativo",
+    ],
+    published: true,
+    clusters: ["auto-buying-financing"],
+    lastModified: "2026-10-02",
+    updated: "Octubre 2026",
+    readingTime: "13 min",
+    recommendedFor:
+      "Personas que están financiando o considerando financiar un carro y quieren saber si GAP podría protegerlas frente a una deuda superior al valor del vehículo.",
+    bottomLine:
+      "GAP es un producto opcional que puede cubrir parte o toda la diferencia entre lo que todavía debe por el carro y lo que paga el seguro después de una pérdida cubierta, según los términos del contrato. Su valor depende de la exposición que tenga, el precio de la cobertura y las condiciones específicas del producto.",
+    tool: {
+      type: "calculator",
+      name: "Calculadora de valor de GAP",
+    },
+  },
 ]
 export function getGuideBySlug(slug: string) {
   return guides.find((guide) => guide.slug === slug);
