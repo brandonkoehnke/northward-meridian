@@ -20,7 +20,7 @@ export default function RelatedDecisions({
                   eyebrow: "Decisiones relacionadas",
                   title: "También puede estar decidiendo...",
                   scroll: "Deslice para explorar →",
-                  read: "Leer la guía →",
+                  read: "Leer la guía",
                   browse: "Ver todas las guías de decisiones",
                   browseDescription:
                       "Explore marcos prácticos para decisiones importantes.",

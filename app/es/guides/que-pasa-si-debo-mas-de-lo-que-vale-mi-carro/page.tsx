@@ -10,6 +10,7 @@ import QuestionsToAsk from "@/app/components/article/QuestionsToAsk";
 import Sources from "@/app/components/article/Sources";
 import WhyThisMatters from "@/app/components/article/WhyThisMatters";
 import NegativeEquityTradeInCheck from "./NegativeEquityTradeInCheck";
+import RelatedDecisions from "@/app/components/article/RelatedDecisions";
 
 const siteUrl = "https://www.northwardmeridian.com";
 const canonicalUrl =
@@ -373,6 +374,10 @@ export default function SpanishNegativeEquityGuide() {
                         href: "https://files.consumerfinance.gov/f/documents/cfpb_adult-fin-ed_spanish-style-guide-glossary.pdf",
                     },
                 ]}
+            />
+            <RelatedDecisions
+                locale="es"
+                currentSlug="que-pasa-si-debo-mas-de-lo-que-vale-mi-carro"
             />
         </GuideLayout>
     );

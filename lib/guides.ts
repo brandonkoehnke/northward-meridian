@@ -1053,7 +1053,7 @@ export const guides: GuideSummary[] = [
       "deuda de auto",
     ],
     published: true,
-    clusters: ["spanish-auto-finance"],
+    clusters: ["auto-buying-financing"],
     lastModified: "2026-10-01",
     updated: "Octubre 2026",
     readingTime: "12 min",
@@ -1064,6 +1064,37 @@ export const guides: GuideSummary[] = [
     tool: {
       type: "calculator",
       name: "Calculadora de valor neto negativo y canje",
+    },
+  },
+  {
+    slug: "tengo-que-comprar-extras-concesionario",
+    title: "¿Tengo que comprar los extras que me ofrece el concesionario?",
+    description:
+      "Entienda cuáles productos adicionales suelen ser opcionales, qué revisar antes de aceptarlos y cuánto pueden costar si los incorpora al préstamo del carro.",
+    category: "Automóviles",
+    href: "/es/guides/tengo-que-comprar-extras-concesionario",
+    locale: "es",
+    tags: [
+      "extras del concesionario",
+      "complementos del carro",
+      "productos opcionales",
+      "GAP",
+      "garantía extendida",
+      "contrato de servicio",
+      "financiamiento de auto",
+    ],
+    published: true,
+    clusters: ["auto-buying-financing"],
+    lastModified: "2026-10-01",
+    updated: "Octubre 2026",
+    readingTime: "12 min",
+    recommendedFor:
+      "Personas que están comprando o financiando un carro y reciben ofertas de GAP, contratos de servicio, garantías extendidas, protección de llantas u otros productos adicionales.",
+    bottomLine:
+      "Muchos extras que se ofrecen al comprar o financiar un carro son opcionales. Antes de aceptar uno, confirme si realmente es obligatorio, pida su precio por separado, revise qué cubre y qué excluye, compare alternativas y calcule cuánto pagará si lo incorpora al préstamo.",
+    tool: {
+      type: "calculator",
+      name: "Calculadora del costo de extras financiados",
     },
   },
 ]
