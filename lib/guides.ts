@@ -1128,6 +1128,39 @@ export const guides: GuideSummary[] = [
       name: "Calculadora de valor de GAP",
     },
   },
+  {
+    slug: "how-much-raise-changing-jobs-worth-it",
+    title: "How Much of a Raise Makes Changing Jobs Worth It?",
+    description:
+      "Estimate the salary increase needed to offset differences in bonuses, retirement contributions, health costs, commuting, and one-time switching costs, then consider the career factors that do not fit neatly into a calculator.",
+    category: "Career",
+    href: "/guides/how-much-raise-changing-jobs-worth-it",
+    locale: "en",
+    tags: [
+      "changing jobs",
+      "salary increase",
+      "raise",
+      "job offer",
+      "total compensation",
+      "employee benefits",
+      "commute",
+      "career decision",
+    ],
+    published: true,
+    clusters: ["career-compensation"],
+    lastModified: "2026-10-02",
+    updated: "October 2026",
+    readingTime: "14 min",
+    recommendedFor:
+      "People comparing a new job with their current role and trying to determine how much additional salary would offset measurable compensation, benefit, commuting, and switching-cost differences.",
+    bottomLine:
+      "The raise needed to make a job change financially break even is the amount required to offset recurring compensation and cost differences plus the annualized effect of one-time switching costs. That break-even salary is a useful financial reference point, but it does not determine whether changing jobs is worthwhile because commute time, flexibility, career growth, management, stability, workload, and other nonfinancial factors still matter.",
+    tool: {
+      type: "calculator",
+      name: "Break-Even Raise Calculator",
+    },
+  },
+
 ]
 export function getGuideBySlug(slug: string) {
   return guides.find((guide) => guide.slug === slug);
