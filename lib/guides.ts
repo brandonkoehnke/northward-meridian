@@ -1160,6 +1160,38 @@ export const guides: GuideSummary[] = [
       name: "Break-Even Raise Calculator",
     },
   },
+  {
+    slug: "what-freelance-hourly-rate-equals-my-salary",
+    title: "What Freelance Hourly Rate Equals My Salary?",
+    description:
+      "Estimate the freelance hourly rate needed to replace employee salary, employer benefits, and business expenses using realistic billable hours, then compare the result with market rates and tax considerations.",
+    category: "Career",
+    href: "/guides/what-freelance-hourly-rate-equals-my-salary",
+    locale: "en",
+    tags: [
+      "freelance hourly rate",
+      "salary equivalent",
+      "freelance rate calculator",
+      "billable hours",
+      "self employment",
+      "consulting rate",
+      "employee benefits",
+      "career decision",
+    ],
+    published: true,
+    clusters: ["career-compensation"],
+    lastModified: "2026-10-09",
+    updated: "October 2026",
+    readingTime: "12 min",
+    recommendedFor:
+      "Employees considering freelancing or consulting who want to estimate the hourly billing rate required to replace salary, employer benefits, and business costs.",
+    bottomLine:
+      "A freelance hourly rate must cover more than employee salary. Add the employer benefits you need to replace and annual business costs, then divide by realistically billable hours. The result is a pre-tax revenue target, not a guaranteed take-home-pay equivalent or a market rate.",
+    tool: {
+      type: "calculator",
+      name: "Freelance Salary-Equivalent Rate Calculator",
+    },
+  },
 
 ]
 export function getGuideBySlug(slug: string) {
