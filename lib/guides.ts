@@ -1192,6 +1192,23 @@ export const guides: GuideSummary[] = [
       name: "Freelance Salary-Equivalent Rate Calculator",
     },
   },
+  {
+    slug: "is-unlimited-pto-better-than-fixed-pto",
+    title: "Is Unlimited PTO Better Than Fixed PTO?",
+    description: "Compare unlimited and fixed vacation policies using realistic days taken, approval culture, carryover, payout rules, and a practical PTO decision check.",
+    category: "Career",
+    href: "/guides/is-unlimited-pto-better-than-fixed-pto",
+    locale: "en",
+    tags: ["unlimited PTO", "fixed PTO", "vacation days", "job benefits", "paid time off", "PTO policy", "career decision"],
+    published: true,
+    clusters: ["career-compensation"],
+    lastModified: "2026-10-09",
+    updated: "October 2026",
+    readingTime: "11 min",
+    recommendedFor: "Employees comparing a job with unlimited paid time off against one offering a defined annual vacation allowance.",
+    bottomLine: "Unlimited PTO is not automatically more valuable than a fixed allowance. Compare how many days people actually take, whether managers approve leave, the written policy, and what happens to unused accrued days. The better choice depends on usable time and the full job offer, not the label.",
+    tool: { type: "calculator", name: "PTO Decision Check" },
+  },
 
 ]
 export function getGuideBySlug(slug: string) {
