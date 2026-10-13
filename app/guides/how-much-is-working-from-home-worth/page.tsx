@@ -114,7 +114,7 @@ export default function RemoteWorkValueGuide() {
     <Sources sources={[
       { title: "American Time Use Survey", publisher: "U.S. Bureau of Labor Statistics", href: "https://www.bls.gov/tus/" },
       { title: "Travel, Gift, and Car Expenses (Publication 463)", publisher: "Internal Revenue Service", href: "https://www.irs.gov/publications/p463" },
-      { title: "Tax Withholding", publisher: "Internal Revenue Service", href: "https://www.irs.gov/individuals/tax-withholding" },
+      { title: "Tax Withholding", publisher: "Internal Revenue Service", href: "https://www.irs.gov/payments/tax-withholding" },
     ]} />
     <RelatedDecisions currentSlug={slug} />
   </GuideLayout>;
