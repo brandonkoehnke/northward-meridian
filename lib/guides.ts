@@ -1226,6 +1226,23 @@ export const guides: GuideSummary[] = [
     bottomLine: "Changing your own oil can save money, but compare equivalent services and include oil, filter, consumables, and any equipment you still need. Frequency and the value of your time determine whether DIY is worthwhile.",
     tool: { type: "calculator", name: "DIY Oil Change Savings Calculator" },
   },
+  {
+    slug: "how-much-is-working-from-home-worth",
+    title: "How Much Is Working From Home Worth?",
+    description: "Calculate remote-work savings, recovered commute hours, and the approximate gross salary difference those savings could offset.",
+    category: "Career",
+    href: "/guides/how-much-is-working-from-home-worth",
+    locale: "en",
+    tags: ["remote work value", "working from home savings", "remote salary", "commute cost", "hybrid work", "work from home calculator"],
+    published: true,
+    clusters: ["career-compensation"],
+    lastModified: "2026-10-13",
+    updated: "October 2026",
+    readingTime: "11 min",
+    recommendedFor: "Employees comparing remote, hybrid, and office-based work or considering a remote offer with a lower salary.",
+    bottomLine: "Working from home can reduce commuting and office expenses and recover valuable time, but new home costs, taxes, benefits, and career tradeoffs determine its overall value.",
+    tool: { type: "calculator", name: "Remote Work Value Calculator" },
+  },
 ]
 export function getGuideBySlug(slug: string) {
   return guides.find((guide) => guide.slug === slug);
