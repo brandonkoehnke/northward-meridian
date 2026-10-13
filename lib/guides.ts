@@ -1243,6 +1243,23 @@ export const guides: GuideSummary[] = [
     bottomLine: "Working from home can reduce commuting and office expenses and recover valuable time, but new home costs, taxes, benefits, and career tradeoffs determine its overall value.",
     tool: { type: "calculator", name: "Remote Work Value Calculator" },
   },
+  {
+    slug: "is-a-professional-certification-worth-it",
+    title: "Is a Professional Certification Worth It?",
+    description: "Compare certification costs, employer reimbursement, renewal fees, and the salary increase needed to make a credential pay off.",
+    category: "Career",
+    href: "/guides/is-a-professional-certification-worth-it",
+    locale: "en",
+    tags: ["certification roi", "professional certification worth it", "certification cost", "certification calculator", "career development", "training reimbursement"],
+    published: true,
+    clusters: ["career-compensation"],
+    lastModified: "2026-10-13",
+    updated: "October 2026",
+    readingTime: "11 min",
+    recommendedFor: "Professionals considering a self-funded or employer-sponsored certification and comparing potential career benefits with costs.",
+    bottomLine: "A certification is worth paying for when it credibly unlocks better work or compensation relative to its full cost. Model uncertain outcomes instead of assuming a credential guarantees a raise.",
+    tool: { type: "calculator", name: "Certification ROI Calculator" },
+  },
 ]
 export function getGuideBySlug(slug: string) {
   return guides.find((guide) => guide.slug === slug);
