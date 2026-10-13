@@ -1209,7 +1209,23 @@ export const guides: GuideSummary[] = [
     bottomLine: "Unlimited PTO is not automatically more valuable than a fixed allowance. Compare how many days people actually take, whether managers approve leave, the written policy, and what happens to unused accrued days. The better choice depends on usable time and the full job offer, not the label.",
     tool: { type: "calculator", name: "PTO Decision Check" },
   },
-
+  {
+    slug: "how-much-money-save-changing-your-own-oil",
+    title: "How Much Money Do You Save Changing Your Own Oil?",
+    description: "Compare DIY and shop oil-change costs, estimate annual savings, find equipment break-even, and decide whether the savings justify your time.",
+    category: "Automotive",
+    href: "/guides/how-much-money-save-changing-your-own-oil",
+    locale: "en",
+    tags: ["DIY oil change", "oil change cost", "oil change savings", "car maintenance", "synthetic oil", "oil filter", "vehicle service"],
+    published: true,
+    clusters: ["automotive-maintenance"],
+    lastModified: "2026-10-13",
+    updated: "October 2026",
+    readingTime: "11 min",
+    recommendedFor: "Drivers comparing professional oil changes with buying oil, filters, and equipment to maintain their own vehicles.",
+    bottomLine: "Changing your own oil can save money, but compare equivalent services and include oil, filter, consumables, and any equipment you still need. Frequency and the value of your time determine whether DIY is worthwhile.",
+    tool: { type: "calculator", name: "DIY Oil Change Savings Calculator" },
+  },
 ]
 export function getGuideBySlug(slug: string) {
   return guides.find((guide) => guide.slug === slug);
