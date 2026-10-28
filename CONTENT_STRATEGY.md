@@ -1233,7 +1233,7 @@ US-Spanish search intent may also differ from:
 -   Spain,
 -   and other Spanish-speaking audiences.
 
-The exact localization architecture has not yet been selected.
+The original localization architecture was undecided when this section was drafted. **Current status (October 2026):** `/es` and three Spanish guide routes are live; see the October 2026 update at the end of this document.
 
 ------------------------------------------------------------------------
 
@@ -1277,7 +1277,7 @@ cultural context can differ.
 
 ------------------------------------------------------------------------
 
-# 34. WHY WE ARE WAITING ON LANGUAGES
+# 34. WHY WE ARE SELECTIVE ABOUT ADDITIONAL LANGUAGES
 
 The current constraint is not the ability to generate translations.
 
@@ -1321,7 +1321,7 @@ changes.
 
 # 35. LOCALIZATION IS MORE THAN TRANSLATION
 
-When multilingual expansion begins, treat each localized guide as a
+For existing and future multilingual guides, treat each localized guide as a
 search product for that audience.
 
 Research:
@@ -1629,7 +1629,7 @@ build topical authority
 repeat
 ```
 
-Later, multilingual discovery can follow either of two paths:
+Current and future multilingual discovery can follow either of two paths:
 
 ``` text
 proven English winner
@@ -1725,3 +1725,39 @@ The site's breadth is intentional.
 
 Its coherence comes from the decision model, not from restricting every
 guide to the same subject.
+
+
+---
+
+# October 28, 2026 strategic update — current guidance supersedes outdated future-tense language above
+
+## Current stage and measured evidence
+
+- **43 published guides: 40 English, 3 Spanish**, as of the last confirmed production deployment. Five recent Career guides and a DIY oil-change Automotive Maintenance guide expanded the portfolio.
+- Spanish is **no longer merely a planned phase**: `/es` and three `/es/guides/` automotive-financing pages are live. The statements above that localization architecture is undecided or that multilingual publication has not begun are historical, not current implementation guidance.
+- Google Search Console showed relevant query impressions but generally low rankings for broad consumer topics. A job-change raise query, `what salary increase is worth switching jobs`, generated a click from two impressions in one screenshot (average position 13.5). That is a useful intent-match signal, not statistical evidence of a winning category.
+- An early GSC export showed 534 impressions and one click across its available daily records; the export did not contain a full 28 days of populated records. Later reports and date windows must be compared carefully rather than merged as if identical.
+- GA4's July 21–October 18 overview showed 57 active/new users, including three attributed to Organic Search as first-user channel. Direct traffic and page views may include extensive developer QA. These reports do **not** establish that the search visitor used the job-change calculator. Verify via source/landing-page/event analysis before claiming engagement.
+- IndexNow accepted a 48-URL initial sitemap batch (HTTP 200 on October 28); this is a discovery notification, not an organic-traffic outcome.
+
+## Topic selection: specific, underserved decisions first
+
+The site has a useful content library, but sustained organic acquisition is not yet demonstrated. Do not respond simply by publishing more generic `Is X worth it?` pages. Before committing to each new guide:
+
+1. Identify the **exact decision/search intent** and the audience's practical stakes.
+2. Inspect live competing results and available calculators; assess whether a newer site can realistically add value.
+3. Look for overlooked variables, costly mistakes, conflicting contracts, or cross-category decisions.
+4. Check GSC for relevant existing queries and pages, while recognizing small-sample limitations.
+5. Check whether an existing guide should be expanded instead; avoid keyword cannibalization and near-duplicate URLs.
+6. Verify primary sources and design a differentiated, appropriately bounded tool.
+7. Select the strongest opportunity, not the easiest new guide to produce.
+
+A provisional experimentation mix is **more narrow, high-intent decisions**, with occasional broad but differentiated calculators and selective new sectors/languages. Do not treat an illustrative 6/3/1 mix as a mandatory quota. Favor repeatable top-20 impressions and verified clicks over raw impressions alone, but do not infer trends from one or two observations.
+
+## Candidate for Guide #44 — research, not approved publication
+
+`Do You Have to Repay Tuition Reimbursement If You Leave Your Job?` is a promising specific job-change/education-finance decision. Potential variables: written repayment terms, prorating, service commitment, departure date, gross vs. after-tax cost, and the new job's incremental after-tax compensation. **Research actual SERPs, governing policies, and state-specific limitations first.** Avoid treating the candidate as selected, and do not present a calculator as legal advice. Other candidates included GAP coverage with a large down payment and vehicle battery registration; the former may overlap with the existing GAP guide.
+
+## Multilingual implementation status
+
+Keep English and Spanish guide routes, metadata, navigation, source language, and related-guide recommendations coherent. Do not assume that every English winner must be translated or that all Spanish pages must have an English counterpart. Continue measuring language-specific queries independently and expand only where decision intent and source quality justify it.

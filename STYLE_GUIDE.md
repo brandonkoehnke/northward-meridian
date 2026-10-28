@@ -1248,3 +1248,28 @@ The goal is clarity through:
 
 That standard matters more than article length, publishing frequency,
 category balance, or the number of components on the page.
+
+
+---
+
+# October 2026 implementation notes
+
+These notes supplement the durable standards above; they do not replace them.
+
+## Input behavior and alignment
+
+- Put input labels, controls, and explanatory notes in a consistent top-aligned field wrapper. Avoid `justify-end` when neighboring fields have unequal note lengths. Check desktop and narrow layouts.
+- Allow select-all-and-retype and temporary empty states. Do not cap a dependent input while the user is typing the first digits of another input. Apply appropriate normalization on blur and calculate with bounded effective values.
+- A correct numeric result with an incorrect implication is a defect. Example: at 0% assumed probability, a certification calculator may still display **conditional** payback *if* a raise occurs, but must not imply that a raise is expected.
+- Explicitly distinguish actual cash flows, the optional personal value of time, approximate tax-adjusted salary comparisons, and hypothetical probability-weighted results.
+
+## React/Next.js code QA
+
+- Run the current project's ESLint and production build on every guide. `react-hooks/refs` can flag ref access indirectly captured by callbacks inside render-time field arrays. Keep ref access strictly in actual event handlers or use an appropriate state-based alternative.
+- Verify JSX tag closure and JSX entity escaping. Do not assume a successful guide-registry validator checks TSX syntax.
+- Avoid repeated repair loops: test a representative normal scenario, zero boundary, negative/no-payback case, dependent-limit case, and the specific conditional branches introduced by the tool.
+
+## Sources and multilingual review
+
+- Check all external links at publication time. Automated HTTP checks can be affected by bot protection; manually verify suspicious results. An English-language authority may be the strongest available source for a U.S.-focused Spanish guide, but label the language honestly and seek Spanish equivalents when useful.
+- Spanish guides are already live under `/es/guides/`; write for their actual audience and search vocabulary, not as mechanical English translations. Review headings, navigation, units, calculator labels, source descriptions, and related links.

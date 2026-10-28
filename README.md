@@ -32,7 +32,7 @@ Northward Meridian currently uses:
 -   TypeScript
 -   Tailwind CSS
 -   Vercel
--   Cloudflare
+-   Cloudflare (DNS only; Vercel serves site)
 -   Google Analytics / GA4
 -   Google Search Console
 -   Bing Webmaster Tools
@@ -71,7 +71,9 @@ lib/
 └── guides.ts
 
 scripts/
-└── validate-guides.mjs
+├── validate-guides.mjs
+├── check-source-links.mjs   # if present in checkout
+└── submit-indexnow.mjs
 ```
 
 ### Shared article components
@@ -527,6 +529,71 @@ These documents should complement one another rather than duplicate the
 same instructions.
 
 ------------------------------------------------------------------------
+
+
+
+---
+
+## Current implementation snapshot (October 28, 2026)
+
+The last confirmed production inventory is **43 guides: 40 English and 3 Spanish**. Guide #43 is **Is a Professional Certification Worth It?**; the next guide has not been selected. Do not treat this snapshot as a substitute for checking `lib/guides.ts` and the current validator output.
+
+### Language-aware guide routing
+
+- English guide pages: `app/guides/<slug>/page.tsx`, with href `/guides/<slug>`.
+- Spanish guide pages: `app/es/guides/<slug>/page.tsx`, with href `/es/guides/<slug>`.
+- Spanish index/home: `/es`; the three existing Spanish guides form an auto-buying/financing family.
+- `scripts/validate-guides.mjs` was updated to accept and check locale-aware hrefs and route directories. It verifies registry-to-route consistency separately for English and Spanish. Do not revert to an English-only expected-href rule.
+- Related Decisions use meaningful shared `clusters`; locale boundaries must be respected in displayed recommendations. Verify actual locale filtering in the current code before changing it.
+- Spanish source links should preferably be accessible and useful to Spanish-language readers; an English-language primary source is acceptable when necessary, but do not silently imply it is Spanish.
+
+### Newer guide and tool conventions
+
+Recent additions include Career decision guides on job-change raises, freelance hourly rates, fixed vs. unlimited PTO, remote-work value, and certification ROI; Automotive Maintenance includes DIY oil-change savings. Confirm exact cluster IDs from the current registry rather than inferring them from editorial categories.
+
+- Use top-aligned grid fields (`items-start` and field wrappers without `justify-end`) when some inputs have notes; check multiline-label alignment visually.
+- Do not put ref-reading functions in a field descriptor array mapped during render: React `react-hooks/refs` may reject the pattern. Use event-only handlers and lint-compatible analytics tracking. For the certification tool, `useState` replaced `useRef` for one-time-start tracking.
+- For dependent numeric limits (such as employer reimbursement <= initial expenses), allow uninterrupted typing; normalize on `onBlur`, while calculations use a safe effective capped value. Test retyping, blank values, negative/zero values, and changing parent values.
+- Separate cash savings from optional valuation of time. Label conditional payback and probability-weighted scenarios explicitly; do not treat them as forecasts.
+- Verify calculator output *and wording* against independently calculated scenarios, including adverse cases. Lint/build do not replace visual and functional QA.
+
+### Source-link checking
+
+A `scripts/check-source-links.mjs` utility was introduced during Guide #43 development. Confirm that the file exists in the local repository before using it. When present, run:
+
+```bash
+node scripts/check-source-links.mjs
+```
+
+Treat 403, rate limits, and timeouts as review items rather than proof of a dead link. Open external sources manually, particularly links that redirect or have moved. A broken IRS URL in the remote-work guide was corrected during development.
+
+### IndexNow — operational, manual
+
+Cloudflare currently provides **DNS only** for both apex and `www` CNAMEs; Vercel serves the site. Do not enable Cloudflare proxying merely for IndexNow.
+
+- `public/64fdde9787544aa88891e8d479a801ad.txt` contains the matching key and is hosted at the canonical `www` domain.
+- `scripts/submit-indexnow.mjs` and npm script `indexnow` support `--url`, `--all`, and `--dry-run`.
+- On Windows, Node v24.19.0 needed `NODE_USE_SYSTEM_CA=1` to trust the certificate chain when fetching the deployed key/sitemap. This was set as a **User** environment variable; restart terminal/VS Code if it is not inherited. Never use `NODE_TLS_REJECT_UNAUTHORIZED=0`.
+- On October 28, 2026, `npm run indexnow -- --all` retrieved the live sitemap and the IndexNow API returned **HTTP 200 for 48 URLs**, including 43 guides and five non-guide pages. A single-guide submission previously returned HTTP 202.
+- HTTP 200/202 confirms acceptance of a notification, **not crawling, indexing, ranking, or clicks**. Verify those independently in Bing Webmaster Tools.
+- The script is **manual**, not automatically triggered by Vercel. After a successful production deployment, notify only new or materially changed URLs:
+
+```bash
+npm run indexnow -- --url /guides/your-new-guide --dry-run
+npm run indexnow -- --url /guides/your-new-guide
+```
+
+For a Spanish page, use `/es/guides/<slug>`. Avoid routine `--all` resubmission after every deployment. Keep the sitemap as the primary complete URL inventory.
+
+### Updated publishing checklist
+
+1. Research a specific decision query and compare actual search results; check overlap with existing pages.
+2. Build the guide, registry entry, and tool with credible sources and explicit assumptions.
+3. Run `npm run validate-guides`, `npm run lint`, and `npm run build`.
+4. Run source-link checks where available, manually inspect external links, and test calculator edge cases and rendered layout.
+5. Commit and push; verify the **live** Vercel deployment and sitemap.
+6. Submit the new or materially changed canonical URL through IndexNow **after** deployment.
+7. Monitor GSC, Bing Webmaster Tools, and GA4 without treating small samples as proof of traction.
 
 ## Current Development Principle
 
