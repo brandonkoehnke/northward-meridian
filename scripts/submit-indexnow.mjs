@@ -69,6 +69,7 @@ async function main() {
   const keyLocation = `${ORIGIN}/${files[0]}`;
   console.log(`Host: ${HOST}\nKey URL: ${keyLocation}\nURLs (${urlList.length}):\n${urlList.join('\n')}`);
   if (dry) { console.log('\nDRY RUN: nothing submitted.'); return; }
+  console.log("Checking deployed IndexNow key file...");
   const keyResponse = await fetch(keyLocation, { signal: AbortSignal.timeout(15000) });
   if (!keyResponse.ok || (await keyResponse.text()).trim() !== key) {
     throw new Error('Deployed key file is not accessible or does not match. Deploy before submitting.');
@@ -83,4 +84,12 @@ async function main() {
   if (![200, 202].includes(response.status)) throw new Error(`IndexNow HTTP ${response.status}: ${responseBody}`);
   console.log(`IndexNow accepted the submission (HTTP ${response.status}). This does not guarantee indexing.`);
 }
-main().catch((err) => { console.error(`IndexNow error: ${err.message}`); process.exitCode = 1; });
+main().catch((err) => {
+  console.error("IndexNow error:", err);
+
+  if (err.cause) {
+    console.error("Underlying cause:", err.cause);
+  }
+
+  process.exitCode = 1;
+});
