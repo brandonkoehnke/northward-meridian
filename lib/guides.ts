@@ -1260,6 +1260,23 @@ export const guides: GuideSummary[] = [
     bottomLine: "A certification is worth paying for when it credibly unlocks better work or compensation relative to its full cost. Model uncertain outcomes instead of assuming a credential guarantees a raise.",
     tool: { type: "calculator", name: "Certification ROI Calculator" },
   },
+  {
+    slug: "leave-job-repay-tuition-reimbursement",
+    title: "Is It Worth Leaving Your Job If You Have to Repay Tuition Reimbursement?",
+    description: "Compare tuition repayment, a new job offer, and the cost of waiting with a contract-dependent leave-now-versus-wait calculator.",
+    category: "Career",
+    href: "/guides/leave-job-repay-tuition-reimbursement",
+    locale: "en",
+    tags: ["tuition reimbursement repayment", "quit job tuition assistance", "tuition repayment calculator", "new job offer", "stay or leave job"],
+    published: true,
+    clusters: ["career-compensation"],
+    lastModified: "2026-10-30",
+    updated: "October 2026",
+    readingTime: "10 min",
+    recommendedFor: "Employees comparing a new job offer with a possible employer tuition-repayment obligation.",
+    bottomLine: "Compare the actual terms of your repayment agreement with the compensation gained by leaving and the potential savings from waiting. Do not assume a repayment clause is enforceable without reviewing applicable law.",
+    tool: { type: "calculator", name: "Tuition Repayment Leave-Now vs. Wait Calculator" },
+  },
 ]
 export function getGuideBySlug(slug: string) {
   return guides.find((guide) => guide.slug === slug);
