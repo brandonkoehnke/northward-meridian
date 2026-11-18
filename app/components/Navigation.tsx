@@ -14,7 +14,7 @@ export default function Navigation() {
             <div className="mx-auto flex max-w-6xl items-center px-5 py-4 sm:px-6 sm:py-5">
                 <Link
                     href={spanish ? "/es" : "/"}
-                    className="flex min-w-0 items-center gap-3 transition-colors hover:text-[var(--accent)]"
+                    className="flex min-w-0 items-center gap-3 text-[var(--foreground)] transition-colors hover:text-[var(--accent)]"
                 >
                     <LogoMark />
                     <span className="truncate text-lg font-semibold tracking-tight sm:text-xl">
