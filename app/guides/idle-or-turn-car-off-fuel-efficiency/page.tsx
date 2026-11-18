@@ -32,6 +32,7 @@ const guide = (() => {
 
 const siteUrl = "https://www.northwardmeridian.com";
 const canonicalUrl = `${siteUrl}${guide.href}`;
+const searchDescription = "Idle or turn your car off? See when restarting saves fuel and use our free calculator to estimate gas savings for your driving.";
 
 const guideSections = [
     {
@@ -151,7 +152,7 @@ const guidedEntryScenarios = [
 
 export const metadata: Metadata = {
     title: `${guide.title} | Northward Meridian`,
-    description: guide.description,
+    description: searchDescription,
     alternates: {
         canonical: canonicalUrl,
     },
@@ -160,14 +161,14 @@ export const metadata: Metadata = {
         url: canonicalUrl,
         siteName: "Northward Meridian",
         title: guide.title,
-        description: guide.description,
+        description: searchDescription,
         publishedTime: "2026-09-22",
         modifiedTime: "2026-09-22",
     },
     twitter: {
         card: "summary",
         title: guide.title,
-        description: guide.description,
+        description: searchDescription,
     },
 };
 
@@ -175,7 +176,7 @@ const articleJsonLd = {
     "@context": "https://schema.org",
     "@type": "Article",
     headline: guide.title,
-    description: guide.description,
+    description: searchDescription,
     datePublished: "2026-09-22",
     dateModified: "2026-09-22",
     mainEntityOfPage: canonicalUrl,
@@ -205,6 +206,12 @@ export default function IdleOrTurnCarOffGuide() {
             sections={guideSections}
             guidedEntry={<GuidedEntry scenarios={guidedEntryScenarios} />}
         >
+            <div className="mb-6 rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-5">
+                <p className="font-semibold">Quick answer: turning off a safely parked, warmed-up gasoline car generally saves fuel during longer waits.</p>
+                <p className="mt-2 text-sm leading-6 text-[var(--muted)]">
+                    U.S. Department of Energy-supported testing found a fuel-use break-even point of roughly 10 seconds under the conditions tested. This is not advice to manually shut off your engine in traffic or when running it is necessary for safety, visibility, or HVAC. Use the calculator below to estimate your own fuel-cost difference.
+                </p>
+            </div>
             <IdleVsShutdownCalculator />
 
             <WhyThisMatters id="short-answer">

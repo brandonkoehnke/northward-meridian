@@ -24,6 +24,7 @@ const canonicalUrl = `${siteUrl}${guide.href}`;
 const guideSections = [
     { id: "break-even-raise-calculator", label: "Break-even raise calculator" },
     { id: "short-answer", label: "The short answer" },
+    { id: "typical-vs-break-even", label: "Typical raise vs. break-even" },
     { id: "salary-is-not-total-comp", label: "Salary vs. total compensation" },
     { id: "recurring-differences", label: "Recurring differences" },
     { id: "one-time-costs", label: "One-time switching costs" },
@@ -112,6 +113,15 @@ export default function BreakEvenRaiseGuide() {
                 <p>A useful starting point is therefore the <strong>break-even salary</strong>: the new salary that offsets the measurable financial disadvantages of switching jobs over the period you expect to stay.</p>
                 <p>That number is not a recommendation to accept or reject an offer. Career growth, management, flexibility, stability, workload, and the value of your time can matter even when they cannot be priced reliably.</p>
             </WhyThisMatters>
+            <GuideSection id="typical-vs-break-even" eyebrow="Raise Expectations" title="What is a good raise when changing jobs?">
+                <p>There is no universal percentage that makes a job-switching raise good. Three different numbers answer three different questions:</p>
+                <div className="mt-5 space-y-4">
+                    <InformationCard title="Typical raise"><p>A statistic about pay changes among workers in a particular market and time period. It describes what happened to others; it does not establish what your offer should be.</p></InformationCard>
+                    <InformationCard title="Negotiation target"><p>The salary you decide to request based on the role, market evidence, your qualifications, and available alternatives. It may be above your personal financial break-even point.</p></InformationCard>
+                    <InformationCard title="Personal break-even raise"><p>The extra salary needed to offset changes in benefits, recurring expenses, and one-time switching costs over your chosen period. This is what the calculator above estimates.</p></InformationCard>
+                </div>
+                <p className="mt-5">If leaving your current employer could trigger tuition-assistance repayment, compare leaving now with waiting using our <a className="font-semibold text-[var(--accent)] underline underline-offset-2" href="/guides/leave-job-repay-tuition-reimbursement">tuition reimbursement repayment decision calculator</a>. A repayment obligation can change the financial comparison without changing the headline raise.</p>
+            </GuideSection>
             <GuideSection id="salary-is-not-total-comp" eyebrow="Compensation" title="Salary is only one part of what an employer provides.">
                 <p>The Bureau of Labor Statistics measures employer compensation as wages and salaries plus employee benefits. Benefits can include paid leave, supplemental pay, insurance, retirement and savings contributions, and legally required benefits.</p>
                 <p>In June 2026, BLS estimated that wages and salaries made up about 70% of private-industry employer compensation costs, with benefits accounting for about 30%. That does not mean your benefits equal 30% of your salary; it shows why comparing salary alone can miss meaningful differences.</p>
