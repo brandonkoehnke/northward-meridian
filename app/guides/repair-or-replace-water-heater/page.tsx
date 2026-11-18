@@ -630,13 +630,13 @@ export default function RepairOrReplaceWaterHeaterGuide() {
                         title: "Selecting a New Water Heater",
                         publisher:
                             "U.S. Department of Energy",
-                        href: "https://www.energy.gov/energysaver/articles/selecting-new-water-heater",
+                        href: "https://www1.eere.energy.gov/buildings/publications/pdfs/building_america/strategy-guideline-water-heater-selection.pdf",
                     },
                     {
                         title: "Water Heating",
                         publisher:
                             "U.S. Department of Energy",
-                        href: "https://www.energy.gov/energysaver/heat-and-cool/water-heating",
+                        href: "https://www.energy.gov/topics/water-heating",
                     },
                     {
                         title: "Heat Pump Water Heaters: Benefits and Savings",

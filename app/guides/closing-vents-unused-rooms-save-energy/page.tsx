@@ -758,17 +758,10 @@ export default function ClosingVentsUnusedRoomsSaveEnergyGuide() {
                 sources={[
                     {
                         title:
-                            "Energy Renovations HVAC Guide — Zoning",
-                        publisher:
-                            "U.S. Department of Energy, Building America",
-                        href: "https://www.energy.gov/cmei/buildings/articles/building-america-best-practices-series-vol-14-energy-renovations-hvac-guide",
-                    },
-                    {
-                        title:
                             "Can You Save Money by Closing HVAC Vents in Unused Rooms?",
                         publisher:
                             "U.S. Department of Energy, Building Science Education",
-                        href: "https://bsesc.energy.gov/sources/can-you-save-money-closing-hvac-vents-unused-rooms",
+                        href: "https://www1.eere.energy.gov/buildings/publications/pdfs/building_america/hvac_guide.pdf",
                     },
                     {
                         title:

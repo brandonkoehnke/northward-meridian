@@ -856,13 +856,6 @@ export default function HomeEnergyAuditGuide() {
                             "https://www.energy.gov/sites/default/files/guide_to_home_energy_assessments.pdf",
                     },
                     {
-                        title: "Home Energy Assessments",
-                        publisher:
-                            "U.S. Department of Energy",
-                        href:
-                            "https://www.energy.gov/energysaver/home-energy-audits",
-                    },
-                    {
                         title: "Home Energy Yardstick",
                         publisher: "ENERGY STAR",
                         href:

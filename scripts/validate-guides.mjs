@@ -217,6 +217,40 @@ function getClustersField(block) {
     ].map((match) => match[1]);
 }
 
+/** Read string-valued fields, including strings placed on the next line. */
+function getRequiredText(block, name) {
+    const match = new RegExp(`(?:^|\\n)\\s*${name}\\s*:\\s*"([^"\\n]*)"`, "m").exec(block);
+    return match?.[1]?.trim() ?? null;
+}
+
+function getFieldLiteral(block, name) {
+    const match = new RegExp(`(?:^|\\n)\\s*${name}\\s*:\\s*(true|false)\\s*[,\\n]`, "m").exec(block);
+    return match ? match[1] === "true" : null;
+}
+
+function validISODate(value) {
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(value ?? "")) return false;
+    const parsed = new Date(`${value}T00:00:00Z`);
+    return Number.isFinite(parsed.getTime()) && parsed.toISOString().slice(0, 10) === value;
+}
+
+function validateMetadata(guide) {
+    const block = guide.block;
+    const slug = guide.slug ?? `Guide #${guide.index + 1}`;
+    for (const name of ["title", "description", "category", "updated", "readingTime", "recommendedFor", "bottomLine"]) {
+        if (!getRequiredText(block, name)) error(`${slug}: missing or empty ${name}.`);
+    }
+    const date = getRequiredText(block, "lastModified");
+    if (!validISODate(date)) error(`${slug}: lastModified must be a real ISO date (YYYY-MM-DD).`);
+    if (getFieldLiteral(block, "published") === null) error(`${slug}: published must be true or false.`);
+    const tagsMatch = block.match(/(?:^|\n)\s*tags\s*:\s*\[([\s\S]*?)\]/m);
+    if (!tagsMatch || !/"[^"\n]+"/.test(tagsMatch[1])) error(`${slug}: tags must contain at least one string.`);
+    const toolMatch = block.match(/(?:^|\n)\s*tool\s*:\s*\{([\s\S]*?)\}/m);
+    if (!toolMatch || !/\btype\s*:\s*"(?:calculator|decision-check)"/.test(toolMatch[1]) || !/\bname\s*:\s*"[^"\n]+"/.test(toolMatch[1])) {
+        error(`${slug}: tool requires a valid type and nonempty name.`);
+    }
+}
+
 /**
  * Validate the relationship between a slug and its route.
  */
@@ -334,6 +368,9 @@ for (const guide of guides) {
         );
     }
 }
+
+// Validate required registry metadata.
+for (const guide of guides) validateMetadata(guide);
 
 // --------------------------------------------------
 // Validate slugs
@@ -490,6 +527,10 @@ for (const [cluster, members] of sortedClusters) {
     success(
         `Cluster "${cluster}" contains ${members.length} ${noun}.`,
     );
+}
+
+for (const [cluster, members] of sortedClusters) {
+    if (members.length === 1) console.warn(`! Singleton cluster "${cluster}": ${members[0]} (review for a possible typo).`);
 }
 
 // --------------------------------------------------

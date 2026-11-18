@@ -712,7 +712,7 @@ export default function HeatPumpWaterHeaterGuide() {
                         title: "Home Electrification and Appliances Rebates",
                         publisher:
                             "U.S. Department of Energy",
-                        href: "https://www.energy.gov/scep/home-energy-rebates",
+                        href: "https://www.energy.gov/cmei/scep/slsc/home-energy-rebates-program",
                     },
                     {
                         title: "Federal Tax Credits for Heat Pump Water Heaters",

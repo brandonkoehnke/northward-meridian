@@ -700,7 +700,7 @@ export default function DirtyEngineAirFilterGasMileageGuide() {
                             "Effect of Intake Air Filter Condition on Vehicle Fuel Economy",
                         publisher:
                             "Oak Ridge National Laboratory / U.S. Department of Energy",
-                        href: "https://www.osti.gov/servlets/purl/939301",
+                        href: "https://info.ornl.gov/sites/publications/files/Pub14105.pdf",
                     },
                     {
                         title:
