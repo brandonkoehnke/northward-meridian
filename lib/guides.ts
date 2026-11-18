@@ -372,7 +372,7 @@ export const guides: GuideSummary[] = [
     ],
     published: true,
     clusters: ["automotive-efficiency"],
-    lastModified: "2026-09-24",
+    lastModified: "2026-11-18",
     updated: "September 2026",
     readingTime: "9 min",
     recommendedFor:
@@ -1250,7 +1250,7 @@ export const guides: GuideSummary[] = [
     ],
     published: true,
     clusters: ["career-compensation"],
-    lastModified: "2026-10-02",
+    lastModified: "2026-11-18",
     updated: "October 2026",
     readingTime: "14 min",
     recommendedFor:
