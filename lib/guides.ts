@@ -22,6 +22,24 @@ export type GuideSummary = {
 };
 export const guides: GuideSummary[] = [
   {
+    slug: "why-is-my-external-ssd-so-slow",
+    title: "Why Is My External SSD So Slow? Find the USB Bottleneck",
+    description: "Find why an external SSD transfers slowly with a free checker for USB ports, cables, enclosures, docks, read/write tests and sustained speed.",
+    category: "Technology",
+    href: "/guides/why-is-my-external-ssd-so-slow",
+    locale: "en",
+    tags: ["external SSD slow", "USB-C SSD speed", "USB transfer speed", "SSD bottleneck", "SSD cable speed", "external drive troubleshooting"],
+    published: true,
+    clusters: ["technology-connectivity"],
+    updated: "November 2026",
+    lastModified: "2026-11-18",
+    readingTime: "11 min",
+    recommendedFor: "People troubleshooting an external SSD that transfers files much more slowly than its advertised speed.",
+    bottomLine: "A slow external SSD may be limited by its USB connection, but file type, write cache, heat and the source drive can also matter. Verify the actual link and test one variable at a time before replacing hardware.",
+    tool: { type: "decision-check", name: "External SSD Speed & Bottleneck Checker" },
+  },
+
+  {
     slug: "usb-c-monitor-not-working",
     title: "USB-C Monitor Not Working? Check Your Cable, Port & Video Support",
     description: "Troubleshoot a USB-C monitor with a free checker for video-capable ports, cables, docks, adapters, display inputs and USB graphics exceptions.",
@@ -47,7 +65,7 @@ export const guides: GuideSummary[] = [
     locale: "en",
     tags: ["storage unit cost", "keep storage unit", "downsize storage", "empty storage unit", "storage calculator"],
     published: true,
-    clusters: [],
+    clusters: ["household-cost-decisions"],
     updated: "November 2026",
     lastModified: "2026-11-18",
     readingTime: "9 min",
@@ -373,7 +391,7 @@ export const guides: GuideSummary[] = [
     published: true,
     clusters: ["automotive-efficiency"],
     lastModified: "2026-11-18",
-    updated: "September 2026",
+    updated: "November 2026",
     readingTime: "9 min",
     recommendedFor:
       "Drivers wondering whether leaving a gasoline vehicle idling during short waits saves fuel compared with shutting the engine off and restarting it.",
@@ -545,7 +563,7 @@ export const guides: GuideSummary[] = [
       "payback",
     ],
     published: true,
-    clusters: [],
+    clusters: ["household-cost-decisions"],
     lastModified: "2026-09-24",
     updated: "September 2026",
     readingTime: "9 min",
@@ -1251,7 +1269,7 @@ export const guides: GuideSummary[] = [
     published: true,
     clusters: ["career-compensation"],
     lastModified: "2026-11-18",
-    updated: "October 2026",
+    updated: "November 2026",
     readingTime: "14 min",
     recommendedFor:
       "People comparing a new job with their current role and trying to determine how much additional salary would offset measurable compensation, benefit, commuting, and switching-cost differences.",
