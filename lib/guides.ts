@@ -22,6 +22,23 @@ export type GuideSummary = {
 };
 export const guides: GuideSummary[] = [
   {
+    slug: "keep-downsize-or-empty-storage-unit",
+    title: "Keep, Downsize, or Empty Your Storage Unit? Compare the Real Costs",
+    description: "Compare keeping, downsizing, or emptying a storage unit with a free calculator for rent increases, moving expenses, resale proceeds, and replacement costs.",
+    category: "Home & Living",
+    href: "/guides/keep-downsize-or-empty-storage-unit",
+    locale: "en",
+    tags: ["storage unit cost", "keep storage unit", "downsize storage", "empty storage unit", "storage calculator"],
+    published: true,
+    clusters: ["household-cost-decisions"],
+    updated: "November 2026",
+    lastModified: "2026-11-18",
+    readingTime: "9 min",
+    recommendedFor: "People paying for a storage unit who are deciding whether to keep it, move to a smaller unit, or clear it out.",
+    bottomLine: "Compare the future cost of all three options. Past rent and purchase prices are sunk costs; realistic moving expenses, resale proceeds, and future replacement needs matter more.",
+    tool: { type: "calculator", name: "Storage Unit Keep vs. Downsize vs. Empty Calculator" },
+  },
+  {
     slug: "what-happens-to-files-when-you-cancel-cloud-storage",
     title: "What Happens to Your Files When You Cancel Cloud Storage?",
     description: "Check what happens to files, syncing, backups and storage limits after cancelling iCloud+, Google One, OneDrive or Dropbox.",
@@ -511,7 +528,7 @@ export const guides: GuideSummary[] = [
       "payback",
     ],
     published: true,
-    clusters: [],
+    clusters: ["household-cost-decisions"],
     lastModified: "2026-09-24",
     updated: "September 2026",
     readingTime: "9 min",
