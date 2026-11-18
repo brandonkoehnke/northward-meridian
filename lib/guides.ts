@@ -22,6 +22,23 @@ export type GuideSummary = {
 };
 export const guides: GuideSummary[] = [
   {
+    slug: "what-happens-to-files-when-you-cancel-cloud-storage",
+    title: "What Happens to Your Files When You Cancel Cloud Storage?",
+    description: "Check what happens to files, syncing, backups and storage limits after cancelling iCloud+, Google One, OneDrive or Dropbox.",
+    category: "Technology",
+    href: "/guides/what-happens-to-files-when-you-cancel-cloud-storage",
+    locale: "en",
+    tags: ["cancel cloud storage", "cloud storage downgrade", "iCloud cancellation", "Google One cancellation", "OneDrive over quota", "Dropbox over quota"],
+    published: true,
+    clusters: ["data-storage-backup"],
+    updated: "November 2026",
+    lastModified: "2026-11-18",
+    readingTime: "9 min",
+    recommendedFor: "People considering or recovering from a cloud storage downgrade who want to protect their photos, files and backups.",
+    bottomLine: "Cancelling paid cloud storage may stop syncing and backups before any files are deleted. Check your post-downgrade quota, provider notices and independent backups before acting.",
+    tool: { type: "decision-check", name: "Cloud Storage Cancellation Checker" },
+  },
+  {
     slug: "can-i-use-ai-for-my-college-assignment",
     title: "Can I Use AI for My College Assignment? Rules, Disclosure & Examples",
     description: "Check assignment-specific AI rules, distinguish permission from disclosure, and draft an accurate AI-use acknowledgment or instructor clarification request.",
