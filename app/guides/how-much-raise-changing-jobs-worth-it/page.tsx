@@ -20,6 +20,8 @@ const guide = (() => {
 
 const siteUrl = "https://www.northwardmeridian.com";
 const canonicalUrl = `${siteUrl}${guide.href}`;
+const seoTitle = "How Much of a Raise Is Worth Switching Jobs? Calculator";
+const seoDescription = "Use our free job change calculator to find your break-even raise. Compare salary, benefits, retirement contributions, commuting costs, and switching expenses.";
 
 const guideSections = [
     { id: "break-even-raise-calculator", label: "Break-even raise calculator" },
@@ -66,28 +68,28 @@ const guidedEntryScenarios = [
 ] as const;
 
 export const metadata: Metadata = {
-    title: `${guide.title} | Northward Meridian`,
-    description: guide.description,
+    title: seoTitle,
+    description: seoDescription,
     alternates: { canonical: canonicalUrl },
     openGraph: {
         type: "article",
         url: canonicalUrl,
         siteName: "Northward Meridian",
-        title: guide.title,
-        description: guide.description,
+        title: seoTitle,
+        description: seoDescription,
         publishedTime: "2026-10-02",
-        modifiedTime: "2026-10-02",
+        modifiedTime: guide.lastModified,
     },
-    twitter: { card: "summary", title: guide.title, description: guide.description },
+    twitter: { card: "summary", title: seoTitle, description: seoDescription },
 };
 
 const articleJsonLd = {
     "@context": "https://schema.org",
     "@type": "Article",
     headline: guide.title,
-    description: guide.description,
+    description: seoDescription,
     datePublished: "2026-10-02",
-    dateModified: "2026-10-02",
+    dateModified: guide.lastModified,
     mainEntityOfPage: canonicalUrl,
     author: { "@type": "Organization", name: "Northward Meridian", url: `${siteUrl}/about` },
     publisher: { "@type": "Organization", name: "Northward Meridian", url: siteUrl },

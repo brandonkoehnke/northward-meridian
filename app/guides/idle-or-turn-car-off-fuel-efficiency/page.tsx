@@ -32,7 +32,8 @@ const guide = (() => {
 
 const siteUrl = "https://www.northwardmeridian.com";
 const canonicalUrl = `${siteUrl}${guide.href}`;
-const searchDescription = "Idle or turn your car off? See when restarting saves fuel and use our free calculator to estimate gas savings for your driving.";
+const seoTitle = "Idle vs. Restart Fuel Calculator: Which Saves More Gas?";
+const seoDescription = "Should you idle or turn off your engine? Use our free calculator to estimate fuel costs and savings based on your vehicle, gas price, and idling time.";
 
 const guideSections = [
     {
@@ -151,8 +152,8 @@ const guidedEntryScenarios = [
 ] as const;
 
 export const metadata: Metadata = {
-    title: `${guide.title} | Northward Meridian`,
-    description: searchDescription,
+    title: seoTitle,
+    description: seoDescription,
     alternates: {
         canonical: canonicalUrl,
     },
@@ -160,15 +161,15 @@ export const metadata: Metadata = {
         type: "article",
         url: canonicalUrl,
         siteName: "Northward Meridian",
-        title: guide.title,
-        description: searchDescription,
+        title: seoTitle,
+        description: seoDescription,
         publishedTime: "2026-09-22",
-        modifiedTime: "2026-09-22",
+        modifiedTime: guide.lastModified,
     },
     twitter: {
         card: "summary",
-        title: guide.title,
-        description: searchDescription,
+        title: seoTitle,
+        description: seoDescription,
     },
 };
 
@@ -176,9 +177,9 @@ const articleJsonLd = {
     "@context": "https://schema.org",
     "@type": "Article",
     headline: guide.title,
-    description: searchDescription,
+    description: seoDescription,
     datePublished: "2026-09-22",
-    dateModified: "2026-09-22",
+    dateModified: guide.lastModified,
     mainEntityOfPage: canonicalUrl,
     author: {
         "@type": "Organization",
