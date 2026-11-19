@@ -22,6 +22,23 @@ export type GuideSummary = {
 };
 export const guides: GuideSummary[] = [
   {
+    slug: "ethernet-stuck-at-100-mbps",
+    title: "Why Is My Ethernet Stuck at 100 Mbps Instead of 1 Gbps?",
+    description: "Troubleshoot a wired Ethernet link stuck at 100 Mbps with a step-by-step checker for cables, adapters, router ports, wall jacks and negotiated speed.",
+    category: "Technology",
+    href: "/guides/ethernet-stuck-at-100-mbps",
+    locale: "en",
+    tags: ["ethernet stuck at 100 mbps", "ethernet capped at 100mbps", "gigabit ethernet not working", "ethernet link speed", "ethernet cable troubleshooting", "100 mbps instead of 1 gbps"],
+    published: true,
+    clusters: ["technology-connectivity"],
+    updated: "November 2026",
+    lastModified: "2026-11-19",
+    readingTime: "7 min",
+    recommendedFor: "People whose wired Ethernet connection negotiates at 100 Mbps instead of the gigabit speed their equipment should support.",
+    bottomLine: "First distinguish the negotiated Ethernet link speed from an internet speed test. Then test a known-good direct connection and compare devices to isolate the limiting cable, port, adapter, or intermediate segment.",
+    tool: { type: "decision-check", name: "Ethernet Bottleneck Troubleshooter" },
+  },
+  {
     slug: "why-is-my-external-ssd-so-slow",
     title: "Why Is My External SSD So Slow? Find the USB Bottleneck",
     description: "Find why an external SSD transfers slowly with a free checker for USB ports, cables, enclosures, docks, read/write tests and sustained speed.",
