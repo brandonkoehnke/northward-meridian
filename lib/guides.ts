@@ -22,6 +22,24 @@ export type GuideSummary = {
 };
 export const guides: GuideSummary[] = [
   {
+    slug: "portable-power-station-shuts-off-with-battery-left",
+    title: "Why Does My Portable Power Station Shut Off With Battery Left?",
+    description: "Find out why a portable power station shuts off with charge remaining. Check ECO mode, AC timeouts, overload warnings, temperature, and battery behavior.",
+    category: "Technology",
+    href: "/guides/portable-power-station-shuts-off-with-battery-left",
+    locale: "en",
+    tags: ["power station shuts off", "portable power station battery remaining", "EcoFlow AC timeout", "BLUETTI ECO mode", "power station overload", "portable battery troubleshooting"],
+    published: true,
+    clusters: ["home-backup"],
+    updated: "November 2026",
+    lastModified: "2026-11-19",
+    readingTime: "8 min",
+    recommendedFor: "Owners of portable power stations whose AC or DC output stops despite charge remaining on the battery display.",
+    bottomLine: "A battery percentage does not prove that the AC or DC output should remain on. Check which part shut off, the warning indicators, the load pattern, and your exact model manual before changing settings or replacing hardware.",
+    tool: { type: "decision-check", name: "Portable Power Station Shutdown Checker" },
+  },
+
+  {
     slug: "ethernet-stuck-at-100-mbps",
     title: "Why Is My Ethernet Stuck at 100 Mbps Instead of 1 Gbps?",
     description: "Troubleshoot a wired Ethernet link stuck at 100 Mbps with a step-by-step checker for cables, adapters, router ports, wall jacks and negotiated speed.",
