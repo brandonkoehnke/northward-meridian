@@ -1273,3 +1273,12 @@ These notes supplement the durable standards above; they do not replace them.
 
 - Check all external links at publication time. Automated HTTP checks can be affected by bot protection; manually verify suspicious results. An English-language authority may be the strongest available source for a U.S.-focused Spanish guide, but label the language honestly and seek Spanish equivalents when useful.
 - Spanish guides are already live under `/es/guides/`; write for their actual audience and search vocabulary, not as mechanical English translations. Review headings, navigation, units, calculator labels, source descriptions, and related links.
+
+
+## November 2026 — Diagnostic tools and source QA
+
+For troubleshooting guides, put the actionable diagnostic near the top; use accessible everyday-language questions and define technical terms such as negotiated link speed. Treat unknown inputs as unknown rather than inventing a confident diagnosis. Differentiate observed facts, possible explanations, and the next safe test. Avoid model-specific electrical/battery thresholds without manufacturer documentation, and do not instruct users to bypass safety protections.
+
+When a tool offers **Copy Diagnostic Summary**, display the summary before copying, include selected observations and actionable next steps, and handle clipboard failures. Do not automatically transmit user answers or embed sensitive inputs in public links. Test all relevant branches, default/unknown states, safety warnings, keyboard access, and mobile width.
+
+Before publishing, run `npm run validate-guides`, `npm run lint`, `npm run build`, and `npm run check-guide-links -- --guide <slug>`. Investigate HTTP 404/410; manually inspect 403/timeouts; verify source-to-claim fit even when HTTP 200. Search page and tool files when repairing old URLs. Verify rendered layout, live deployment, and sitemap before IndexNow.

@@ -1761,3 +1761,14 @@ A provisional experimentation mix is **more narrow, high-intent decisions**, wit
 ## Multilingual implementation status
 
 Keep English and Spanish guide routes, metadata, navigation, source language, and related-guide recommendations coherent. Do not assume that every English winner must be translated or that all Spanish pages must have an English counterpart. Continue measuring language-specific queries independently and expand only where decision intent and source quality justify it.
+
+
+## November 2026 — Guide selection and organic-engagement experiment
+
+NM has **52 registered guides in the latest local build**, including three Spanish guides. Guides #49–#52 explored practical technical troubleshooting: USB-C monitor video, external SSD speed, Ethernet negotiation at 100 Mbps, and portable power-station shutdowns. This is an **experiment**, not proof of organic demand or ranking success.
+
+Choose future guides by inspecting current search results, official documentation, existing calculators/diagnostic tools, real repeated user problems, and available Search Console query/page data. Prefer narrow user tasks that can be completed with a concise, accurate checker or reference. Don't infer low competition from Reddit threads or invent keyword volumes. Reject near-duplicates and topics where official resources already meet the intent well.
+
+Measure page-specific impressions, clicks, CTR, indexing, and meaningful client-side tool interactions before expanding a topic cluster. Avoid tracking salary, diagnostic inputs, or other personal values in GA4. At small traffic volumes, interpret changes cautiously and do not mistake IndexNow acceptance for search performance.
+
+Source validation is part of editorial QA: `npm run check-guide-links -- --guide <slug>` before publication; `npm run check-guide-links` periodically for all guides. 404/410 require investigation; 403/timeouts require manual verification; 200 is accessibility, not factual support. Preserve exact registry metadata and `lastModified` values.

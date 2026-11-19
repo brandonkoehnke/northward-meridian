@@ -617,3 +617,25 @@ architecture work to replace the core objective:
 
 > Build genuinely useful decision resources, measure what earns search
 > visibility, and expand intelligently from the evidence.
+
+
+## November 2026: Current publishing QA and handoff
+
+The latest **local** registry/route validation reports **52 guides (49 English, 3 Spanish)**. Guide #52 is `portable-power-station-shuts-off-with-battery-left`; Guide #51 is `ethernet-stuck-at-100-mbps`. Local build and source-link checks for #52 passed; **verify production deployment separately**. The `lib/guides.ts` file, not a historical guide count in documentation, is the source of truth. Preserve all entries, clusters, and substantive `lastModified` dates when adding guides. The idling and changing-jobs guides were substantively revised November 18, 2026.
+
+### External-source validation
+
+```powershell
+npm run validate-guides
+npm run lint
+npm run build
+npm run check-guide-links -- --guide your-guide-slug
+# Periodic sitewide audit:
+npm run check-guide-links
+```
+
+`check-guide-links` scans literal external URLs in guide source files, including guide-specific client components. It follows redirects; HTTP 404/410 are confirmed failures requiring investigation, while 403/timeouts and blocked requests are **manual-review warnings**. A 200 response does not prove a source supports the associated claim, and dynamically constructed URLs may escape detection. Check the actual destination and cited statement in a browser. Search the entire repository for an old URL before considering a replacement complete.
+
+### Release sequence
+
+Research search intent and competitors → implement guide and registry → test diagnostic/calculator branches and copy behavior → validate/lint/build → check source links and claims → full visual/mobile QA → commit/push → verify Vercel page and live sitemap → submit **only newly added or materially updated canonical URLs** through IndexNow after deployment → monitor GSC and GA4. `npm run indexnow -- --url /guides/your-guide-slug` returns acceptance, not indexing.

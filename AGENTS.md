@@ -18,3 +18,9 @@ Before changing guide architecture or generating a new guide, read `README.md`, 
 - Run `npm run validate-guides`, `npm run lint`, and `npm run build`; check external sources and test calculator scenarios and layout before committing.
 - Deployment is via Vercel. IndexNow notifications are manual **after** deployment, via `npm run indexnow -- --url /guides/<slug>` (or `/es/guides/<slug>`). Do not notify pre-deployment or resubmit all URLs routinely.
 - Do not infer search success from impressions or IndexNow HTTP 200 alone. Current strategy prioritizes researched, specific underserved decisions and avoids duplicating existing guides.
+
+## Current release guardrails (November 2026)
+
+- As of the latest local validation: **52 registered guides (49 English, 3 Spanish)**. Verify the registry before each edit; do not overwrite `lib/guides.ts` from an old generated file or revert existing `lastModified` dates.
+- Before publishing run `npm run check-guide-links -- --guide <slug>` in addition to validation, lint, and build. HTTP 404/410 needs repair; HTTP 403/timeouts need manual review; HTTP 200 alone does not validate the claim. Periodically run `npm run check-guide-links` across all guides.
+- Inspect and test interactive diagnostic branches, copied summaries, and mobile layout; verify deployed page/sitemap before manual IndexNow submission.
