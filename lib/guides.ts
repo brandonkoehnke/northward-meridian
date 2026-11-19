@@ -22,6 +22,23 @@ export type GuideSummary = {
 };
 export const guides: GuideSummary[] = [
   {
+    slug: "which-google-takeout-files-can-i-delete",
+    title: "Which Google Takeout Photo Files Can I Safely Delete?",
+    description: "Understand Google Takeout duplicates, edited photos, JSON sidecars, and album folders before deleting anything. Use a free file decision checker.",
+    category: "Technology",
+    href: "/guides/which-google-takeout-files-can-i-delete",
+    locale: "en",
+    tags: ["Google Takeout duplicate photos", "Google Takeout JSON sidecars", "Google Photos export files", "Google Takeout edited photos", "safe photo archive cleanup", "photo duplicates"],
+    published: true,
+    clusters: ["data-storage-backup"],
+    updated: "November 2026",
+    lastModified: "2026-11-19",
+    readingTime: "7 min",
+    recommendedFor: "People reviewing Google Photos Takeout exports with repeated-looking media, album folders, edited versions, and JSON metadata files.",
+    bottomLine: "Do not delete files solely because their names or folders look duplicated. Preserve the original export and metadata, compare actual file contents, and verify album context before changing a working copy.",
+    tool: { type: "decision-check", name: "Google Takeout File Decision Checker" },
+  },
+  {
     slug: "why-do-my-photos-show-todays-date",
     title: "Why Do My Photos Show Today’s Date After Downloading Them?",
     description: "Find out why downloaded photos show the wrong date. Check file timestamps, EXIF capture dates, iCloud, Google Photos, and Google Takeout metadata.",
