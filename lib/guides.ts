@@ -22,6 +22,23 @@ export type GuideSummary = {
 };
 export const guides: GuideSummary[] = [
   {
+    slug: "why-do-my-photos-show-todays-date",
+    title: "Why Do My Photos Show Today’s Date After Downloading Them?",
+    description: "Find out why downloaded photos show the wrong date. Check file timestamps, EXIF capture dates, iCloud, Google Photos, and Google Takeout metadata.",
+    category: "Technology",
+    href: "/guides/why-do-my-photos-show-todays-date",
+    locale: "en",
+    tags: ["photos wrong date after download", "photo date created today", "Google Takeout JSON metadata", "iCloud photo date changed", "EXIF date taken", "photo metadata troubleshooting"],
+    published: true,
+    clusters: ["data-storage-backup"],
+    updated: "November 2026",
+    lastModified: "2026-11-19",
+    readingTime: "8 min",
+    recommendedFor: "People whose downloaded, transferred, or exported photos display the wrong dates in Windows, macOS, Apple Photos, or Google Photos.",
+    bottomLine: "A new file creation date does not necessarily mean the original capture date was lost. Compare file timestamps, embedded capture metadata, and photo-library dates before making changes; preserve originals and JSON sidecars.",
+    tool: { type: "decision-check", name: "Photo Date Troubleshooter" },
+  },
+  {
     slug: "portable-power-station-shuts-off-with-battery-left",
     title: "Why Does My Portable Power Station Shut Off With Battery Left?",
     description: "Find out why a portable power station shuts off with charge remaining. Check ECO mode, AC timeouts, overload warnings, temperature, and battery behavior.",
