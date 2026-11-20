@@ -22,6 +22,23 @@ export type GuideSummary = {
 };
 export const guides: GuideSummary[] = [
   {
+    slug: "usps-delivered-to-parcel-locker-no-key",
+    title: "USPS Says Delivered to a Parcel Locker, but No Key. What Now?",
+    description: "USPS says your package was delivered to a parcel locker, but no key or access code arrived? Check the mailbox, building, and official USPS next steps.",
+    category: "Household",
+    href: "/guides/usps-delivered-to-parcel-locker-no-key",
+    locale: "en",
+    tags: ["USPS parcel locker no key", "USPS delivered no locker key", "parcel locker missing key", "USPS package says delivered", "cluster mailbox package key"],
+    published: true,
+    clusters: ["delivery-and-returns"],
+    updated: "November 2026",
+    lastModified: "2026-11-20",
+    readingTime: "4 min",
+    recommendedFor: "People whose USPS tracking says delivered to a parcel locker but who did not receive a usable key or access code.",
+    bottomLine: "Check your regular mailbox and any managed mailroom first. If the package remains inaccessible, follow USPS's official delivered-package guidance and contact the delivering Post Office.",
+    tool: { type: "decision-check", name: "Parcel Locker Access Checker" },
+  },
+  {
     slug: "which-google-takeout-files-can-i-delete",
     title: "Which Google Takeout Photo Files Can I Safely Delete?",
     description: "Understand Google Takeout duplicates, edited photos, JSON sidecars, and album folders before deleting anything. Use a free file decision checker.",
